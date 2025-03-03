@@ -1,0 +1,566 @@
+---
+title: "Physiology- A. hyacinthus juvenile size"
+author: "Alex Macadam"
+date: "2023-10-24"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Load the necessary libraries
+```{r libraries, results='markdown', eval=TRUE, message=FALSE, warning=FALSE}
+library(car)       #for regression diagnostics
+library(broom)     #for tidy output
+library(ggfortify) #for model diagnostics
+library(sjPlot)    #for outputs
+library(knitr)     #for kable
+library(effects)   #for partial effects plots
+library(emmeans)   #for estimating marginal means
+library(MASS)      #for glm.nb
+library(MuMIn)     #for AICc
+library(tidyverse) #for data wrangling
+library(brms)
+library(tidybayes)
+library(broom.mixed)#for tidying MCMC outputs
+library(patchwork)  #for multiple plots
+library(rstanarm)
+library(ggeffects)
+library(bayesplot)
+library(rstan)
+library(DHARMa)
+library(ggridges)
+source('C:/Users/amacadam/Dropbox/PhD/Chapter 5- Outplanting/Chapter 5 Scripts/Chapter-5--Outplanting-AGF-corals/helperFunctions.R')
+```
+
+# Read in the data
+```{r readData, results='markdown', eval=TRUE}
+size <- read.csv("C:/Users/amacadam/Dropbox/PhD/Chapter 2- Physiology/Chapter 2 data/Bayes stats data/physiology/juv_size2021.csv", header=T, fileEncoding="UTF-8-BOM")
+```
+
+# Exploratory data analysis
+```{r processData, results='markdown', eval=TRUE}
+#change catagorical columns to factors and remove NAs
+size <- size |>
+  mutate(Family = factor(Family),
+         Species = factor(Species),
+         Temp = factor(Temp),
+         Tank = factor(Tank.No.),
+         Timepoint = factor(Timepoint),
+         Cassette = factor(Cassette),
+         Plate.Slide = factor(Slide),
+         Treatment = factor(Treatment),
+         Cone = factor(Cone),
+         Cross = factor(Cross),
+         CrossType = factor(CrossType),
+         popcross = factor(popcross),
+         SINGLE.CLUMP = factor(SINGLE.CLUMP),
+         Mom = factor(Mom),
+         Dad = factor(Dad)
+         ) |>
+  filter(CrossType == "IndivCross", SINGLE.CLUMP == "S", Timepoint != "3")
+```
+
+Visualise
+```{r}
+ggplot(size, aes(y = Area, x = Treatment, colour = Temp)) +
+  geom_point(position = position_jitter(width = 0.2, height = 0)) +
+  facet_wrap(~popcross)
+```
+
+```{r eda1, results='markdown', eval=TRUE, hidden=TRUE}
+ggplot(size, aes(y=Area, x=popcross)) +
+    geom_boxplot() +
+    facet_grid(~Treatment)
+## Better still
+ggplot(size, aes(y=Area, x=Temp, group=Treatment)) +
+    geom_point() +
+    geom_line() +
+    facet_grid(~popcross) 
+```
+
+Add Temp x Treatment column
+```{r}
+size$popcrossxsym <- paste(size$Treatment, size$popcross, sep='_')
+size$popcrossxsym <- as.factor(size$popcrossxsym)
+```
+
+```{r}
+growth<- size %>% filter(Timepoint2 %in% c("T0","T6")) %>% dplyr::select(Timepoint2, Temp,  Cross, Area, IndID, popcross, Tank, Cassette, Plate.Slide, Mom, Dad) %>%
+  mutate(popcross = factor(popcross)) %>%
+  pivot_wider(names_from = Timepoint2, values_from = Area) %>%
+  tidyr::unnest() %>%
+  mutate(Growth = ((`T6` - `T0`)/`T0`)*100) |>
+  drop_na(Growth)
+```
+
+### Using default priors
+```{r}
+growth.form <- bf(Growth ~ popcross * Temp + (1|Plate.Slide),
+                     family = gaussian()
+                   )
+```
+
+```{r}
+options(width=150)
+growth.form %>% get_prior(data = growth)
+options(width=80)
+```
+
+### Defining priors
+```{r}
+growth |>
+group_by(popcross, Temp) |>
+summarise(
+mean(Growth),
+median(Growth),
+sd(Growth),
+mad(Growth)
+)
+```
+
+```{r fitModel2h1, results='markdown', eval=TRUE, hidden=TRUE, cache=TRUE}
+priors<- prior("normal(-10, 5)", class = "Intercept") +
+    prior("normal(0, 15)", class = "b") +
+    #prior("normal(0, 0.5)", class = "sd", group = "Tank") +
+    prior("normal(0, 20)", class = "sd", group = "Plate.Slide") +
+    prior(student_t(3, 0, 24.6), class = 'sigma') +
+    prior(cauchy(0,2.5), class = 'sd')
+```
+
+```{r}
+growth.brm <- brm(growth.form, 
+                  data = growth,
+                  prior = priors,
+                  sample_prior = 'only',
+                  iter = 5000,
+                  warmup = 1000,
+                  chains = 3,
+                  thin = 5,
+                  refresh = 0
+                  )
+```
+
+```{r partialPlot2h1a, results='markdown', eval=TRUE, hidden=TRUE, fig.width=8, fig.height=5}
+growth.brm %>%
+  conditional_effects() |>
+  plot(points = TRUE)
+```
+
+```{r fitModel2h1b, results='markdown', eval=TRUE, hidden=TRUE, cache=TRUE}
+growth.brm2 <- update(growth.brm,  
+                       sample_prior = 'yes',
+                       control = list(adapt_delta = 0.99),
+                       refresh = 0)
+#save(growth.brm2, file = 'growth.brm2')
+```
+
+```{r}
+growth.brm2 %>%
+    conditional_effects() %>%
+    plot(points = TRUE)
+```
+
+### Plotting prior and posterior
+```{r}
+growth.brm2 %>% SUYR_prior_and_posterior()
+```
+
+```{r}
+growth.brm2$fit |> stan_trace()
+```
+
+```{r}
+growth.brm2$fit |> stan_ac()
+```
+
+```{r}
+growth.brm2$fit |> stan_rhat()
+```
+
+```{r}
+growth.brm2$fit |> stan_ess()
+```
+
+### Random intercept/slope model
+```{r fitModel2h3, results='markdown', eval=TRUE, hidden=TRUE, cache=TRUE}
+#priors<- prior("normal(-10, 5)", class = "Intercept") +
+#    prior("normal(0, 15)", class = "b") +
+#    #prior("normal(0, 0.5)", class = "sd", group = "Tank") +
+#    prior("normal(0, 20)", class = "sd", group = "Plate.Slide") +
+#    prior(student_t(3, 0, 24.6), class = 'sigma') +
+#    prior(cauchy(0,2.5), class = 'sd') +
+#    prior(lkj_corr_cholesky(1), class = 'L')
+```
+
+```{r}
+#growth.form <- bf(Growth ~ popcross * Temp + (popcross|Plate.Slide),
+#                     family = gaussian()
+#                   )
+```
+
+```{r}
+#growth.brm3 <- brm(growth.form, 
+#                  data = growth,
+#                  prior = priors,
+#                  sample_prior = 'yes',
+#                  iter = 5000,
+#                  warmup = 1000,
+#                  chains = 3,
+#                  thin = 5,
+#                  refresh = 0,
+#                  control = list(adapt_delta = 0.99)
+#                  )
+#save(growth.brm3, file = 'growth.brm3')
+```
+
+```{r}
+#growth.brm3 %>%
+#    conditional_effects() %>%
+#    plot(points = TRUE)
+```
+
+### Plotting prior and posterior
+```{r}
+#growth.brm3%>% SUYR_prior_and_posterior()
+```
+
+```{r}
+#growth.brm3$fit |> stan_trace()
+```
+
+```{r}
+#growth.brm3$fit |> stan_ac()
+```
+
+```{r}
+#growth.brm3$fit |> stan_rhat()
+```
+
+```{r}
+#growth.brm3$fit |> stan_ess()
+```
+
+### Compare models
+```{r fitModel2h3a, results='markdown', eval=TRUE, hidden=TRUE, cache=TRUE}
+#loo(growth.brm2, growth.brm3)
+```
+
+# Model validation
+```{r modelValidation5b, results='markdown', eval=TRUE, hidden=TRUE, fig.width=6, fig.height=4}
+growth.brm2 %>% pp_check(type = 'dens_overlay', nsamples = 250)
+```
+
+```{r modelValidation5c, results='markdown', eval=TRUE, hidden=TRUE, fig.width=6, fig.height=4}
+growth.brm2 %>% pp_check(type = 'error_scatter_avg')
+```
+
+### DHARMa residuals
+```{r}
+growth.resids<- make_brms_dharma_res(growth.brm2, integerResponse = FALSE)
+wrap_elements(~testUniformity(growth.resids)) +
+wrap_elements(~plotResiduals(growth.resids, form = factor(rep(1,nrow(growth))))) +
+wrap_elements(~plotResiduals(growth.resids, quantreg = FALSE))+
+wrap_elements(~testDispersion(growth.resids))
+```
+
+**Conclusions:**
+### conditional_effects
+```{r partialPlot2d, results='markdown', eval=TRUE, hidden=TRUE, fig.width=8, fig.height=5}
+growth.brm2 %>%
+    conditional_effects("popcross:Temp") %>%
+    plot(points = TRUE)
+```
+
+### ggpredict
+```{r partialPlot2a, results='markdown', eval=TRUE, hidden=TRUE, fig.width=8, fig.height=5}
+growth.brm2 %>%
+    ggpredict(~popcross*Temp) %>%
+    plot(add.data = TRUE)
+```
+
+### ggemmeans
+```{r partialPlot2b, results='markdown', eval=TRUE, hidden=TRUE, fig.width=8, fig.height=5}
+starling.brm3 %>%
+    ggemmeans(~popcross*Temp) %>%
+    plot(add.data = TRUE) 
+```
+
+```{r}
+growth.brm2 |>
+  summarise_draws(
+    median,
+    HDInterval::hdi,
+    Pl = ~mean(.x < 0),
+    Pg = ~mean(.x > 0),
+    rhat,
+    ess_bulk
+    ) |>
+  knitr::kable()
+```
+
+```{r}
+growth.brm2 |>
+  summarise_draws(
+    median,
+    HDInterval::hdi,
+    Pl = ~mean(.x < 0),
+    Pg = ~mean(.x > 0),
+    rhat,
+    ess_bulk
+    ) |>
+  knitr::kable()
+```
+
+```{r summariseModel2c4, results='markdown', eval=TRUE, hidden=TRUE, fig.width=8, fig.height=5,echo=TRUE}
+growth.brm2 %>%
+    gather_draws(`b_Intercept.*|b_popcross.*|b_Temp.*`, regex=TRUE) %>% 
+    ggplot() +
+    geom_vline(xintercept=0, linetype='dashed') +
+    stat_slab(aes(x = .value, y = .variable,
+                  fill = stat(ggdist::cut_cdf_qi(cdf,
+                                                 .width = c(0.5, 0.8, 0.95), 
+                                                 labels = scales::percent_format())
+                              )), color='black') + 
+    scale_fill_brewer('Interval', direction = -1, na.translate = FALSE) 
+```
+
+```{r}
+growth.brm2 %>% 
+    gather_draws(`.Intercept.*|b_popcross.*|b_Temp.*`, regex=TRUE) %>% 
+    ggplot() + 
+    geom_vline(xintercept = 0, linetype='dashed') +
+    stat_halfeye(aes(x=.value,  y=.variable)) +
+    theme_classic()
+```
+
+### density ridges (ggridges)
+```{r summariseModel2c7, results='markdown', eval=TRUE, hidden=TRUE, fig.width=8, fig.height=5,echo=TRUE}
+##in colour
+growth.brm2 %>% 
+    gather_draws(`^b_.*`, regex=TRUE) %>% 
+    filter(.variable != 'b_Intercept') %>%
+    ggplot() + 
+    geom_density_ridges_gradient(aes(x=(.value),
+                                     y = .variable,
+                                     fill = stat(x)),
+                                 alpha=0.4, colour = 'white',
+                                 quantile_lines = TRUE,
+                                 quantiles = c(0.025, 0.975)) +
+    geom_vline(xintercept = 1, linetype = 'dashed') +
+    scale_x_continuous() +
+    scale_fill_viridis_c(option = "C") 
+
+## Fractional scale
+growth.brm2 %>% 
+    gather_draws(`^b_.*`, regex=TRUE) %>% 
+    filter(.variable != 'b_Intercept') %>%
+    ggplot() + 
+    geom_density_ridges_gradient(aes(x=exp(.value),
+                                     y = .variable,
+                                     fill = stat(x)),
+                                 alpha=0.4, colour = 'white',
+                                 quantile_lines = TRUE,
+                                 quantiles = c(0.025, 0.975)) +
+    geom_vline(xintercept = 1, linetype = 'dashed') +
+    scale_x_continuous(trans = scales::log2_trans()) +
+    scale_fill_viridis_c(option = "C") 
+```
+ 
+### R2
+```{r summariseModel2g, results='markdown', eval=TRUE, hidden=TRUE, fig.width=8, fig.height=5}
+growth.brm2 %>%
+    bayes_R2(re.form = NA, summary=FALSE) %>%
+    median_hdci
+growth.brm2 %>%
+    bayes_R2(re.form = ~(1|Plate.Slide), summary=FALSE) %>%
+    median_hdci
+growth.brm2 %>%
+    bayes_R2(re.form = ~(popcross|Plate.Slide), summary=FALSE) %>%
+    median_hdci
+```
+
+```{r}
+growth.brm2 |>
+  emmeans(~popcross, type = "response")
+```
+
+planned contrasts- compare situations
+
+              North vs Central    Central vs Hybrid   North vs hybrid  N mom vs N dad
+              
+DAVxDAV     |    -1                -1                     0                 0  
+DAVxMAR     |     0                 1/4                   1/4               1/3     
+MARxARL     |     0                 1/4                   1/4              -1/3     
+MARxDAV     |     0                 1/4                   1/4               1/3    
+MARxMAR     |     1/3               0                    -1/3               0    
+MARxWOO     |     1/3               0                    -1/3               0    
+PALxMAR     |     0                 1/4                   1/4               1/3     
+WOOxMAR     |     1/3               0                    -1/3               0     
+
+```{r}
+cmat<- cbind("North vs Central"=c(-1, 0, 0, 0, 1/3, 1/3, 0, 1/3),
+             "Central vs Hybrid" = c(-1, 1/4, 1/4, 1/4, 0, 0, 1/4, 0),
+             "North vs hybrid" = c(0, 1/4, 1/4, 1/4, -1/3, -1/3, 1/4, -1/3),
+             "N mom vs N dad" = c(0, 1/3, -1/3, 1/3, -0, 0, 1/3, 0)
+             )
+```
+ 
+```{r}
+growth.brm2 |>
+  emmeans(~popcross) |>
+  contrast(list(popcross=cmat)) |>
+    gather_emmeans_draws() |>
+  summarise(median_hdci(.value),
+            Pl = mean(.value < 0),
+            Pg = mean(.value > 0)
+            )
+```
+
+```{r}
+growth.brm2 |>
+  emmeans(~popcross|Temp) |>
+  as.data.frame() |>
+  ggplot(aes(y = emmean, x = popcross, color = Temp)) +
+  geom_pointrange(aes(ymin = lower.HPD, ymax = upper.HPD))
+```
+
+#############################################################################################################
+Hot only
+```{r}
+growth.hot<- growth |>
+  filter(Temp == "HOT")
+```
+
+```{r}
+growth.form <- bf(Growth ~ popcross + (1|Plate.Slide),
+                     family = gaussian()
+                   )
+```
+
+```{r fitModel2h1, results='markdown', eval=TRUE, hidden=TRUE, cache=TRUE}
+priors<- prior("normal(-10, 5)", class = "Intercept") +
+    prior("normal(0, 15)", class = "b") +
+    prior("normal(0, 7)", class = "sd", group = "Plate.Slide") +
+    prior(student_t(2, -5, 1), class = 'sigma') +
+    prior(cauchy(0,2.5), class = 'sd')
+```
+
+```{r}
+growth.brm4 <- brm(growth.form, 
+                  data = growth.hot,
+                  prior = priors,
+                  sample_prior = 'yes',
+                  iter = 5000,
+                  warmup = 1000,
+                  chains = 3,
+                  thin = 5,
+                  control = list(adapt_delta = 0.99),
+                  refresh = 0
+                  )
+```
+
+```{r partialPlot2h1a, results='markdown', eval=TRUE, hidden=TRUE, fig.width=8, fig.height=5}
+growth.brm4 %>%
+  conditional_effects() |>
+  plot(points = TRUE)
+```
+
+### Plotting prior and posterior
+```{r}
+growth.brm4 %>% SUYR_prior_and_posterior()
+```
+
+```{r}
+growth.brm4$fit |> stan_trace()
+```
+
+```{r}
+growth.brm4$fit |> stan_ac()
+```
+
+```{r}
+growth.brm4$fit |> stan_rhat()
+```
+
+```{r}
+growth.brm4$fit |> stan_ess()
+```
+
+# Model validation
+```{r modelValidation5b, results='markdown', eval=TRUE, hidden=TRUE, fig.width=6, fig.height=4}
+growth.brm4 %>% pp_check(type = 'dens_overlay', nsamples = 250)
+```
+
+### DHARMa residuals
+```{r}
+growth.resids<- make_brms_dharma_res(growth.brm4, integerResponse = FALSE)
+wrap_elements(~testUniformity(growth.resids)) +
+wrap_elements(~plotResiduals(growth.resids, form = factor(rep(1,nrow(growth.hot))))) +
+wrap_elements(~plotResiduals(growth.resids, quantreg = FALSE))+
+wrap_elements(~testDispersion(growth.resids))
+```
+
+```{r summariseModel2c4, results='markdown', eval=TRUE, hidden=TRUE, fig.width=8, fig.height=5,echo=TRUE}
+growth.brm4 %>%
+    gather_draws(`b_Intercept.*|b_popcrossxsym.*`, regex=TRUE) %>% 
+    ggplot() +
+    geom_vline(xintercept=0, linetype='dashed') +
+    stat_slab(aes(x = .value, y = .variable,
+                  fill = stat(ggdist::cut_cdf_qi(cdf,
+                                                 .width = c(0.5, 0.8, 0.95), 
+                                                 labels = scales::percent_format())
+                              )), color='black') + 
+    scale_fill_brewer('Interval', direction = -1, na.translate = FALSE) 
+```
+
+####################################################################################################
+popcross only
+```{r}
+growth.form <- bf(Growth ~ popcross + (1|Plate.Slide),
+                     family = gaussian()
+                   )
+```
+
+### Defining priors
+```{r fitModel2h1, results='markdown', eval=TRUE, hidden=TRUE, cache=TRUE}
+priors<- prior("normal(-10, 5)", class = "Intercept") +
+    prior("normal(0, 15)", class = "b") +
+    #prior("normal(0, 0.5)", class = "sd", group = "Tank") +
+    prior("normal(0, 7)", class = "sd", group = "Plate.Slide") +
+    prior(student_t(2, -5, 1), class = 'sigma') +
+    prior(cauchy(0,2.5), class = 'sd')
+```
+
+```{r}
+growth.brm5 <- brm(growth.form, 
+                  data = growth.hot,
+                  prior = priors,
+                  sample_prior = 'yes',
+                  iter = 5000,
+                  warmup = 1000,
+                  chains = 3,
+                  thin = 5,
+                  refresh = 0
+                  )
+```
+
+```{r partialPlot2h1a, results='markdown', eval=TRUE, hidden=TRUE, fig.width=8, fig.height=5}
+growth.brm5 %>%
+  conditional_effects() |>
+  plot(points = TRUE)
+```
+
+```{r summariseModel2c4, results='markdown', eval=TRUE, hidden=TRUE, fig.width=8, fig.height=5,echo=TRUE}
+growth.brm5 %>%
+    gather_draws(`b_Intercept.*|b_popcross.*`, regex=TRUE) %>% 
+    ggplot() +
+    geom_vline(xintercept=0, linetype='dashed') +
+    stat_slab(aes(x = .value, y = .variable,
+                  fill = stat(ggdist::cut_cdf_qi(cdf,
+                                                 .width = c(0.5, 0.8, 0.95), 
+                                                 labels = scales::percent_format())
+                              )), color='black') + 
+    scale_fill_brewer('Interval', direction = -1, na.translate = FALSE) 
+```
