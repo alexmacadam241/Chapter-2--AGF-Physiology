@@ -76,7 +76,7 @@ summarySE <- function(data=NULL, measurevar=NULL, groupvars=NULL, na.rm=FALSE,
 
 Read in the data
 ```{r readData, results='markdown', eval=TRUE}
-colour <- read.csv("/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/juv_colour2020_4.csv", header=T, fileEncoding="UTF-8-BOM") |>
+colour <- read.csv("/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/Juvenile-colour-2020.csv", header=T, fileEncoding="UTF-8-BOM") |>
   mutate( Treatment = factor(Treatment),
           Plate.Slide = factor(Plate.Slide),
           Temp = factor(Temp),
