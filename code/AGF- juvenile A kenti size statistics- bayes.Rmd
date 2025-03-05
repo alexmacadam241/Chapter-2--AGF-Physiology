@@ -1,5 +1,5 @@
 ---
-title: "Physiology- A. tenuis juvenile size"
+title: "Physiology- A. kenti juvenile size"
 author: "Alex Macadam"
 date: "2023-10-24"
 output: html_document
@@ -33,7 +33,7 @@ library(DHARMa)
 library(ggridges)
 library(easystats)
 library(patchwork)
-source('/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/helperFunctions.R')
+source('helperFunctions.R')
 
 # Function for summarising survival standard error
 summarySE <- function(data=NULL, measurevar=NULL, groupvars=NULL, na.rm=FALSE,
@@ -76,7 +76,7 @@ summarySE <- function(data=NULL, measurevar=NULL, groupvars=NULL, na.rm=FALSE,
 
 Read in the data
 ```{r readData, results='markdown', eval=TRUE}
-size <- read.csv("/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/Juvenile-size-2020.csv", header=T, fileEncoding="UTF-8-BOM") |>
+size <- read.csv("Juvenile-size-2020.csv", header=T, fileEncoding="UTF-8-BOM") |>
   mutate(Family = factor(Family),
          Species = factor(Species),
          Temp = factor(Temp),
@@ -151,20 +151,18 @@ priors<- prior("normal(-10, 5)", class = "Intercept") +
 
 run model
 ```{r}
-#growth.brm2 <- brm(growth.form, 
-#                  data = growth,
-#                  prior = priors,
-#                  sample_prior = 'yes',
-#                  iter = 5000,
-#                  warmup = 1000,
-#                  chains = 3,
-#                  thin = 5,
-#                  control = list(adapt_delta = 0.99),
-#                  refresh = 0
-#                  )
-
-#saveRDS(growth.brm2, file = "growth.brm2_A.tenuis_juv.rds")
-growth.brm2 <- readRDS("/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/growth.brm2_A.tenuis_juv.rds")
+growth.brm2 <- brm(growth.form, 
+                  data = growth,
+                  prior = priors,
+                  sample_prior = 'yes',
+                  iter = 5000,
+                  warmup = 1000,
+                  chains = 3,
+                  thin = 5,
+                  control = list(adapt_delta = 0.99),
+                  refresh = 0,
+                  backend = "cmdstanr"
+                  )
 ```
 
 View prior and posterior
@@ -321,20 +319,18 @@ priors<- prior("normal(1, 0.5)", class = "Intercept") +
 
 run model
 ```{r}
-#size.brm2 <- brm(size.form, 
-#                  data = final.size,
-#                  prior = priors,
-#                  sample_prior = 'yes',
-#                  iter = 2000,
-#                  warmup = 500,
-#                  chains = 3,
-#                  thin = 5,
-#                  control = list(adapt_delta = 0.99),
-#                  refresh = 50
-#                  )
-
-#saveRDS(size.brm2, file = "size.brm2_A.tenuis_juv.rds")
-size.brm2 <- readRDS("/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/size.brm2_A.tenuis_juv.rds")
+size.brm2 <- brm(size.form, 
+                  data = final.size,
+                  prior = priors,
+                  sample_prior = 'yes',
+                  iter = 2000,
+                  warmup = 500,
+                  chains = 3,
+                  thin = 5,
+                  control = list(adapt_delta = 0.99),
+                  refresh = 50,
+                  backend = "cmdstanr"
+                  )
 ```
 
 View prior and posterior

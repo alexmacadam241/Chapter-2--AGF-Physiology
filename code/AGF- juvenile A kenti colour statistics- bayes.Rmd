@@ -1,5 +1,5 @@
 ---
-title: "Physiology- A. tenuis juvenile colour"
+title: "Physiology- A. kenti juvenile colour"
 author: "Alex Macadam"
 date: "2023-10-24"
 output: html_document
@@ -33,7 +33,7 @@ library(DHARMa)
 library(ggridges)
 library(easystats)
 library(patchwork)
-source('/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/helperFunctions.R')
+source('helperFunctions.R')
 
 # Function for summarising survival standard error
 summarySE <- function(data=NULL, measurevar=NULL, groupvars=NULL, na.rm=FALSE,
@@ -76,7 +76,7 @@ summarySE <- function(data=NULL, measurevar=NULL, groupvars=NULL, na.rm=FALSE,
 
 Read in the data
 ```{r readData, results='markdown', eval=TRUE}
-colour <- read.csv("/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/Juvenile-colour-2020.csv", header=T, fileEncoding="UTF-8-BOM") |>
+colour <- read.csv("Juvenile-colour-2020.csv", header=T, fileEncoding="UTF-8-BOM") |>
   mutate( Treatment = factor(Treatment),
           Plate.Slide = factor(Plate.Slide),
           Temp = factor(Temp),
@@ -127,20 +127,18 @@ priors<- prior("normal(-4, 6)", class = "Intercept") +
 
 run model
 ```{r}
-#colour.brm2 <- brm(colour.form, 
-#                  data = colour,
-#                  prior = priors,
-#                  sample_prior = 'yes',
-#                  iter = 5000,
-#                  warmup = 1000,
-#                  chains = 3,
-#                  thin = 10,
-#                  control = list(adapt_delta = 0.9, max_treedepth = 20),
-#                  refresh = 0
-#                  )
-
-#saveRDS(colour.brm2, file = "colour.brm2_A.tenuis_juv.rds")
-colour.brm2 <- readRDS("/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/colour.brm2_A.tenuis_juv.rds")
+colour.brm2 <- brm(colour.form, 
+                  data = colour,
+                  prior = priors,
+                  sample_prior = 'yes',
+                  iter = 5000,
+                  warmup = 1000,
+                  chains = 3,
+                  thin = 10,
+                  control = list(adapt_delta = 0.9, max_treedepth = 20),
+                  refresh = 0,
+                  backend = "cmdstanr"
+                  )
 ```
 
 View prior and posterior
@@ -279,20 +277,18 @@ priors<- prior("normal(20, 20)", class = "Intercept") +
 
 run model
 ```{r}
-#colour.brm3 <- brm(colour.form, 
-#                  data = colour,
-#                  prior = priors,
-#                  sample_prior = 'yes',
-#                  iter = 10000,
-#                  warmup = 5000,
-#                  chains = 4,
-#                  thin = 20,
-#                  control = list(adapt_delta = 0.99, max_treedepth = 20),
-#                  refresh = 0
-#                  )
-
-#saveRDS(colour.brm3, file = "colour.brm3_A.tenuis_juv.rds")
-colour.brm3 <- readRDS("/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/colour.brm3_A.tenuis_juv.rds")
+colour.brm3 <- brm(colour.form, 
+                  data = colour,
+                  prior = priors,
+                  sample_prior = 'yes',
+                  iter = 10000,
+                  warmup = 5000,
+                  chains = 4,
+                  thin = 20,
+                  control = list(adapt_delta = 0.99, max_treedepth = 20),
+                  refresh = 0,
+                  backend = "cmdstanr"
+                  )
 ```
 
 View prior and posterior

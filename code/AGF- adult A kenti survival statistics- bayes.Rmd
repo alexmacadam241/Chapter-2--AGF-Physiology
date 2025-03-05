@@ -1,5 +1,5 @@
 ---
-title: "09_AGF- Adult survival statistics- bayes"
+title: "09_AGF- Adult A. kenti survival statistics- bayes"
 author: "Alex Macadam"
 date: "2023-11-23"
 output: html_document
@@ -33,12 +33,12 @@ library(DHARMa)
 library(ggridges)
 library(easystats)     #framework for stats, modelling and visualisation
 library(patchwork)
-source('/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/helperFunctions.R')
+source('helperFunctions.R')
 ```
 
 Read in data
 ```{r}
-survival.ten <- read.csv('/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/Adult-survival.csv', header=T) |>
+survival.ten <- read.csv('Adult-survival.csv', header=T) |>
   filter(Species == "Tenuis", Timepoint == "3") |> #remove other species data
   mutate(Survival=as.numeric(Survival), Bleaching_D=as.numeric(Bleaching_D), TissueArea_cm2=as.numeric(TissueArea_cm2)) |> #format columns
   mutate(Tank = factor(Tank),
@@ -79,7 +79,7 @@ survival.brm <- brm(survival.form,
                   thin = 5,
                   control = list(adapt_delta = 0.99, max_treedepth = 20),
                   refresh = 0,
-                  backend = "rstan"
+                  backend = "cmdstanr"
                   )
 ```
 
@@ -247,7 +247,7 @@ survival.brm3 <- brm(survival.form,
                   thin = 5,
                   control = list(adapt_delta = 0.99, max_treedepth = 20),
                   refresh = 0,
-                  backend = "rstan"
+                  backend = "cmdstanr"
                   )
 ```
 
@@ -370,4 +370,3 @@ surv.plot<- survival.brm3 %>%
   labs(x = "Survival", y = "Treatment")
 surv.plot
 ```
-

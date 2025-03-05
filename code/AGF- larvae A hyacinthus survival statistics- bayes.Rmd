@@ -33,12 +33,12 @@ library(DHARMa)
 library(ggridges)
 library(easystats)
 library(patchwork)
-source('/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/helperFunctions.R')
+source('helperFunctions.R')
 ```
 
 ```{r}
 #load data
-survival_hot <- read.csv("/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/Larvae-survival-2021.csv", header=T, fileEncoding="UTF-8-BOM") |>
+survival_hot <- read.csv("Larvae-survival-2021.csv", header=T, fileEncoding="UTF-8-BOM") |>
   mutate(Family = factor(Family),
          Temp = factor(Temp),
          Treatment = factor(Treatment),
@@ -73,21 +73,18 @@ priors <-
 
 run model
 ```{r}
-#survival.brm <- brm(survival.form, 
-#                  data = survival_hot,
-#                  prior = priors,
-#                  sample_prior = 'yes',
-#                  iter = 5000,
-#                  warmup = 2500,
-#                  chains = 3, cores = 3,
-#                  thin = 5,
-#                  control = list(adapt_delta = 0.99, max_treedepth = 20),
-#                  refresh = 0,
-#                  backend = "rstan"
-#                  )
-
-#saveRDS(survival.brm, file = "survival.brm4_A.hyacinthus.rds")
-survival.brm <- readRDS("/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/survival.brm4_A.hyacinthus.rds")
+survival.brm <- brm(survival.form, 
+                  data = survival_hot,
+                  prior = priors,
+                  sample_prior = 'yes',
+                  iter = 5000,
+                  warmup = 2500,
+                  chains = 3, cores = 3,
+                  thin = 5,
+                  control = list(adapt_delta = 0.99, max_treedepth = 20),
+                  refresh = 0,
+                  backend = "cmdstanr"
+                  )
 ```
 
 View prior and posterior
@@ -286,7 +283,7 @@ survival.brm4 <- brm(survival.form,
                   thin = 5,
                   control = list(adapt_delta = 0.99, max_treedepth = 20),
                   refresh = 0,
-                  backend = "rstan"
+                  backend = "cmdstanr"
                   )
 ```
 

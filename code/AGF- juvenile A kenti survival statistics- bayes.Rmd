@@ -1,5 +1,5 @@
 ---
-title: "Physiology- A. tenuis juvenile survival"
+title: "Physiology- A. kenti juvenile survival"
 author: "Alex Macadam"
 date: "2023-10-21"
 output: html_document
@@ -33,12 +33,12 @@ library(DHARMa)
 library(ggridges)
 library(easystats)
 library(patchwork)
-source('/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/helperFunctions.R')
+source('helperFunctions.R')
 ```
 
 ```{r}
 #load data
-survival.hot <- read.csv("/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/Juvenile-survival-2020.csv", header=T, fileEncoding="UTF-8-BOM") |>
+survival.hot <- read.csv("Juvenile-survival-2020.csv", header=T, fileEncoding="UTF-8-BOM") |>
   mutate(Family = factor(Family),
          Species = factor(Species),
          Temp = factor(Temp),
@@ -73,21 +73,18 @@ priors <-
 
 run model
 ```{r}
-#survival.brm4 <- brm(survival.form, 
-#                  data = survival_hot,
-#                  prior = priors,
-#                  sample_prior = 'yes',
-#                  iter = 5000,
-#                  warmup = 2500,
-#                  chains = 3, cores = 3,
-#                  thin = 5,
-#                  control = list(adapt_delta = 0.99, max_treedepth = 20),
-#                  refresh = 0,
-#                  backend = "rstan"
-#                  )
-
-#saveRDS(survival.brm4, file = "survival.brm4_A.tenuis_juv.rds")
-survival.brm4 <- readRDS("/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/survival.brm4_A.tenuis_juv.rds")
+survival.brm4 <- brm(survival.form, 
+                  data = survival_hot,
+                  prior = priors,
+                  sample_prior = 'yes',
+                  iter = 5000,
+                  warmup = 2500,
+                  chains = 3, cores = 3,
+                  thin = 5,
+                  control = list(adapt_delta = 0.99, max_treedepth = 20),
+                  refresh = 0,
+                  backend = "cmdstanr"
+                  )
 ```
 
 View prior and posterior
@@ -248,21 +245,18 @@ priors <-
 
 run model
 ```{r}
-#survival.brm3 <- brm(survival.form, 
-#                  data = survival.hot,
-#                  prior = priors,
-#                  sample_prior = 'yes',
-#                  iter = 5000,
-#                  warmup = 2500,
-#                  chains = 3, cores = 3,
-#                  thin = 5,
-#                  control = list(adapt_delta = 0.99, max_treedepth = 20),
-#                  refresh = 100,
-#                  backend = "rstan"
-#                  )
-
-#saveRDS(survival.brm3, file = "survival.brm5_A.tenuis_juv.rds")
-survival.brm3 <- readRDS("survival.brm5_A.tenuis_juv.rds")
+survival.brm3 <- brm(survival.form, 
+                  data = survival.hot,
+                  prior = priors,
+                  sample_prior = 'yes',
+                  iter = 5000,
+                  warmup = 2500,
+                  chains = 3, cores = 3,
+                  thin = 5,
+                  control = list(adapt_delta = 0.99, max_treedepth = 20),
+                  refresh = 100,
+                  backend = "cmdstanr"
+                  )
 ```
 
 View prior and posterior
@@ -371,7 +365,7 @@ survival.brm4 <- brm(survival.form,
                   thin = 5,
                   control = list(adapt_delta = 0.99, max_treedepth = 20),
                   refresh = 0,
-                  backend = "rstan"
+                  backend = "cmdstanr"
                   )
 ```
 

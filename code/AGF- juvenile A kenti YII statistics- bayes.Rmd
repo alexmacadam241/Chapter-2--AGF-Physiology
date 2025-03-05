@@ -1,5 +1,5 @@
 ---
-title: "Physiology- A. tenuis juvenile YII"
+title: "Physiology- A. kenti juvenile YII"
 author: "Alex Macadam"
 date: "2023-10-24"
 output: html_document
@@ -33,7 +33,7 @@ library(DHARMa)
 library(ggridges)
 library(easystats)
 library(patchwork)
-source('/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/helperFunctions.R')
+source('helperFunctions.R')
 
 # Function for summarising survival standard error
 summarySE <- function(data=NULL, measurevar=NULL, groupvars=NULL, na.rm=FALSE,
@@ -76,7 +76,7 @@ summarySE <- function(data=NULL, measurevar=NULL, groupvars=NULL, na.rm=FALSE,
 
 Read in the data
 ```{r readData, results='markdown', eval=TRUE}
-yii <- read.csv("/Users/alexmacadam/Dropbox/PhD/Chapter2_Physiology/Chapter 2 data/Bayes stats data/physiology/juv_PAM2020.csv", header=T, fileEncoding="UTF-8-BOM") |>
+yii <- read.csv("juv_PAM2020.csv", header=T, fileEncoding="UTF-8-BOM") |>
   mutate(Family = factor(Family),
          Species = factor(Species),
          Temp = factor(Temp),
@@ -159,11 +159,9 @@ YII.brm3 <- brm(yii.form,
                   chains = 4,
                   thin = 20,
                   control = list(adapt_delta = 0.99, max_treedepth = 20),
-                  refresh = 0
+                  refresh = 0,
+                  backend = "cmdstanr"
                   )
-
-#saveRDS(YII.brm3, file = "YII.brm3_A.tenuis_juv.rds")
-YII.brm3 <- readRDS("/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/YII.brm3_A.tenuis_juv.rds")
 ```
 
 View prior and posterior
@@ -316,11 +314,9 @@ YII.brm2 <- brm(yii.form,
                   chains = 4,
                   thin = 20,
                   control = list(adapt_delta = 0.99, max_treedepth = 20),
-                  refresh = 0
+                  refresh = 0,
+                  backend = "cmdstanr"
                   )
-
-#saveRDS(YII.brm2, file = "YII.brm2_A.tenuis_juv.rds")
-YII.brm2 <- readRDS("YII.brm2_A.tenuis_juv.rds")
 ```
 
 View prior and posterior
