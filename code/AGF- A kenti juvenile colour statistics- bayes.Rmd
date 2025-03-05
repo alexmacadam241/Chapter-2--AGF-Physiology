@@ -1,0 +1,416 @@
+---
+title: "Physiology- A. tenuis juvenile colour"
+author: "Alex Macadam"
+date: "2023-10-24"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Load packages
+```{r}
+set.seed(123)
+library(tidyverse) #for data wrangling
+library(car)       #for regression diagnostics
+library(broom)     #for tidy output
+library(ggfortify) #for model diagnostics
+library(sjPlot)    #for outputs
+library(knitr)     #for kable
+library(effects)   #for partial effects plots
+library(emmeans)   #for estimating marginal means
+library(MASS)      #for glm.nb
+library(MuMIn)     #for AICc
+library(brms)
+library(broom.mixed)
+library(tidybayes)
+library(bayesplot)
+library(rstanarm)
+library(ggeffects)
+library(rstan)
+library(DHARMa)
+library(ggridges)
+library(easystats)
+library(patchwork)
+source('/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/helperFunctions.R')
+
+# Function for summarising survival standard error
+summarySE <- function(data=NULL, measurevar=NULL, groupvars=NULL, na.rm=FALSE,
+                      conf.interval=.95, .drop=TRUE) {
+  require(plyr)
+  
+  # New version of length which can handle NA's: if na.rm==T, don't count them
+  length2 <- function (x, na.rm=FALSE) {
+    if (na.rm==TRUE) sum(!is.na(x))
+    else       length(x)
+  }
+  
+  # This does the summary. For each group's data frame, return a vector with
+  # N, mean, and sd
+  datac <- ddply(data, groupvars, .drop=.drop,
+                 .fun = function(xx, col) {
+                   c(N    = length2(xx[[col]], na.rm=na.rm),
+                     mean = mean   (xx[[col]], na.rm=na.rm),
+                     sd   = sd     (xx[[col]], na.rm=na.rm)
+                   )
+                 },
+                 measurevar
+  )
+  
+  # Commenting this rename mean column line, as not assigning measurevar name properly
+  # # Rename the "mean" column    
+  # datac <- rename(datac, measurevar = mean)
+  
+  datac$se <- datac$sd / sqrt(datac$N)  # Calculate standard error of the mean
+  
+  # Confidence interval multiplier for standard error
+  # Calculate t-statistic for confidence interval: 
+  # e.g., if conf.interval is .95, use .975 (above/below), and use df=N-1
+  ciMult <- qt(conf.interval/2 + .5, datac$N-1)
+  datac$ci <- datac$se * ciMult
+  
+  return(datac)
+}
+```
+
+Read in the data
+```{r readData, results='markdown', eval=TRUE}
+colour <- read.csv("/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/juv_colour2020_4.csv", header=T, fileEncoding="UTF-8-BOM") |>
+  mutate( Treatment = factor(Treatment),
+          Plate.Slide = factor(Plate.Slide),
+          Temp = factor(Temp),
+          popcross = factor(popcross)
+          ) |>
+  filter(IndID != "NA")
+
+colour$symxtemp <- paste(colour$Treatment, colour$Temp, sep='_')
+colour$symxtemp <- as.factor(colour$symxtemp)
+
+#colour change
+colour<- colour |>
+  mutate(T0_2 = (100-(T0 / 255)*100))
+colour<- colour |>
+  mutate(T6_2 = (100-(T6 / 255)*100))
+colour<- colour |>
+  mutate(Grey_change_2 = T6_2 - T0_2)
+```
+
+Change in colour
+```{r}
+#all
+col.change.all.sum.se <- summarySE(colour, measurevar="Grey_change_2",
+                          groupvars=c("Temp"), na.rm=TRUE)
+
+#by reef cross
+col.change.sum.se <- summarySE(colour, measurevar="Grey_change_2",
+                          groupvars=c("Temp", "Treatment"), na.rm=TRUE)
+```
+
+# Fit the model
+form
+```{r}
+colour.form <- bf(Grey_change_2 ~ symxtemp + (1|Plate.Slide),
+                     family = gaussian()
+                   )
+```
+
+priors
+```{r fitModel2h1, results='markdown', eval=TRUE, hidden=TRUE, cache=TRUE}
+priors<- prior("normal(-4, 6)", class = "Intercept") +
+    prior("normal(0, 8)", class = "b") +
+    #prior("normal(0, 0.5)", class = "sd", group = "Tank") +
+    prior("normal(0, 7)", class = "sd", group = "Plate.Slide") +
+    prior(student_t(3, 0, 6), class = 'sigma') +
+    prior(cauchy(0,2), class = 'sd')
+```
+
+run model
+```{r}
+#colour.brm2 <- brm(colour.form, 
+#                  data = colour,
+#                  prior = priors,
+#                  sample_prior = 'yes',
+#                  iter = 5000,
+#                  warmup = 1000,
+#                  chains = 3,
+#                  thin = 10,
+#                  control = list(adapt_delta = 0.9, max_treedepth = 20),
+#                  refresh = 0
+#                  )
+
+#saveRDS(colour.brm2, file = "colour.brm2_A.tenuis_juv.rds")
+colour.brm2 <- readRDS("/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/colour.brm2_A.tenuis_juv.rds")
+```
+
+View prior and posterior
+```{r}
+colour.brm2 %>% SUYR_prior_and_posterior()
+```
+
+Trace plots
+```{r}
+colour.brm2$fit |> stan_trace()
+```
+
+Autocorrelation
+```{r}
+colour.brm2$fit |> stan_ac()
+```
+
+Rhat
+```{r}
+colour.brm2$fit |> stan_rhat()
+```
+
+Effective sample size
+```{r}
+colour.brm2$fit |> stan_ess()
+```
+
+Density overlay
+```{r modelValidation5b, results='markdown', eval=TRUE, hidden=TRUE, fig.width=6, fig.height=4}
+colour.brm2 %>% pp_check(type = 'dens_overlay', nsamples = 250)
+```
+
+DHARMa residuals
+```{r}
+colour.resids<- make_brms_dharma_res(colour.brm2, integerResponse = FALSE)
+wrap_elements(~testUniformity(colour.resids)) +
+wrap_elements(~plotResiduals(colour.resids, form = factor(rep(1,nrow(colour))))) +
+wrap_elements(~plotResiduals(colour.resids, quantreg = FALSE))+
+wrap_elements(~testDispersion(colour.resids))
+```
+
+Summarise model
+conditional effects
+```{r partialPlot2d, results='markdown', eval=TRUE, hidden=TRUE, fig.width=8, fig.height=5}
+colour.brm2 %>%
+    conditional_effects("symxtemp") %>%
+    plot(points = TRUE)
+```
+
+```{r}
+colour.brm2 |>
+  summarise_draws(
+    median,
+    HDInterval::hdi,
+    Pl = ~mean(.x < 0),
+    Pg = ~mean(.x > 0),
+    rhat,
+    ess_bulk
+    ) |>
+  knitr::kable()
+```
+
+```{r}
+colour.brm2 |>
+  emmeans(~symxtemp, type = "response")
+```
+
+planned contrasts- compare situations
+                 D1 vs Sed       D1 vs SS        SS vs Sed       Central vs Hybrid       
+D1_AMB     |      0                -1/2                0                   -1/3
+D1_HOT     |     -1                -1/2                0                    1/4
+Jewell_AMB |      0              0                  1/2                 -1/3
+Jewell_HOT |      0              0                  1/2                  1/4
+SS_AMB     |      0                1/2               -1/2                 -1/3
+SS_HOT     |      1                1/2               -1/2                  1/4
+ 
+```{r}
+cmat<- cbind(
+             "D1_HOT vs Sed_HOT"=c(0, -1, 0, 1, 0, 0),
+             "D1_HOT vs SS_HOT" = c(0, -1, 0, 0, 0, 1),
+             "SS_HOT vs Sed_HOT" = c(0, 0, 0, 1, 0, -1),
+             "D1_AMB vs Sed_AMB"=c(-1, 0, 1, 0, 0, 0),
+             "D1_AMB vs SS_AMB" = c(-1, 0, 0, 0, 1, 0),
+             "SS_AMB vs Sed_AMB" = c(0, 0, 1, 0, -1, 0),
+             "D1_AMB vs D1_HOT" = c(1, -1, 0, 0, 0, 0),
+             "SS_AMB vs SS_HOT" = c(0, 0, 0, 0, 1, -1),
+             "SED_AMB vs SED_HOT" = c(0, 0, 1, -1, 0, 0)
+             )
+```
+ 
+```{r}
+colour.dif.plot<- colour.brm2 %>%
+  emmeans(~symxtemp) %>%
+  gather_emmeans_draws() %>%
+    ggplot() +
+  #geom_vline(xintercept = 0, linetype = "dashed") +
+  stat_slab(aes(
+    x = .value, y = symxtemp,
+    fill = stat(ggdist::cut_cdf_qi(cdf,
+      .width = c(0.5, 0.8, 0.95),
+      labels = scales::percent_format()
+    ))
+  ), color = "black") +
+  scale_fill_brewer("Interval", direction = -1, na.translate = FALSE) +
+  theme_classic() +
+  labs(x = "Change in colour", y = "Treatment")
+colour.dif.plot
+```
+
+#####
+Final Colour
+```{r}
+col.sum.all.se <- summarySE(colour, measurevar="T6_2",
+                          groupvars=c("Temp"), na.rm=TRUE)
+
+col.sum.se <- summarySE(colour, measurevar="T6_2",
+                          groupvars=c("Temp", "Treatment"), na.rm=TRUE)
+```
+
+form
+```{r}
+colour.form <- bf(T6_2 ~ symxtemp + (1|Plate.Slide),
+                     family = gaussian()
+                   )
+```
+
+priors
+```{r fitModel2h1, results='markdown', eval=TRUE, hidden=TRUE, cache=TRUE}
+priors<- prior("normal(20, 20)", class = "Intercept") +
+    prior("normal(-10, 10)", class = "b") +
+    #prior("normal(0, 0.5)", class = "sd", group = "Tank") +
+    prior("normal(5, 10)", class = "sd", group = "Plate.Slide") +
+    prior(student_t(3, 0, 2), class = 'sigma') +
+    prior(cauchy(0,2.5), class = 'sd')
+```
+
+run model
+```{r}
+#colour.brm3 <- brm(colour.form, 
+#                  data = colour,
+#                  prior = priors,
+#                  sample_prior = 'yes',
+#                  iter = 10000,
+#                  warmup = 5000,
+#                  chains = 4,
+#                  thin = 20,
+#                  control = list(adapt_delta = 0.99, max_treedepth = 20),
+#                  refresh = 0
+#                  )
+
+#saveRDS(colour.brm3, file = "colour.brm3_A.tenuis_juv.rds")
+colour.brm3 <- readRDS("/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/colour.brm3_A.tenuis_juv.rds")
+```
+
+View prior and posterior
+```{r}
+colour.brm3 %>% SUYR_prior_and_posterior()
+```
+
+trace plots
+```{r}
+colour.brm3$fit |> stan_trace()
+```
+
+Autocorrelation
+```{r}
+colour.brm3$fit |> stan_ac()
+```
+
+Rhat
+```{r}
+colour.brm3$fit |> stan_rhat()
+```
+
+Effective sample size
+```{r}
+colour.brm3$fit |> stan_ess()
+```
+
+Density overlay
+```{r modelValidation5b, results='markdown', eval=TRUE, hidden=TRUE, fig.width=6, fig.height=4}
+colour.brm3 %>% pp_check(type = 'dens_overlay', nsamples = 250)
+```
+
+DHARMa residuals
+```{r}
+colour.resids<- make_brms_dharma_res(colour.brm3, integerResponse = FALSE)
+wrap_elements(~testUniformity(colour.resids)) +
+wrap_elements(~plotResiduals(colour.resids, form = factor(rep(1,nrow(colour))))) +
+wrap_elements(~plotResiduals(colour.resids, quantreg = FALSE))+
+wrap_elements(~testDispersion(colour.resids))
+```
+
+Summarise model
+conditional effects
+```{r partialPlot2d, results='markdown', eval=TRUE, hidden=TRUE, fig.width=8, fig.height=5}
+colour.brm3 %>%
+    conditional_effects("symxtemp") %>%
+    plot(points = TRUE)
+```
+
+```{r}
+colour.brm3 |>
+  summarise_draws(
+    median,
+    HDInterval::hdi,
+    Pl = ~mean(.x < 0),
+    Pg = ~mean(.x > 0),
+    rhat,
+    ess_bulk
+    ) |>
+  knitr::kable()
+```
+ 
+```{r}
+colour.brm3 |>
+  emmeans(~symxtemp, type = "response")
+```
+
+planned contrasts- compare situations
+                 D1 vs Sed       D1 vs SS        SS vs Sed       Central vs Hybrid       
+D1_AMB     |      0                -1/2                0                   -1/3
+D1_HOT     |     -1                -1/2                0                    1/4
+Jewell_AMB |      0              0                  1/2                 -1/3
+Jewell_HOT |      0              0                  1/2                  1/4
+SS_AMB     |      0                1/2               -1/2                 -1/3
+SS_HOT     |      1                1/2               -1/2                  1/4
+
+```{r}
+cmat<- cbind(
+             "D1_HOT vs Sed_HOT"=c(0, -1, 0, 1, 0, 0),
+             "D1_HOT vs SS_HOT" = c(0, -1, 0, 0, 0, 1),
+             "SS_HOT vs Sed_HOT" = c(0, 0, 0, 1, 0, -1),
+             "D1_AMB vs Sed_AMB"=c(-1, 0, 1, 0, 0, 0),
+             "D1_AMB vs SS_AMB" = c(-1, 0, 0, 0, 1, 0),
+             "SS_AMB vs Sed_AMB" = c(0, 0, 1, 0, -1, 0),
+             "D1_AMB vs D1_HOT" = c(1, -1, 0, 0, 0, 0),
+             "SS_AMB vs SS_HOT" = c(0, 0, 0, 0, 1, -1),
+             "SED_AMB vs SED_HOT" = c(0, 0, 1, -1, 0, 0)
+             )
+```
+ 
+```{r}
+colour.brm3 |>
+  emmeans(~symxtemp) |>
+  contrast(list(symxtemp=cmat)) |>
+  gather_emmeans_draws() |>
+  dplyr::summarise(median_hdci(.value),
+            Pl = mean(.value < 0),
+            Pg = mean(.value > 0)
+            )
+```
+
+plot
+```{r}
+colour.plot<- colour.brm3 %>%
+  emmeans(~symxtemp) %>%
+  gather_emmeans_draws() %>%
+    ggplot() +
+  #geom_vline(xintercept = 0, linetype = "dashed") +
+  stat_slab(aes(
+    x = .value, y = symxtemp,
+    fill = stat(ggdist::cut_cdf_qi(cdf,
+      .width = c(0.5, 0.8, 0.95),
+      labels = scales::percent_format()
+    ))
+  ), color = "black") +
+  scale_fill_brewer("Interval", direction = -1, na.translate = FALSE) +
+  theme_classic() +
+  labs(x = "Final colour", y = "Treatment")
+colour.plot
+#saveRDS(colour.plot, file = "colour.plot_A.tenuis_juv.rds")
+```

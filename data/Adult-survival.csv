@@ -1,0 +1,747 @@
+,Tank,Temperature,Stick,Position,Population,Species,Genotype,Frag.rep,Frag.id,Timepoint,Survival,Bleaching_D,TissueArea_cm2,PAM,ImageID,FragID,Reef,UniqueCoralID,Temp
+1,1,Ambient,1,1,Davies,Tenuis,Ten.Dav.6,1,Ten.Dav.6.1,3,1,6,3.847,NA,NA,NA,NA,NA,NA
+2,1,Ambient,1,2,Davies,Tenuis,Ten.Dav.D1,1,Ten.Dav.D1.1,3,1,6,4.573,NA,NA,NA,NA,NA,NA
+3,1,Ambient,1,4,Palms,Tenuis,Ten.Pal.6,1,Ten.Pal.6.1,3,0,NA,NA,NA,NA,NA,NA,NA,NA
+4,1,Ambient,1,5,Jewell,Tenuis,Ten.Jew.7,1,Ten.Jew.7.1,3,1,5,2.747,NA,NA,NA,NA,NA,NA
+5,1,Ambient,1,8,Davies,Tenuis,Ten.Dav.1,1,Ten.Dav.1.1,3,1,5,3.546,NA,NA,NA,NA,NA,NA
+6,1,Ambient,1,9,Davies,Tenuis,Ten.Dav.12,1,Ten.Dav.12.1,3,1,6,2.08,NA,NA,NA,NA,NA,NA
+7,1,Ambient,1,11,Davies,Tenuis,Ten.Dav.12,13,Ten.Dav.12.13,3,1,5,4.231,NA,NA,NA,NA,NA,NA
+8,1,Ambient,2,1,Palms,Tenuis,Ten.Pal.1,1,Ten.Pal.1.1,3,1,6,4.489,NA,NA,NA,NA,NA,NA
+9,1,Ambient,2,4,Parke,Tenuis,Ten.Par.5,1,Ten.Par.5.1,3,1,5,5.153,NA,NA,NA,NA,NA,NA
+10,1,Ambient,2,6,Davies,Tenuis,Ten.Dav.1,2,Ten.Dav.1.2,3,1,5,2.512,NA,NA,NA,NA,NA,NA
+11,1,Ambient,2,7,Davies,Tenuis,Ten.Dav.9,1,Ten.Dav.9.1,3,1,5,2.859,NA,NA,NA,NA,NA,NA
+12,1,Ambient,3,2,Parke,Tenuis,Ten.Par.5,2,Ten.Par.5.2,3,1,3,3.404,NA,NA,NA,NA,NA,NA
+13,1,Ambient,3,5,Parke,Tenuis,Ten.Par.2,21,Ten.Par.2.21,3,1,3,3.603,NA,NA,NA,NA,NA,NA
+14,1,Ambient,3,6,Palms,Tenuis,Ten.Pal.1,2,Ten.Pal.1.2,3,1,6,2.5,NA,NA,NA,NA,NA,NA
+15,1,Ambient,3,7,Davies,Tenuis,Ten.Dav.13,1,Ten.Dav.13.1,3,1,5,2.425,NA,NA,NA,NA,NA,NA
+16,1,Ambient,3,9,Palms,Tenuis,Ten.Pal.6,2,Ten.Pal.6.2,3,0,NA,NA,NA,NA,NA,NA,NA,NA
+17,1,Ambient,3,11,Davies,Tenuis,Ten.Dav.10,1,Ten.Dav.10.1,3,1,5,3.799,NA,NA,NA,NA,NA,NA
+18,1,Ambient,4,1,Jewell,Tenuis,Ten.Jew.6,1,Ten.Jew.6.1,3,1,4,4.958,NA,NA,NA,NA,NA,NA
+19,1,Ambient,4,4,Davies,Tenuis,Ten.Dav.9,2,Ten.Dav.9.2,3,1,5,5.194,NA,NA,NA,NA,NA,NA
+20,1,Ambient,4,8,Jewell,Tenuis,Ten.Jew.6,2,Ten.Jew.6.2,3,1,4,2.885,NA,NA,NA,NA,NA,NA
+21,1,Ambient,5,2,Parke,Tenuis,Ten.Par.2,1,Ten.Par.2.1,3,1,2,1.943,NA,NA,NA,NA,NA,NA
+22,1,Ambient,5,10,Davies,Tenuis,Ten.Dav.10,2,Ten.Dav.10.2,3,1,5,5.316,NA,NA,NA,NA,NA,NA
+23,1,Ambient,6,2,Davies,Tenuis,Ten.Dav.D1,2,Ten.Dav.D1.2,3,1,6,4.447,NA,NA,NA,NA,NA,NA
+24,1,Ambient,6,3,Jewell,Tenuis,Ten.Jew.7,20,Ten.Jew.7.20,3,1,6,2.567,NA,NA,NA,NA,NA,NA
+25,1,Ambient,6,6,Davies,Tenuis,Ten.Dav.8,1,Ten.Dav.8.1,3,0,NA,NA,NA,NA,NA,NA,NA,NA
+26,1,Ambient,6,8,Palms,Tenuis,Ten.Pal.3,1,Ten.Pal.3.1,3,1,5,3.227,NA,NA,NA,NA,NA,NA
+27,2,Ambient,1,2,Davies,Tenuis,Ten.Dav.10,3,Ten.Dav.10.3,3,1,5,2.968,NA,NA,NA,NA,NA,NA
+28,2,Ambient,1,8,Davies,Tenuis,Ten.Dav.9,3,Ten.Dav.9.3,3,1,5,2.611,NA,NA,NA,NA,NA,NA
+29,2,Ambient,1,11,Parke,Tenuis,Ten.Par.2,2,Ten.Par.2.2,3,1,2,2.754,NA,NA,NA,NA,NA,NA
+30,2,Ambient,2,4,Davies,Tenuis,Ten.Dav.6,2,Ten.Dav.6.2,3,1,6,4.954,NA,NA,NA,NA,NA,NA
+31,2,Ambient,2,5,Parke,Tenuis,Ten.Par.5,3,Ten.Par.5.3,3,1,4,4.424,NA,NA,NA,NA,NA,NA
+32,2,Ambient,2,6,Davies,Tenuis,Ten.Dav.13,2,Ten.Dav.13.2,3,1,5,2.468,NA,NA,NA,NA,NA,NA
+33,2,Ambient,2,8,Davies,Tenuis,Ten.Dav.1,3,Ten.Dav.1.3,3,1,5,2.649,NA,NA,NA,NA,NA,NA
+34,2,Ambient,2,9,Davies,Tenuis,Ten.Dav.9,4,Ten.Dav.9.4,3,1,5,1.704,NA,NA,NA,NA,NA,NA
+35,2,Ambient,2,10,Davies,Tenuis,Ten.Dav.12,16,Ten.Dav.12.16,3,1,4,2.468,NA,NA,NA,NA,NA,NA
+36,2,Ambient,2,11,Jewell,Tenuis,Ten.Jew.5,2,Ten.Jew.5.2,3,1,4,5.255,NA,NA,NA,NA,NA,NA
+37,2,Ambient,3,1,Jewell,Tenuis,Ten.Jew.5,3,Ten.Jew.5.3,3,1,4,4.135,NA,NA,NA,NA,NA,NA
+38,2,Ambient,3,10,Palms,Tenuis,Ten.Pal.1,3,Ten.Pal.1.3,3,1,6,2.709,NA,NA,NA,NA,NA,NA
+39,2,Ambient,4,1,Parke,Tenuis,Ten.Par.5,4,Ten.Par.5.4,3,1,4,6.403,NA,NA,NA,NA,NA,NA
+40,2,Ambient,4,3,Palms,Tenuis,Ten.Pal.1,4,Ten.Pal.1.4,3,1,6,3.815,NA,NA,NA,NA,NA,NA
+41,2,Ambient,4,5,Davies,Tenuis,Ten.Dav.10,4,Ten.Dav.10.4,3,1,4,2.43,NA,NA,NA,NA,NA,NA
+42,2,Ambient,4,6,Palms,Tenuis,Ten.Pal.3,2,Ten.Pal.3.2,3,1,4,2.719,NA,NA,NA,NA,NA,NA
+43,2,Ambient,4,8,Jewell,Tenuis,Ten.Jew.6,3,Ten.Jew.6.3,3,1,4,4.836,NA,NA,NA,NA,NA,NA
+44,2,Ambient,4,9,Jewell,Tenuis,Ten.Jew.7,2,Ten.Jew.7.2,3,1,5,3.325,NA,NA,NA,NA,NA,NA
+45,2,Ambient,4,11,Davies,Tenuis,Ten.Dav.8,2,Ten.Dav.8.2,3,0,NA,NA,NA,NA,NA,NA,NA,NA
+46,2,Ambient,5,5,Davies,Tenuis,Ten.Dav.D1,3,Ten.Dav.D1.3,3,1,6,3.317,NA,NA,NA,NA,NA,NA
+47,2,Ambient,5,7,Palms,Tenuis,Ten.Pal.6,3,Ten.Pal.6.3,3,0,NA,NA,NA,NA,NA,NA,NA,NA
+48,2,Ambient,5,10,Davies,Tenuis,Ten.Dav.6,3,Ten.Dav.6.3,3,1,6,3.707,NA,NA,NA,NA,NA,NA
+49,2,Ambient,6,2,Jewell,Tenuis,Ten.Jew.7,3,Ten.Jew.7.3,3,1,4,3.754,NA,NA,NA,NA,NA,NA
+50,2,Ambient,6,3,Jewell,Tenuis,Ten.Jew.6,4,Ten.Jew.6.4,3,1,4,4.578,NA,NA,NA,NA,NA,NA
+51,2,Ambient,6,5,Davies,Tenuis,Ten.Dav.1,4,Ten.Dav.1.4,3,1,5,2.835,NA,NA,NA,NA,NA,NA
+52,2,Ambient,6,7,Palms,Tenuis,Ten.Pal.3,3,Ten.Pal.3.3,3,1,5,2.369,NA,NA,NA,NA,NA,NA
+53,2,Ambient,6,9,Davies,Tenuis,Ten.Dav.12,2,Ten.Dav.12.2,3,1,5,2.851,NA,NA,NA,NA,NA,NA
+54,3,Ambient,1,4,Palms,Tenuis,Ten.Pal.3,4,Ten.Pal.3.4,3,1,5,2.134,NA,NA,NA,NA,NA,NA
+55,3,Ambient,1,8,Davies,Tenuis,Ten.Dav.9,5,Ten.Dav.9.5,3,1,6,4.163,NA,NA,NA,NA,NA,NA
+56,3,Ambient,2,2,Parke,Tenuis,Ten.Par.2,3,Ten.Par.2.3,3,1,4,4.627,NA,NA,NA,NA,NA,NA
+57,3,Ambient,2,3,Davies,Tenuis,Ten.Dav.6,4,Ten.Dav.6.4,3,1,3,2.669,NA,NA,NA,NA,NA,NA
+58,3,Ambient,2,5,Jewell,Tenuis,Ten.Jew.5,4,Ten.Jew.5.4,3,1,5,3.352,NA,NA,NA,NA,NA,NA
+59,3,Ambient,2,8,Jewell,Tenuis,Ten.Jew.6,5,Ten.Jew.6.5,3,1,4,NA,NA,NA,NA,NA,NA,NA
+60,3,Ambient,3,2,Davies,Tenuis,Ten.Dav.13,3,Ten.Dav.13.3,3,1,6,5.281,NA,NA,NA,NA,NA,NA
+61,3,Ambient,3,3,Jewell,Tenuis,Ten.Jew.7,4,Ten.Jew.7.4,3,1,5,4.864,NA,NA,NA,NA,NA,NA
+62,3,Ambient,3,4,Parke,Tenuis,Ten.Par.5,5,Ten.Par.5.5,3,1,5,4.432,NA,NA,NA,NA,NA,NA
+63,3,Ambient,3,6,Jewell,Tenuis,Ten.Jew.5,5,Ten.Jew.5.5,3,1,4,5.56,NA,NA,NA,NA,NA,NA
+64,3,Ambient,3,7,Parke,Tenuis,Ten.Par.5,6,Ten.Par.5.6,3,1,4,3.835,NA,NA,NA,NA,NA,NA
+65,3,Ambient,3,8,Davies,Tenuis,Ten.Dav.12,13,Ten.Dav.12.13,3,1,6,5.867,NA,NA,NA,NA,NA,NA
+66,3,Ambient,4,1,Davies,Tenuis,Ten.Dav.1,5,Ten.Dav.1.5,3,1,6,5.196,NA,NA,NA,NA,NA,NA
+67,3,Ambient,4,3,Palms,Tenuis,Ten.Pal.1,5,Ten.Pal.1.5,3,1,6,4.445,NA,NA,NA,NA,NA,NA
+68,3,Ambient,4,10,Jewell,Tenuis,Ten.Jew.6,6,Ten.Jew.6.6,3,1,4,5.548,NA,NA,NA,NA,NA,NA
+69,3,Ambient,5,3,Davies,Tenuis,Ten.Dav.12,3,Ten.Dav.12.3,3,1,6,5.067,NA,NA,NA,NA,NA,NA
+70,3,Ambient,5,5,Davies,Tenuis,Ten.Dav.6,5,Ten.Dav.6.5,3,1,6,5.522,NA,NA,NA,NA,NA,NA
+71,3,Ambient,5,8,Davies,Tenuis,Ten.Dav.D1,4,Ten.Dav.D1.4,3,1,5,4.619,NA,NA,NA,NA,NA,NA
+72,3,Ambient,5,9,Jewell,Tenuis,Ten.Jew.7,5,Ten.Jew.7.5,3,1,4,7.156,NA,NA,NA,NA,NA,NA
+73,3,Ambient,5,11,Davies,Tenuis,Ten.Dav.1,6,Ten.Dav.1.6,3,1,4,3.26,NA,NA,NA,NA,NA,NA
+74,3,Ambient,6,1,Davies,Tenuis,Ten.Dav.10,5,Ten.Dav.10.5,3,1,5,2.867,NA,NA,NA,NA,NA,NA
+75,3,Ambient,6,2,Davies,Tenuis,Ten.Dav.13,4,Ten.Dav.13.4,3,1,6,3.452,NA,NA,NA,NA,NA,NA
+76,3,Ambient,6,5,Parke,Tenuis,Ten.Par.2,4,Ten.Par.2.4,3,1,2,3.569,NA,NA,NA,NA,NA,NA
+77,3,Ambient,6,7,Palms,Tenuis,Ten.Pal.1,6,Ten.Pal.1.6,3,1,5,3.971,NA,NA,NA,NA,NA,NA
+78,4,Ambient,1,1,Davies,Tenuis,Ten.Dav.13,5,Ten.Dav.13.5,3,1,6,NA,NA,NA,NA,NA,NA,NA
+79,4,Ambient,1,3,Davies,Tenuis,Ten.Dav.12,4,Ten.Dav.12.4,3,1,5,NA,NA,NA,NA,NA,NA,NA
+80,4,Ambient,1,5,Davies,Tenuis,Ten.Dav.1,7,Ten.Dav.1.7,3,1,5,NA,NA,NA,NA,NA,NA,NA
+81,4,Ambient,1,7,Davies,Tenuis,Ten.Dav.1,8,Ten.Dav.1.8,3,1,6,NA,NA,NA,NA,NA,NA,NA
+82,4,Ambient,1,11,Davies,Tenuis,Ten.Dav.10,6,Ten.Dav.10.6,3,1,4,NA,NA,NA,NA,NA,NA,NA
+83,4,Ambient,2,1,Jewell,Tenuis,Ten.Jew.5,6,Ten.Jew.5.6,3,1,3,3.357,NA,NA,NA,NA,NA,NA
+84,4,Ambient,2,9,Jewell,Tenuis,Ten.Jew.6,7,Ten.Jew.6.7,3,1,4,4.167,NA,NA,NA,NA,NA,NA
+85,4,Ambient,3,1,Palms,Tenuis,Ten.Pal.1,7,Ten.Pal.1.7,3,1,5,4.549,NA,NA,NA,NA,NA,NA
+86,4,Ambient,3,2,Davies,Tenuis,Ten.Dav.6,6,Ten.Dav.6.6,3,1,6,6.742,NA,NA,NA,NA,NA,NA
+87,4,Ambient,3,9,Parke,Tenuis,Ten.Par.5,7,Ten.Par.5.7,3,1,4,2.477,NA,NA,NA,NA,NA,NA
+88,4,Ambient,4,1,Palms,Tenuis,Ten.Pal.1,8,Ten.Pal.1.8,3,1,6,3.311,NA,NA,NA,NA,NA,NA
+89,4,Ambient,4,3,Parke,Tenuis,Ten.Par.2,5,Ten.Par.2.5,3,1,2,4.829,NA,NA,NA,NA,NA,NA
+90,4,Ambient,4,4,Parke,Tenuis,Ten.Par.2,6,Ten.Par.2.6,3,1,1,4.355,NA,NA,NA,NA,NA,NA
+91,4,Ambient,4,6,Davies,Tenuis,Ten.Dav.D1,5,Ten.Dav.D1.5,3,1,5,2.368,NA,NA,NA,NA,NA,NA
+92,4,Ambient,4,7,Davies,Tenuis,Ten.Dav.12,17,Ten.Dav.12.17,3,1,5,2.268,NA,NA,NA,NA,NA,NA
+93,4,Ambient,4,8,Palms,Tenuis,Ten.Pal.3,5,Ten.Pal.3.5,3,1,4,2.029,NA,NA,NA,NA,NA,NA
+94,4,Ambient,4,9,Jewell,Tenuis,Ten.Jew.7,6,Ten.Jew.7.6,3,1,6,1.917,NA,NA,NA,NA,NA,NA
+95,4,Ambient,4,10,Jewell,Tenuis,Ten.Jew.5,7,Ten.Jew.5.7,3,1,5,3.107,NA,NA,NA,NA,NA,NA
+96,4,Ambient,5,1,Davies,Tenuis,Ten.Dav.6,7,Ten.Dav.6.7,3,1,5,3.299,NA,NA,NA,NA,NA,NA
+97,4,Ambient,5,4,Davies,Tenuis,Ten.Dav.9,6,Ten.Dav.9.6,3,1,5,2.735,NA,NA,NA,NA,NA,NA
+98,4,Ambient,5,5,Jewell,Tenuis,Ten.Jew.6,8,Ten.Jew.6.8,3,1,4,5.012,NA,NA,NA,NA,NA,NA
+99,4,Ambient,5,9,Davies,Tenuis,Ten.Dav.10,7,Ten.Dav.10.7,3,1,6,2.863,NA,NA,NA,NA,NA,NA
+100,4,Ambient,5,10,Jewell,Tenuis,Ten.Jew.7,7,Ten.Jew.7.7,3,1,5,4.134,NA,NA,NA,NA,NA,NA
+101,4,Ambient,6,2,Davies,Tenuis,Ten.Dav.13,6,Ten.Dav.13.6,3,1,5,3.966,NA,NA,NA,NA,NA,NA
+102,4,Ambient,6,3,Parke,Tenuis,Ten.Par.5,8,Ten.Par.5.8,3,1,5,3.696,NA,NA,NA,NA,NA,NA
+103,4,Ambient,6,7,Davies,Tenuis,Ten.Dav.9,7,Ten.Dav.9.7,3,1,5,1.894,NA,NA,NA,NA,NA,NA
+104,5,Ambient,1,2,Parke,Tenuis,Ten.Par.5,9,Ten.Par.5.9,3,1,3,2.84,NA,NA,NA,NA,NA,NA
+105,5,Ambient,1,4,Davies,Tenuis,Ten.Dav.13,7,Ten.Dav.13.7,3,1,4,2.715,NA,NA,NA,NA,NA,NA
+106,5,Ambient,1,8,Davies,Tenuis,Ten.Dav.9,8,Ten.Dav.9.8,3,1,4,2.93,NA,NA,NA,NA,NA,NA
+107,5,Ambient,1,9,Davies,Tenuis,Ten.Dav.D1,6,Ten.Dav.D1.6,3,1,6,6.233,NA,NA,NA,NA,NA,NA
+108,5,Ambient,1,11,Parke,Tenuis,Ten.Par.2,7,Ten.Par.2.7,3,1,1,2.49,NA,NA,NA,NA,NA,NA
+109,5,Ambient,2,3,Palms,Tenuis,Ten.Pal.6,9,Ten.Pal.6.9,3,0,NA,NA,NA,NA,NA,NA,NA,NA
+110,5,Ambient,2,11,Palms,Tenuis,Ten.Pal.1,9,Ten.Pal.1.9,3,1,5,4.004,NA,NA,NA,NA,NA,NA
+111,5,Ambient,3,2,Jewell,Tenuis,Ten.Jew.5,8,Ten.Jew.5.8,3,1,5,3.393,NA,NA,NA,NA,NA,NA
+112,5,Ambient,3,3,Parke,Tenuis,Ten.Par.2,8,Ten.Par.2.8,3,1,3,6.385,NA,NA,NA,NA,NA,NA
+113,5,Ambient,3,5,Davies,Tenuis,Ten.Dav.13,8,Ten.Dav.13.8,3,1,5,2.507,NA,NA,NA,NA,NA,NA
+114,5,Ambient,3,6,Jewell,Tenuis,Ten.Jew.7,8,Ten.Jew.7.8,3,1,5,3.625,NA,NA,NA,NA,NA,NA
+115,5,Ambient,3,9,Parke,Tenuis,Ten.Par.5,21,Ten.Par.5.21,3,1,5,4.747,NA,NA,NA,NA,NA,NA
+116,6,Ambient,1,2,Palms,Tenuis,Ten.Pal.3,7,Ten.Pal.3.7,3,1,5,2.221,NA,NA,NA,NA,NA,NA
+117,6,Ambient,1,4,Davies,Tenuis,Ten.Dav.9,9,Ten.Dav.9.9,3,1,5,3.77,NA,NA,NA,NA,NA,NA
+118,6,Ambient,1,7,Davies,Tenuis,Ten.Dav.8,9,Ten.Dav.8.9,3,1,5,4.404,NA,NA,NA,NA,NA,NA
+119,6,Ambient,1,8,Davies,Tenuis,Ten.Dav.1,10,Ten.Dav.1.10,3,1,6,3.944,NA,NA,NA,NA,NA,NA
+120,6,Ambient,2,11,Parke,Tenuis,Ten.Par.2,9,Ten.Par.2.9,3,1,2,7.137,NA,NA,NA,NA,NA,NA
+121,6,Ambient,3,2,Davies,Tenuis,Ten.Dav.10,9,Ten.Dav.10.9,3,1,5,2.373,NA,NA,NA,NA,NA,NA
+122,6,Ambient,3,6,Davies,Tenuis,Ten.Dav.6,10,Ten.Dav.6.10,3,1,6,3.672,NA,NA,NA,NA,NA,NA
+123,6,Ambient,3,8,Parke,Tenuis,Ten.Par.2,10,Ten.Par.2.10,3,1,4,4.607,NA,NA,NA,NA,NA,NA
+124,6,Ambient,3,10,Jewell,Tenuis,Ten.Jew.6,10,Ten.Jew.6.10,3,1,4,2.846,NA,NA,NA,NA,NA,NA
+125,6,Ambient,4,1,Davies,Tenuis,Ten.Dav.D1,8,Ten.Dav.D1.8,3,1,5,2.704,NA,NA,NA,NA,NA,NA
+126,6,Ambient,4,4,Davies,Tenuis,Ten.Dav.13,9,Ten.Dav.13.9,3,1,5,3.957,NA,NA,NA,NA,NA,NA
+127,6,Ambient,4,9,Palms,Tenuis,Ten.Pal.3,8,Ten.Pal.3.8,3,1,4,1.639,NA,NA,NA,NA,NA,NA
+128,6,Ambient,4,10,Davies,Tenuis,Ten.Dav.D1,9,Ten.Dav.D1.9,3,1,6,2.87,NA,NA,NA,NA,NA,NA
+129,6,Ambient,4,11,Davies,Tenuis,Ten.Dav.12,6,Ten.Dav.12.6,3,1,5,3.277,NA,NA,NA,NA,NA,NA
+130,6,Ambient,5,5,Davies,Tenuis,Ten.Dav.10,10,Ten.Dav.10.10,3,1,5,4.412,NA,NA,NA,NA,NA,NA
+131,6,Ambient,5,7,Jewell,Tenuis,Ten.Jew.6,21,Ten.Jew.6.21,3,1,4,1.948,NA,NA,NA,NA,NA,NA
+132,6,Ambient,5,8,Parke,Tenuis,Ten.Par.5,10,Ten.Par.5.10,3,0,NA,NA,NA,NA,NA,NA,NA,NA
+133,6,Ambient,5,9,Palms,Tenuis,Ten.Pal.1,10,Ten.Pal.1.10,3,1,6,3.874,NA,NA,NA,NA,NA,NA
+134,6,Ambient,5,10,Jewell,Tenuis,Ten.Jew.7,10,Ten.Jew.7.10,3,1,5,2.43,NA,NA,NA,NA,NA,NA
+135,6,Ambient,6,9,Davies,Tenuis,Ten.Dav.9,10,Ten.Dav.9.10,3,1,5,2.746,NA,NA,NA,NA,NA,NA
+136,6,Ambient,6,10,Jewell,Tenuis,Ten.Jew.5,10,Ten.Jew.5.10,3,1,5,4.376,NA,NA,NA,NA,NA,NA
+137,6,Ambient,6,11,Davies,Tenuis,Ten.Dav.13,10,Ten.Dav.13.10,3,1,6,5.502,NA,NA,NA,NA,NA,NA
+138,7,Hot,1,1,Davies,Tenuis,Ten.Dav.D1,10,Ten.Dav.D1.10,3,1,2,3.866,NA,NA,NA,NA,NA,NA
+139,7,Hot,1,4,Jewell,Tenuis,Ten.Jew.5,11,Ten.Jew.5.11,3,0,NA,NA,NA,NA,NA,NA,NA,NA
+140,7,Hot,1,5,Davies,Tenuis,Ten.Dav.12,14,Ten.Dav.12.14,3,0,NA,NA,NA,NA,NA,NA,NA,NA
+141,7,Hot,1,7,Davies,Tenuis,Ten.Dav.13,11,Ten.Dav.13.11,3,1,2,3.005,NA,NA,NA,NA,NA,NA
+142,7,Hot,2,2,Parke,Tenuis,Ten.Par.2,11,Ten.Par.2.11,3,1,3,4.453,NA,NA,NA,NA,NA,NA
+143,7,Hot,2,8,Palms,Tenuis,Ten.Pal.3,9,Ten.Pal.3.9,3,1,3,2.796,NA,NA,NA,NA,NA,NA
+144,7,Hot,2,10,Jewell,Tenuis,Ten.Jew.6,11,Ten.Jew.6.11,3,1,4,4.987,NA,NA,NA,NA,NA,NA
+145,7,Hot,3,1,Palms,Tenuis,Ten.Pal.1,11,Ten.Pal.1.11,3,1,5,2.826,NA,NA,NA,NA,NA,NA
+146,7,Hot,3,2,Jewell,Tenuis,Ten.Jew.7,11,Ten.Jew.7.11,3,1,5,4.23,NA,NA,NA,NA,NA,NA
+147,7,Hot,3,4,Davies,Tenuis,Ten.Dav.6,11,Ten.Dav.6.11,3,1,5,2.371,NA,NA,NA,NA,NA,NA
+148,7,Hot,3,5,Jewell,Tenuis,Ten.Jew.5,12,Ten.Jew.5.12,3,0,NA,NA,NA,NA,NA,NA,NA,NA
+149,7,Hot,3,7,Jewell,Tenuis,Ten.Jew.7,12,Ten.Jew.7.12,3,1,4,2.699,NA,NA,NA,NA,NA,NA
+150,7,Hot,4,1,Parke,Tenuis,Ten.Par.5,11,Ten.Par.5.11,3,1,4,3.446,NA,NA,NA,NA,NA,NA
+151,7,Hot,4,4,Palms,Tenuis,Ten.Pal.1,12,Ten.Pal.1.12,3,1,5,2.858,NA,NA,NA,NA,NA,NA
+152,7,Hot,4,5,Davies,Tenuis,Ten.Dav.10,11,Ten.Dav.10.11,3,1,1,4.354,NA,NA,NA,NA,NA,NA
+153,7,Hot,4,7,Parke,Tenuis,Ten.Par.5,12,Ten.Par.5.12,3,1,5,3.56,NA,NA,NA,NA,NA,NA
+154,7,Hot,4,8,Davies,Tenuis,Ten.Dav.D1,11,Ten.Dav.D1.11,3,0,NA,NA,NA,NA,NA,NA,NA,NA
+155,7,Hot,4,11,Davies,Tenuis,Ten.Dav.12,7,Ten.Dav.12.7,3,0,NA,NA,NA,NA,NA,NA,NA,NA
+156,7,Hot,5,9,Davies,Tenuis,Ten.Dav.1,11,Ten.Dav.1.11,3,1,5,4.457,NA,NA,NA,NA,NA,NA
+157,7,Hot,5,10,Jewell,Tenuis,Ten.Jew.6,12,Ten.Jew.6.12,3,0,NA,NA,NA,NA,NA,NA,NA,NA
+158,7,Hot,6,4,Davies,Tenuis,Ten.Dav.10,12,Ten.Dav.10.12,3,1,1,2.092,NA,NA,NA,NA,NA,NA
+159,7,Hot,6,5,Davies,Tenuis,Ten.Dav.1,12,Ten.Dav.1.12,3,1,4,2.925,NA,NA,NA,NA,NA,NA
+160,7,Hot,6,6,Parke,Tenuis,Ten.Par.2,22,Ten.Par.2.22,3,1,2,4.86,NA,NA,NA,NA,NA,NA
+161,7,Hot,6,8,Davies,Tenuis,Ten.Dav.9,11,Ten.Dav.9.11,3,1,5,3.691,NA,NA,NA,NA,NA,NA
+162,7,Hot,6,9,Davies,Tenuis,Ten.Dav.9,12,Ten.Dav.9.12,3,1,5,2.85,NA,NA,NA,NA,NA,NA
+163,9,Hot,1,1,Davies,Tenuis,Ten.Dav.12,9,Ten.Dav.12.9,3,0,NA,NA,NA,NA,NA,NA,NA,NA
+164,9,Hot,1,2,Jewell,Tenuis,Ten.Jew.6,15,Ten.Jew.6.15,3,1,4,4.774,NA,NA,NA,NA,NA,NA
+165,9,Hot,1,6,Davies,Tenuis,Ten.Dav.13,13,Ten.Dav.13.13,3,1,2,4.757,NA,NA,NA,NA,NA,NA
+166,9,Hot,1,7,Parke,Tenuis,Ten.Par.2,13,Ten.Par.2.13,3,1,2,2.398,NA,NA,NA,NA,NA,NA
+167,9,Hot,1,8,Davies,Tenuis,Ten.Dav.6,14,Ten.Dav.6.14,3,1,4,1.991,NA,NA,NA,NA,NA,NA
+168,9,Hot,1,9,Davies,Tenuis,Ten.Dav.9,15,Ten.Dav.9.15,3,1,4,2.712,NA,NA,NA,NA,NA,NA
+169,9,Hot,2,3,Jewell,Tenuis,Ten.Jew.5,15,Ten.Jew.5.15,3,0,NA,NA,NA,NA,NA,NA,NA,NA
+170,9,Hot,2,7,Davies,Tenuis,Ten.Dav.D1,13,Ten.Dav.D1.13,3,1,1,1.712,NA,NA,NA,NA,NA,NA
+171,9,Hot,3,3,Davies,Tenuis,Ten.Dav.1,15,Ten.Dav.1.15,3,1,4,3.13,NA,NA,NA,NA,NA,NA
+172,9,Hot,3,5,Davies,Tenuis,Ten.Dav.13,14,Ten.Dav.13.14,3,1,2,5.025,NA,NA,NA,NA,NA,NA
+173,9,Hot,3,6,Parke,Tenuis,Ten.Par.5,15,Ten.Par.5.15,3,1,4,5.337,NA,NA,NA,NA,NA,NA
+174,9,Hot,3,9,Jewell,Tenuis,Ten.Jew.5,16,Ten.Jew.5.16,3,0,NA,NA,NA,NA,NA,NA,NA,NA
+175,9,Hot,3,10,Palms,Tenuis,Ten.Pal.3,12,Ten.Pal.3.12,3,1,4,2.107,NA,NA,NA,NA,NA,NA
+176,9,Hot,4,2,Davies,Tenuis,Ten.Dav.12,19,Ten.Dav.12.19,3,0,NA,NA,NA,NA,NA,NA,NA,NA
+177,9,Hot,4,3,Davies,Tenuis,Ten.Dav.D1,14,Ten.Dav.D1.14,3,1,3,2.088,NA,NA,NA,NA,NA,NA
+178,9,Hot,4,4,Davies,Tenuis,Ten.Dav.6,15,Ten.Dav.6.15,3,1,5,2.314,NA,NA,NA,NA,NA,NA
+179,9,Hot,4,8,Davies,Tenuis,Ten.Dav.1,16,Ten.Dav.1.16,3,1,4,2.55,NA,NA,NA,NA,NA,NA
+180,9,Hot,5,3,Jewell,Tenuis,Ten.Jew.7,15,Ten.Jew.7.15,3,1,4,2.122,NA,NA,NA,NA,NA,NA
+181,9,Hot,5,5,Jewell,Tenuis,Ten.Jew.7,16,Ten.Jew.7.16,3,1,5,4,NA,NA,NA,NA,NA,NA
+182,9,Hot,5,6,Parke,Tenuis,Ten.Par.2,14,Ten.Par.2.14,3,1,2,2.003,NA,NA,NA,NA,NA,NA
+183,9,Hot,5,8,Jewell,Tenuis,Ten.Jew.6,16,Ten.Jew.6.16,3,0,NA,NA,NA,NA,NA,NA,NA,NA
+184,9,Hot,6,1,Davies,Tenuis,Ten.Dav.10,15,Ten.Dav.10.15,3,1,1,2.676,NA,NA,NA,NA,NA,NA
+185,9,Hot,6,8,Palms,Tenuis,Ten.Pal.1,15,Ten.Pal.1.15,3,1,6,3.053,NA,NA,NA,NA,NA,NA
+186,9,Hot,6,11,Palms,Tenuis,Ten.Pal.1,16,Ten.Pal.1.16,3,1,6,2.665,NA,NA,NA,NA,NA,NA
+187,12,Hot,1,1,Davies,Tenuis,Ten.Dav.13,19,Ten.Dav.13.19,3,1,2,4.967,NA,NA,NA,NA,NA,NA
+188,12,Hot,1,4,Jewell,Tenuis,Ten.Jew.6,20,Ten.Jew.6.20,3,1,3,1.748,NA,NA,NA,NA,NA,NA
+189,12,Hot,1,6,Parke,Tenuis,Ten.Par.2,19,Ten.Par.2.19,3,0,NA,NA,NA,NA,NA,NA,NA,NA
+190,12,Hot,1,7,Davies,Tenuis,Ten.Dav.1,20,Ten.Dav.1.20,3,1,1,4.036,NA,NA,NA,NA,NA,NA
+191,12,Hot,1,9,Davies,Tenuis,Ten.Dav.D1,18,Ten.Dav.D1.18,3,1,1,1.464,NA,NA,NA,NA,NA,NA
+192,12,Hot,2,2,Palms,Tenuis,Ten.Pal.3,17,Ten.Pal.3.17,3,1,4,1.254,NA,NA,NA,NA,NA,NA
+193,12,Hot,2,3,Davies,Tenuis,Ten.Dav.9,19,Ten.Dav.9.19,3,1,4,1.65,NA,NA,NA,NA,NA,NA
+194,12,Hot,2,6,Davies,Tenuis,Ten.Dav.10,19,Ten.Dav.10.19,3,1,1,3.192,NA,NA,NA,NA,NA,NA
+195,12,Hot,2,8,Jewell,Tenuis,Ten.Jew.7,19,Ten.Jew.7.19,3,1,5,3.012,NA,NA,NA,NA,NA,NA
+196,12,Hot,3,2,Davies,Tenuis,Ten.Dav.9,20,Ten.Dav.9.20,3,1,5,2.695,NA,NA,NA,NA,NA,NA
+197,12,Hot,3,6,Parke,Tenuis,Ten.Par.5,20,Ten.Par.5.20,3,1,4,4.007,NA,NA,NA,NA,NA,NA
+198,12,Hot,3,10,Davies,Tenuis,Ten.Dav.10,20,Ten.Dav.10.20,3,1,1,6.044,NA,NA,NA,NA,NA,NA
+199,12,Hot,4,3,Parke,Tenuis,Ten.Par.5,22,Ten.Par.5.22,3,1,5,3.618,NA,NA,NA,NA,NA,NA
+200,12,Hot,4,8,Palms,Tenuis,Ten.Pal.1,20,Ten.Pal.1.20,3,1,4,3.94,NA,NA,NA,NA,NA,NA
+201,12,Hot,5,6,Davies,Tenuis,Ten.Dav.6,20,Ten.Dav.6.20,3,1,3,4.886,NA,NA,NA,NA,NA,NA
+202,12,Hot,5,9,Jewell,Tenuis,Ten.Jew.5,20,Ten.Jew.5.20,3,0,NA,NA,NA,NA,NA,NA,NA,NA
+203,12,Hot,6,2,Parke,Tenuis,Ten.Par.2,20,Ten.Par.2.20,3,1,1,2.765,NA,NA,NA,NA,NA,NA
+204,12,Hot,6,3,Davies,Tenuis,Ten.Dav.D1,19,Ten.Dav.D1.19,3,0,NA,NA,NA,NA,NA,NA,NA,NA
+205,12,Hot,6,5,Davies,Tenuis,Ten.Dav.12,12,Ten.Dav.12.12,3,0,NA,NA,NA,NA,NA,NA,NA,NA
+206,12,Hot,6,8,Davies,Tenuis,Ten.Dav.13,20,Ten.Dav.13.20,3,1,2,4.409,NA,NA,NA,NA,NA,NA
+207,1,Ambient,1,3,Parke,Goniastrea,Gon.Par.7,1,Gon.Par.7.1,4,1,6,3.095,NA,NA,NA,NA,NA,NA
+208,1,Ambient,1,7,Jewell,Goniastrea,Gon.Jew.8,1,Gon.Jew.8.1,4,1,6,2.882,NA,NA,NA,NA,NA,NA
+209,1,Ambient,1,10,Parke,Goniastrea,Gon.Par.6,1,Gon.Par.6.1,4,1,6,3.938,NA,NA,NA,NA,NA,NA
+210,1,Ambient,2,2,Switzer,Goniastrea,Gon.Swi.7,1,Gon.Swi.7.1,4,1,NA,NA,NA,NA,NA,NA,NA,NA
+211,1,Ambient,2,8,Switzer,Goniastrea,Gon.Swi.11,1,Gon.Swi.11.1,4,1,NA,NA,NA,NA,NA,NA,NA,NA
+212,1,Ambient,2,10,Switzer,Goniastrea,Gon.Swi.12,1,Gon.Swi.12.1,4,1,NA,NA,NA,NA,NA,NA,NA,NA
+213,1,Ambient,2,11,Parke,Goniastrea,Gon.Par.3,1,Gon.Par.3.1,4,1,NA,NA,NA,NA,NA,NA,NA,NA
+214,1,Ambient,3,3,Switzer,Goniastrea,Gon.Swi.6,1,Gon.Swi.6.1,4,1,6,1.89,NA,NA,NA,NA,NA,NA
+215,1,Ambient,3,8,Parke,Goniastrea,Gon.Par.6,2,Gon.Par.6.2,4,1,6,2.125,NA,NA,NA,NA,NA,NA
+216,1,Ambient,3,10,Parke,Goniastrea,Gon.Par.8,1,Gon.Par.8.1,4,1,6,2.218,NA,NA,NA,NA,NA,NA
+217,1,Ambient,4,2,Switzer,Goniastrea,Gon.Swi.5,1,Gon.Swi.5.1,4,1,6,2.664,NA,NA,NA,NA,NA,NA
+218,1,Ambient,4,3,Jewell,Goniastrea,Gon.Jew.11,1,Gon.Jew.11.1,4,1,6,2.185,NA,NA,NA,NA,NA,NA
+219,1,Ambient,4,5,Parke,Goniastrea,Gon.Par.3,2,Gon.Par.3.2,4,1,6,3.569,NA,NA,NA,NA,NA,NA
+220,1,Ambient,4,6,Parke,Goniastrea,Gon.Par.8,2,Gon.Par.8.2,4,1,6,2.216,NA,NA,NA,NA,NA,NA
+221,1,Ambient,4,7,Switzer,Goniastrea,Gon.Swi.6,2,Gon.Swi.6.2,4,1,6,2.914,NA,NA,NA,NA,NA,NA
+222,1,Ambient,4,10,Jewell,Goniastrea,Gon.Jew.6,1,Gon.Jew.6.1,4,1,6,2.44,NA,NA,NA,NA,NA,NA
+223,1,Ambient,4,11,Switzer,Goniastrea,Gon.Swi.10,1,Gon.Swi.10.1,4,1,6,2.989,NA,NA,NA,NA,NA,NA
+224,1,Ambient,5,1,Switzer,Goniastrea,Gon.Swi.7,2,Gon.Swi.7.2,4,1,6,3.519,NA,NA,NA,NA,NA,NA
+225,1,Ambient,5,3,Parke,Goniastrea,Gon.Par.8,3,Gon.Par.8.3,4,1,6,2.503,NA,NA,NA,NA,NA,NA
+226,1,Ambient,5,5,Switzer,Goniastrea,Gon.Swi.11,2,Gon.Swi.11.2,4,1,6,2.416,NA,NA,NA,NA,NA,NA
+227,1,Ambient,5,7,Parke,Goniastrea,Gon.Par.8,4,Gon.Par.8.4,4,1,6,2.553,NA,NA,NA,NA,NA,NA
+228,1,Ambient,5,8,Parke,Goniastrea,Gon.Par.7,2,Gon.Par.7.2,4,1,6,3.824,NA,NA,NA,NA,NA,NA
+229,1,Ambient,6,5,Jewell,Goniastrea,Gon.Jew.10,1,Gon.Jew.10.1,4,1,5,3.289,NA,NA,NA,NA,NA,NA
+230,1,Ambient,6,7,Parke,Goniastrea,Gon.Par.2,1,Gon.Par.2.1,4,1,6,3.22,NA,NA,NA,NA,NA,NA
+231,1,Ambient,6,9,Jewell,Goniastrea,Gon.Jew.10,2,Gon.Jew.10.2,4,1,5,3.463,NA,NA,NA,NA,NA,NA
+232,1,Ambient,6,11,Jewell,Goniastrea,Gon.Jew.7,1,Gon.Jew.7.1,4,1,6,3.599,NA,NA,NA,NA,NA,NA
+233,2,Ambient,1,3,Parke,Goniastrea,Gon.Par.3,3,Gon.Par.3.3,4,1,6,5.169,NA,NA,NA,NA,NA,NA
+234,2,Ambient,1,4,Switzer,Goniastrea,Gon.Swi.7,3,Gon.Swi.7.3,4,1,6,4.429,NA,NA,NA,NA,NA,NA
+235,2,Ambient,1,7,Parke,Goniastrea,Gon.Par.6,3,Gon.Par.6.3,4,1,6,3.684,NA,NA,NA,NA,NA,NA
+236,2,Ambient,1,9,Switzer,Goniastrea,Gon.Swi.11,3,Gon.Swi.11.3,4,1,4,2.958,NA,NA,NA,NA,NA,NA
+237,2,Ambient,1,10,Jewell,Goniastrea,Gon.Jew.10,3,Gon.Jew.10.3,4,1,4,4.289,NA,NA,NA,NA,NA,NA
+238,2,Ambient,2,1,Switzer,Goniastrea,Gon.Swi.7,4,Gon.Swi.7.4,4,1,6,3.341,NA,NA,NA,NA,NA,NA
+239,2,Ambient,2,2,Jewell,Goniastrea,Gon.Jew.8,2,Gon.Jew.8.2,4,1,6,1.845,NA,NA,NA,NA,NA,NA
+240,2,Ambient,2,3,Parke,Goniastrea,Gon.Par.7,3,Gon.Par.7.3,4,1,6,4.193,NA,NA,NA,NA,NA,NA
+241,2,Ambient,3,2,Switzer,Goniastrea,Gon.Swi.6,3,Gon.Swi.6.3,4,1,6,1.777,NA,NA,NA,NA,NA,NA
+242,2,Ambient,3,5,Jewell,Goniastrea,Gon.Jew.11,2,Gon.Jew.11.2,4,1,6,3.027,NA,NA,NA,NA,NA,NA
+243,2,Ambient,3,7,Jewell,Goniastrea,Gon.Jew.6,2,Gon.Jew.6.2,4,1,6,2.595,NA,NA,NA,NA,NA,NA
+244,2,Ambient,3,8,Jewell,Goniastrea,Gon.Jew.10,4,Gon.Jew.10.4,4,1,5,2.217,NA,NA,NA,NA,NA,NA
+245,2,Ambient,3,11,Parke,Goniastrea,Gon.Par.2,2,Gon.Par.2.2,4,1,5,3.8,NA,NA,NA,NA,NA,NA
+246,2,Ambient,4,2,Parke,Goniastrea,Gon.Par.3,4,Gon.Par.3.4,4,1,6,2.822,NA,NA,NA,NA,NA,NA
+247,2,Ambient,4,4,Switzer,Goniastrea,Gon.Swi.12,2,Gon.Swi.12.2,4,1,6,3.149,NA,NA,NA,NA,NA,NA
+248,2,Ambient,4,10,Switzer,Goniastrea,Gon.Swi.10,2,Gon.Swi.10.2,4,1,6,2.379,NA,NA,NA,NA,NA,NA
+249,2,Ambient,5,2,Switzer,Goniastrea,Gon.Swi.11,4,Gon.Swi.11.4,4,1,NA,NA,NA,NA,NA,NA,NA,NA
+250,2,Ambient,5,4,Jewell,Goniastrea,Gon.Jew.7,2,Gon.Jew.7.2,4,1,NA,NA,NA,NA,NA,NA,NA,NA
+251,2,Ambient,5,6,Parke,Goniastrea,Gon.Par.8,5,Gon.Par.8.5,4,1,NA,NA,NA,NA,NA,NA,NA,NA
+252,2,Ambient,5,11,Parke,Goniastrea,Gon.Par.8,6,Gon.Par.8.6,4,1,NA,NA,NA,NA,NA,NA,NA,NA
+253,2,Ambient,6,4,Switzer,Goniastrea,Gon.Swi.5,2,Gon.Swi.5.2,4,1,6,2.157,NA,NA,NA,NA,NA,NA
+254,2,Ambient,6,6,Parke,Goniastrea,Gon.Par.7,4,Gon.Par.7.4,4,1,6,3.378,NA,NA,NA,NA,NA,NA
+255,2,Ambient,6,8,Jewell,Goniastrea,Gon.Jew.11,3,Gon.Jew.11.3,4,1,6,2.722,NA,NA,NA,NA,NA,NA
+256,2,Ambient,6,11,Switzer,Goniastrea,Gon.Swi.6,4,Gon.Swi.6.4,4,1,5,2.668,NA,NA,NA,NA,NA,NA
+257,3,Ambient,1,3,Jewell,Goniastrea,Gon.Jew.7,3,Gon.Jew.7.3,4,1,6,2.152,NA,NA,NA,NA,NA,NA
+258,3,Ambient,1,5,Parke,Goniastrea,Gon.Par.6,4,Gon.Par.6.4,4,1,6,2.55,NA,NA,NA,NA,NA,NA
+259,3,Ambient,1,7,Jewell,Goniastrea,Gon.Jew.6,3,Gon.Jew.6.3,4,1,6,3.006,NA,NA,NA,NA,NA,NA
+260,3,Ambient,1,10,Switzer,Goniastrea,Gon.Swi.12,3,Gon.Swi.12.3,4,1,6,4.414,NA,NA,NA,NA,NA,NA
+261,3,Ambient,2,1,Switzer,Goniastrea,Gon.Swi.7,5,Gon.Swi.7.5,4,1,6,3.156,NA,NA,NA,NA,NA,NA
+262,3,Ambient,2,6,Switzer,Goniastrea,Gon.Swi.5,3,Gon.Swi.5.3,4,1,6,3.401,NA,NA,NA,NA,NA,NA
+263,3,Ambient,2,9,Switzer,Goniastrea,Gon.Swi.6,5,Gon.Swi.6.5,4,1,6,3.283,NA,NA,NA,NA,NA,NA
+264,3,Ambient,2,10,Switzer,Goniastrea,Gon.Swi.6,6,Gon.Swi.6.6,4,1,6,3.345,NA,NA,NA,NA,NA,NA
+265,3,Ambient,2,11,Switzer,Goniastrea,Gon.Swi.11,5,Gon.Swi.11.5,4,1,6,3.318,NA,NA,NA,NA,NA,NA
+266,3,Ambient,3,5,Parke,Goniastrea,Gon.Par.7,5,Gon.Par.7.5,4,1,6,4.755,NA,NA,NA,NA,NA,NA
+267,3,Ambient,4,2,Switzer,Goniastrea,Gon.Swi.10,3,Gon.Swi.10.3,4,1,6,3.422,NA,NA,NA,NA,NA,NA
+268,3,Ambient,4,4,Switzer,Goniastrea,Gon.Swi.12,4,Gon.Swi.12.4,4,1,6,3.567,NA,NA,NA,NA,NA,NA
+269,3,Ambient,4,5,Jewell,Goniastrea,Gon.Jew.8,3,Gon.Jew.8.3,4,1,6,2.616,NA,NA,NA,NA,NA,NA
+270,3,Ambient,4,7,Parke,Goniastrea,Gon.Par.2,3,Gon.Par.2.3,4,1,6,4.188,NA,NA,NA,NA,NA,NA
+271,3,Ambient,4,9,Parke,Goniastrea,Gon.Par.3,5,Gon.Par.3.5,4,1,6,3.982,NA,NA,NA,NA,NA,NA
+272,3,Ambient,5,1,Jewell,Goniastrea,Gon.Jew.8,4,Gon.Jew.8.4,4,1,6,3.219,NA,NA,NA,NA,NA,NA
+273,3,Ambient,5,2,Parke,Goniastrea,Gon.Par.6,5,Gon.Par.6.5,4,1,6,4.477,NA,NA,NA,NA,NA,NA
+274,3,Ambient,5,6,Switzer,Goniastrea,Gon.Swi.7,6,Gon.Swi.7.6,4,1,6,2.366,NA,NA,NA,NA,NA,NA
+275,3,Ambient,5,7,Jewell,Goniastrea,Gon.Jew.11,4,Gon.Jew.11.4,4,1,6,4.06,NA,NA,NA,NA,NA,NA
+276,3,Ambient,5,10,Switzer,Goniastrea,Gon.Swi.10,4,Gon.Swi.10.4,4,1,6,4.181,NA,NA,NA,NA,NA,NA
+277,3,Ambient,6,3,Parke,Goniastrea,Gon.Par.2,4,Gon.Par.2.4,4,1,6,3.789,NA,NA,NA,NA,NA,NA
+278,3,Ambient,6,6,Parke,Goniastrea,Gon.Par.3,6,Gon.Par.3.6,4,1,6,3.457,NA,NA,NA,NA,NA,NA
+279,3,Ambient,6,8,Switzer,Goniastrea,Gon.Swi.11,6,Gon.Swi.11.6,4,1,5,2.494,NA,NA,NA,NA,NA,NA
+280,3,Ambient,6,9,Jewell,Goniastrea,Gon.Jew.10,5,Gon.Jew.10.5,4,1,6,2.608,NA,NA,NA,NA,NA,NA
+281,3,Ambient,6,10,Parke,Goniastrea,Gon.Par.7,6,Gon.Par.7.6,4,1,6,3.148,NA,NA,NA,NA,NA,NA
+282,3,Ambient,6,11,Jewell,Goniastrea,Gon.Jew.11,5,Gon.Jew.11.5,4,1,6,2.762,NA,NA,NA,NA,NA,NA
+283,4,Ambient,1,2,Switzer,Goniastrea,Gon.Swi.5,4,Gon.Swi.5.4,4,1,6,3.105,NA,NA,NA,NA,NA,NA
+284,4,Ambient,1,4,Jewell,Goniastrea,Gon.Jew.7,13,Gon.Jew.7.13,4,1,6,2.374,NA,NA,NA,NA,NA,NA
+285,4,Ambient,1,9,Jewell,Goniastrea,Gon.Jew.11,6,Gon.Jew.11.6,4,1,6,2.734,NA,NA,NA,NA,NA,NA
+286,4,Ambient,1,10,Jewell,Goniastrea,Gon.Jew.8,5,Gon.Jew.8.5,4,1,6,3.36,NA,NA,NA,NA,NA,NA
+287,4,Ambient,2,2,Parke,Goniastrea,Gon.Par.6,6,Gon.Par.6.6,4,1,6,2.989,NA,NA,NA,NA,NA,NA
+288,4,Ambient,2,4,Switzer,Goniastrea,Gon.Swi.12,5,Gon.Swi.12.5,4,1,6,3.05,NA,NA,NA,NA,NA,NA
+289,4,Ambient,2,6,Parke,Goniastrea,Gon.Par.8,7,Gon.Par.8.7,4,1,5,2.052,NA,NA,NA,NA,NA,NA
+290,4,Ambient,2,8,Switzer,Goniastrea,Gon.Swi.7,7,Gon.Swi.7.7,4,1,5,2.824,NA,NA,NA,NA,NA,NA
+291,4,Ambient,2,10,Parke,Goniastrea,Gon.Par.2,5,Gon.Par.2.5,4,0,NA,NA,NA,NA,NA,NA,NA,NA
+292,4,Ambient,3,3,Jewell,Goniastrea,Gon.Jew.10,6,Gon.Jew.10.6,4,1,5,2.538,NA,NA,NA,NA,NA,NA
+293,4,Ambient,3,4,Switzer,Goniastrea,Gon.Swi.10,5,Gon.Swi.10.5,4,1,6,2.967,NA,NA,NA,NA,NA,NA
+294,4,Ambient,3,5,Switzer,Goniastrea,Gon.Swi.12,6,Gon.Swi.12.6,4,1,6,3.706,NA,NA,NA,NA,NA,NA
+295,4,Ambient,3,6,Parke,Goniastrea,Gon.Par.7,7,Gon.Par.7.7,4,1,5,2.431,NA,NA,NA,NA,NA,NA
+296,4,Ambient,3,8,Parke,Goniastrea,Gon.Par.2,6,Gon.Par.2.6,4,1,6,4.149,NA,NA,NA,NA,NA,NA
+297,4,Ambient,3,10,Parke,Goniastrea,Gon.Par.3,7,Gon.Par.3.7,4,1,6,3.618,NA,NA,NA,NA,NA,NA
+298,4,Ambient,4,5,Jewell,Goniastrea,Gon.Jew.6,4,Gon.Jew.6.4,4,1,6,3.255,NA,NA,NA,NA,NA,NA
+299,4,Ambient,5,3,Switzer,Goniastrea,Gon.Swi.6,7,Gon.Swi.6.7,4,1,6,2.925,NA,NA,NA,NA,NA,NA
+300,4,Ambient,5,6,Jewell,Goniastrea,Gon.Jew.11,7,Gon.Jew.11.7,4,1,6,2.688,NA,NA,NA,NA,NA,NA
+301,4,Ambient,5,7,Switzer,Goniastrea,Gon.Swi.6,8,Gon.Swi.6.8,4,1,6,3.062,NA,NA,NA,NA,NA,NA
+302,4,Ambient,5,8,Switzer,Goniastrea,Gon.Swi.11,7,Gon.Swi.11.7,4,1,6,2.155,NA,NA,NA,NA,NA,NA
+303,4,Ambient,6,5,Jewell,Goniastrea,Gon.Jew.8,6,Gon.Jew.8.6,4,1,6,3.205,NA,NA,NA,NA,NA,NA
+304,4,Ambient,6,8,Parke,Goniastrea,Gon.Par.7,8,Gon.Par.7.8,4,1,6,2.844,NA,NA,NA,NA,NA,NA
+305,4,Ambient,6,9,Jewell,Goniastrea,Gon.Jew.7,4,Gon.Jew.7.4,4,1,6,1.936,NA,NA,NA,NA,NA,NA
+306,4,Ambient,6,10,Parke,Goniastrea,Gon.Par.3,8,Gon.Par.3.8,4,1,6,2.592,NA,NA,NA,NA,NA,NA
+307,5,Ambient,1,3,Jewell,Goniastrea,Gon.Jew.6,5,Gon.Jew.6.5,4,1,6,4.351,NA,NA,NA,NA,NA,NA
+308,5,Ambient,1,5,Switzer,Goniastrea,Gon.Swi.12,7,Gon.Swi.12.7,4,1,6,3.282,NA,NA,NA,NA,NA,NA
+309,5,Ambient,2,2,Parke,Goniastrea,Gon.Par.8,8,Gon.Par.8.8,4,1,6,2.588,NA,NA,NA,NA,NA,NA
+310,5,Ambient,2,5,Switzer,Goniastrea,Gon.Swi.11,8,Gon.Swi.11.8,4,1,6,2.514,NA,NA,NA,NA,NA,NA
+311,5,Ambient,2,6,Parke,Goniastrea,Gon.Par.2,7,Gon.Par.2.7,4,1,6,2.35,NA,NA,NA,NA,NA,NA
+312,5,Ambient,2,8,Switzer,Goniastrea,Gon.Swi.6,9,Gon.Swi.6.9,4,1,5,3.137,NA,NA,NA,NA,NA,NA
+313,5,Ambient,2,9,Jewell,Goniastrea,Gon.Jew.7,5,Gon.Jew.7.5,4,1,6,3.288,NA,NA,NA,NA,NA,NA
+314,5,Ambient,2,10,Parke,Goniastrea,Gon.Par.8,9,Gon.Par.8.9,4,1,5,2.891,NA,NA,NA,NA,NA,NA
+315,5,Ambient,3,1,Jewell,Goniastrea,Gon.Jew.11,8,Gon.Jew.11.8,4,1,6,4.058,NA,NA,NA,NA,NA,NA
+316,5,Ambient,3,7,Parke,Goniastrea,Gon.Par.7,9,Gon.Par.7.9,4,1,6,2.717,NA,NA,NA,NA,NA,NA
+317,6,Ambient,1,5,Parke,Goniastrea,Gon.Par.2,9,Gon.Par.2.9,4,1,6,3.675,NA,NA,NA,NA,NA,NA
+318,6,Ambient,1,6,Parke,Goniastrea,Gon.Par.6,8,Gon.Par.6.8,4,1,6,3.828,NA,NA,NA,NA,NA,NA
+319,6,Ambient,1,10,Jewell,Goniastrea,Gon.Jew.10,9,Gon.Jew.10.9,4,1,4,2.06,NA,NA,NA,NA,NA,NA
+320,6,Ambient,1,11,Switzer,Goniastrea,Gon.Swi.6,10,Gon.Swi.6.10,4,1,5,2.657,NA,NA,NA,NA,NA,NA
+321,6,Ambient,2,1,Switzer,Goniastrea,Gon.Swi.11,10,Gon.Swi.11.10,4,1,6,2.632,NA,NA,NA,NA,NA,NA
+322,6,Ambient,2,2,Switzer,Goniastrea,Gon.Swi.7,10,Gon.Swi.7.10,4,1,6,2.723,NA,NA,NA,NA,NA,NA
+323,6,Ambient,2,3,Jewell,Goniastrea,Gon.Jew.11,10,Gon.Jew.11.10,4,1,6,2.801,NA,NA,NA,NA,NA,NA
+324,6,Ambient,2,4,Parke,Goniastrea,Gon.Par.8,10,Gon.Par.8.10,4,1,6,2.145,NA,NA,NA,NA,NA,NA
+325,6,Ambient,2,5,Switzer,Goniastrea,Gon.Swi.12,9,Gon.Swi.12.9,4,1,6,2.646,NA,NA,NA,NA,NA,NA
+326,6,Ambient,2,7,Jewell,Goniastrea,Gon.Jew.7,6,Gon.Jew.7.6,4,1,6,3.665,NA,NA,NA,NA,NA,NA
+327,6,Ambient,2,8,Jewell,Goniastrea,Gon.Jew.8,9,Gon.Jew.8.9,4,1,6,3.482,NA,NA,NA,NA,NA,NA
+328,6,Ambient,2,9,Parke,Goniastrea,Gon.Par.8,11,Gon.Par.8.11,4,1,6,2.772,NA,NA,NA,NA,NA,NA
+329,6,Ambient,3,1,Switzer,Goniastrea,Gon.Swi.7,11,Gon.Swi.7.11,4,1,6,2.707,NA,NA,NA,NA,NA,NA
+330,6,Ambient,3,4,Switzer,Goniastrea,Gon.Swi.12,10,Gon.Swi.12.10,4,1,6,2.85,NA,NA,NA,NA,NA,NA
+331,6,Ambient,3,9,Jewell,Goniastrea,Gon.Jew.8,10,Gon.Jew.8.10,4,1,6,3.38,NA,NA,NA,NA,NA,NA
+332,6,Ambient,3,11,Parke,Goniastrea,Gon.Par.8,12,Gon.Par.8.12,4,1,5,3.852,NA,NA,NA,NA,NA,NA
+333,6,Ambient,4,3,Switzer,Goniastrea,Gon.Swi.5,6,Gon.Swi.5.6,4,1,6,2.579,NA,NA,NA,NA,NA,NA
+334,6,Ambient,4,5,Switzer,Goniastrea,Gon.Swi.5,7,Gon.Swi.5.7,4,1,6,2.493,NA,NA,NA,NA,NA,NA
+335,6,Ambient,4,6,Switzer,Goniastrea,Gon.Swi.10,8,Gon.Swi.10.8,4,1,6,2.609,NA,NA,NA,NA,NA,NA
+336,6,Ambient,5,2,Parke,Goniastrea,Gon.Par.2,10,Gon.Par.2.10,4,1,6,3.047,NA,NA,NA,NA,NA,NA
+337,6,Ambient,5,3,Switzer,Goniastrea,Gon.Swi.10,9,Gon.Swi.10.9,4,1,6,3.077,NA,NA,NA,NA,NA,NA
+338,6,Ambient,5,4,Parke,Goniastrea,Gon.Par.6,9,Gon.Par.6.9,4,1,6,4.281,NA,NA,NA,NA,NA,NA
+339,6,Ambient,5,11,Jewell,Goniastrea,Gon.Jew.10,10,Gon.Jew.10.10,4,1,5,3.016,NA,NA,NA,NA,NA,NA
+340,6,Ambient,6,5,Parke,Goniastrea,Gon.Par.7,10,Gon.Par.7.10,4,1,6,3.509,NA,NA,NA,NA,NA,NA
+341,6,Ambient,6,7,Parke,Goniastrea,Gon.Par.3,10,Gon.Par.3.10,4,1,6,3.592,NA,NA,NA,NA,NA,NA
+342,6,Ambient,6,8,Jewell,Goniastrea,Gon.Jew.6,6,Gon.Jew.6.6,4,1,6,3.34,NA,NA,NA,NA,NA,NA
+343,7,Hot,1,3,Switzer,Goniastrea,Gon.Swi.12,11,Gon.Swi.12.11,4,1,6,3.459,NA,NA,NA,NA,NA,NA
+344,7,Hot,1,6,Switzer,Goniastrea,Gon.Swi.6,11,Gon.Swi.6.11,4,1,5,2.851,NA,NA,NA,NA,NA,NA
+345,7,Hot,1,8,Switzer,Goniastrea,Gon.Swi.11,11,Gon.Swi.11.11,4,1,5,2.419,NA,NA,NA,NA,NA,NA
+346,7,Hot,1,10,Switzer,Goniastrea,Gon.Swi.10,10,Gon.Swi.10.10,4,1,6,2.956,NA,NA,NA,NA,NA,NA
+347,7,Hot,2,1,Parke,Goniastrea,Gon.Par.8,13,Gon.Par.8.13,4,1,4,3.049,NA,NA,NA,NA,NA,NA
+348,7,Hot,2,3,Switzer,Goniastrea,Gon.Swi.5,8,Gon.Swi.5.8,4,1,6,2.224,NA,NA,NA,NA,NA,NA
+349,7,Hot,2,4,Parke,Goniastrea,Gon.Par.8,14,Gon.Par.8.14,4,1,5,1.964,NA,NA,NA,NA,NA,NA
+350,7,Hot,2,5,Switzer,Goniastrea,Gon.Swi.6,12,Gon.Swi.6.12,4,1,5,3.51,NA,NA,NA,NA,NA,NA
+351,7,Hot,2,7,Switzer,Goniastrea,Gon.Swi.11,12,Gon.Swi.11.12,4,1,4,2.087,NA,NA,NA,NA,NA,NA
+352,7,Hot,2,9,Parke,Goniastrea,Gon.Par.6,10,Gon.Par.6.10,4,1,4,3.271,NA,NA,NA,NA,NA,NA
+353,7,Hot,2,11,Parke,Goniastrea,Gon.Par.8,15,Gon.Par.8.15,4,1,3,2.948,NA,NA,NA,NA,NA,NA
+354,7,Hot,3,3,Switzer,Goniastrea,Gon.Swi.7,12,Gon.Swi.7.12,4,1,5,2.798,NA,NA,NA,NA,NA,NA
+355,7,Hot,3,6,Jewell,Goniastrea,Gon.Jew.10,11,Gon.Jew.10.11,4,1,2,2.153,NA,NA,NA,NA,NA,NA
+356,7,Hot,3,8,Jewell,Goniastrea,Gon.Jew.7,7,Gon.Jew.7.7,4,1,1,1.738,NA,NA,NA,NA,NA,NA
+357,7,Hot,3,10,Switzer,Goniastrea,Gon.Swi.5,9,Gon.Swi.5.9,4,1,6,3.244,NA,NA,NA,NA,NA,NA
+358,7,Hot,3,11,Parke,Goniastrea,Gon.Par.3,11,Gon.Par.3.11,4,1,5,3.368,NA,NA,NA,NA,NA,NA
+359,7,Hot,4,3,Parke,Goniastrea,Gon.Par.6,11,Gon.Par.6.11,4,1,6,4.512,NA,NA,NA,NA,NA,NA
+360,7,Hot,4,6,Parke,Goniastrea,Gon.Par.2,11,Gon.Par.2.11,4,1,4,2.65,NA,NA,NA,NA,NA,NA
+361,7,Hot,4,10,Switzer,Goniastrea,Gon.Swi.7,13,Gon.Swi.7.13,4,1,4,2.337,NA,NA,NA,NA,NA,NA
+362,7,Hot,5,1,Parke,Goniastrea,Gon.Par.8,16,Gon.Par.8.16,4,1,5,2.651,NA,NA,NA,NA,NA,NA
+363,7,Hot,5,5,Parke,Goniastrea,Gon.Par.7,11,Gon.Par.7.11,4,1,4,2.62,NA,NA,NA,NA,NA,NA
+364,7,Hot,5,6,Switzer,Goniastrea,Gon.Swi.10,11,Gon.Swi.10.11,4,1,6,3.289,NA,NA,NA,NA,NA,NA
+365,7,Hot,5,8,Jewell,Goniastrea,Gon.Jew.11,11,Gon.Jew.11.11,4,1,1,3.044,NA,NA,NA,NA,NA,NA
+366,7,Hot,5,11,Jewell,Goniastrea,Gon.Jew.10,12,Gon.Jew.10.12,4,1,2,1.944,NA,NA,NA,NA,NA,NA
+367,7,Hot,6,2,Parke,Goniastrea,Gon.Par.7,12,Gon.Par.7.12,4,1,5,4.628,NA,NA,NA,NA,NA,NA
+368,7,Hot,6,7,Jewell,Goniastrea,Gon.Jew.6,7,Gon.Jew.6.7,4,1,3,3.007,NA,NA,NA,NA,NA,NA
+369,7,Hot,6,10,Jewell,Goniastrea,Gon.Jew.8,11,Gon.Jew.8.11,4,1,2,3.202,NA,NA,NA,NA,NA,NA
+370,9,Hot,1,3,Parke,Goniastrea,Gon.Par.6,14,Gon.Par.6.14,4,1,6,3.109,NA,NA,NA,NA,NA,NA
+371,9,Hot,1,4,Parke,Goniastrea,Gon.Par.7,15,Gon.Par.7.15,4,1,4,3.754,NA,NA,NA,NA,NA,NA
+372,9,Hot,3,8,Parke,Goniastrea,Gon.Par.2,13,Gon.Par.2.13,4,1,5,3.992,NA,NA,NA,NA,NA,NA
+373,9,Hot,4,1,Switzer,Goniastrea,Gon.Swi.10,13,Gon.Swi.10.13,4,1,6,3.271,NA,NA,NA,NA,NA,NA
+374,9,Hot,4,5,Switzer,Goniastrea,Gon.Swi.12,14,Gon.Swi.12.14,4,1,6,3.732,NA,NA,NA,NA,NA,NA
+375,9,Hot,4,6,Switzer,Goniastrea,Gon.Swi.6,15,Gon.Swi.6.15,4,1,5,2.756,NA,NA,NA,NA,NA,NA
+376,9,Hot,4,7,Parke,Goniastrea,Gon.Par.2,14,Gon.Par.2.14,4,1,4,3.017,NA,NA,NA,NA,NA,NA
+377,9,Hot,4,10,Parke,Goniastrea,Gon.Par.3,14,Gon.Par.3.14,4,1,4,3.94,NA,NA,NA,NA,NA,NA
+378,9,Hot,4,11,Switzer,Goniastrea,Gon.Swi.11,15,Gon.Swi.11.15,4,1,5,4.592,NA,NA,NA,NA,NA,NA
+379,9,Hot,5,1,Switzer,Goniastrea,Gon.Swi.7,16,Gon.Swi.7.16,4,1,5,2.641,NA,NA,NA,NA,NA,NA
+380,9,Hot,5,2,Jewell,Goniastrea,Gon.Jew.6,9,Gon.Jew.6.9,4,1,2,3.065,NA,NA,NA,NA,NA,NA
+381,9,Hot,5,4,Parke,Goniastrea,Gon.Par.7,16,Gon.Par.7.16,4,1,4,2.894,NA,NA,NA,NA,NA,NA
+382,9,Hot,5,7,Parke,Goniastrea,Gon.Par.6,15,Gon.Par.6.15,4,1,3,3.689,NA,NA,NA,NA,NA,NA
+383,9,Hot,5,9,Jewell,Goniastrea,Gon.Jew.8,13,Gon.Jew.8.13,4,1,1,1.872,NA,NA,NA,NA,NA,NA
+384,9,Hot,5,10,Parke,Goniastrea,Gon.Par.8,18,Gon.Par.8.18,4,1,3,2.3,NA,NA,NA,NA,NA,NA
+385,9,Hot,6,2,Jewell,Goniastrea,Gon.Jew.10,16,Gon.Jew.10.16,4,1,2,2.124,NA,NA,NA,NA,NA,NA
+386,9,Hot,6,4,Jewell,Goniastrea,Gon.Jew.8,14,Gon.Jew.8.14,4,1,1,1.969,NA,NA,NA,NA,NA,NA
+387,9,Hot,6,6,Switzer,Goniastrea,Gon.Swi.11,16,Gon.Swi.11.16,4,1,5,2.602,NA,NA,NA,NA,NA,NA
+388,9,Hot,6,9,Switzer,Goniastrea,Gon.Swi.6,16,Gon.Swi.6.16,4,1,5,3.245,NA,NA,NA,NA,NA,NA
+389,12,Hot,1,2,Switzer,Goniastrea,Gon.Swi.6,20,Gon.Swi.6.20,4,1,5,3.142,NA,NA,NA,NA,NA,NA
+390,12,Hot,1,5,Jewell,Goniastrea,Gon.Jew.11,20,Gon.Jew.11.20,4,1,1,4.896,NA,NA,NA,NA,NA,NA
+391,12,Hot,1,8,Jewell,Goniastrea,Gon.Jew.7,19,Gon.Jew.7.20,4,0,NA,NA,NA,NA,NA,NA,NA,NA
+392,12,Hot,2,1,Jewell,Goniastrea,Gon.Jew.10,19,Gon.Jew.10.19,4,1,1,2.205,NA,NA,NA,NA,NA,NA
+393,12,Hot,2,4,Switzer,Goniastrea,Gon.Swi.7,19,Gon.Swi.7.19,4,1,4,2.736,NA,NA,NA,NA,NA,NA
+394,12,Hot,2,9,Jewell,Goniastrea,Gon.Jew.10,20,Gon.Jew.10.20,4,1,2,2.829,NA,NA,NA,NA,NA,NA
+395,12,Hot,2,10,Parke,Goniastrea,Gon.Par.6,18,Gon.Par.6.18,4,1,3,2.921,NA,NA,NA,NA,NA,NA
+396,12,Hot,2,11,Parke,Goniastrea,Gon.Par.6,19,Gon.Par.6.19,4,1,6,4.715,NA,NA,NA,NA,NA,NA
+397,12,Hot,3,1,Jewell,Goniastrea,Gon.Jew.7,12,Gon.Jew.7.12,4,0,NA,NA,NA,NA,NA,NA,NA,NA
+398,12,Hot,3,3,Switzer,Goniastrea,Gon.Swi.12,19,Gon.Swi.12.19,4,1,6,4.097,NA,NA,NA,NA,NA,NA
+399,12,Hot,3,7,Switzer,Goniastrea,Gon.Swi.11,20,Gon.Swi.11.20,4,1,5,3.392,NA,NA,NA,NA,NA,NA
+400,12,Hot,3,8,Switzer,Goniastrea,Gon.Swi.12,20,Gon.Swi.12.20,4,1,6,3.81,NA,NA,NA,NA,NA,NA
+401,12,Hot,3,11,Parke,Goniastrea,Gon.Par.8,20,Gon.Par.8.20,4,1,3,3.144,NA,NA,NA,NA,NA,NA
+402,12,Hot,4,2,Jewell,Goniastrea,Gon.Jew.8,19,Gon.Jew.8.19,4,1,2,2.069,NA,NA,NA,NA,NA,NA
+403,12,Hot,4,5,Switzer,Goniastrea,Gon.Swi.10,18,Gon.Swi.10.18,4,1,6,2.518,NA,NA,NA,NA,NA,NA
+404,12,Hot,4,9,Switzer,Goniastrea,Gon.Swi.7,20,Gon.Swi.7.20,4,1,4,2.642,NA,NA,NA,NA,NA,NA
+405,12,Hot,4,10,Jewell,Goniastrea,Gon.Jew.6,12,Gon.Jew.6.12,4,1,3,4.556,NA,NA,NA,NA,NA,NA
+406,12,Hot,5,1,Switzer,Goniastrea,Gon.Swi.5,14,Gon.Swi.5.14,4,1,6,2.397,NA,NA,NA,NA,NA,NA
+407,12,Hot,5,3,Parke,Goniastrea,Gon.Par.2,19,Gon.Par.2.19,4,1,3,3.994,NA,NA,NA,NA,NA,NA
+408,12,Hot,5,7,Parke,Goniastrea,Gon.Par.3,19,Gon.Par.3.19,4,1,4,2.755,NA,NA,NA,NA,NA,NA
+409,12,Hot,5,10,Switzer,Goniastrea,Gon.Swi.10,19,Gon.Swi.10.19,4,1,6,4.941,NA,NA,NA,NA,NA,NA
+410,12,Hot,6,1,Parke,Goniastrea,Gon.Par.7,20,Gon.Par.7.20,4,1,3,2.604,NA,NA,NA,NA,NA,NA
+411,12,Hot,6,6,Parke,Goniastrea,Gon.Par.2,20,Gon.Par.2.20,4,1,4,3.217,NA,NA,NA,NA,NA,NA
+412,12,Hot,6,10,Jewell,Goniastrea,Gon.Jew.8,20,Gon.Jew.8.20,4,1,2,2.7,NA,NA,NA,NA,NA,NA
+413,AC1,Ambient,1,1,Martin,A. hyacinthus,Martin17,NA,NA,T5,1,NA,NA,NA,_1111836,AhyaMartin17,Martin,AC1_1_1,Ambient
+414,AC1,Ambient,1,2,Palms,A. hyacinthus,Palms5,NA,NA,T5,1,NA,NA,NA,_1111836,AhyaPalms5,Palms,AC1_1_2,Ambient
+415,AC1,Ambient,1,3,Arlington,A. hyacinthus,Arlington8,NA,NA,T5,1,NA,NA,NA,_1111836,AhyaArlington8,Arlington,AC1_1_3,Ambient
+416,AC1,Ambient,1,4,Martin,A. hyacinthus,Martin11,NA,NA,T5,1,NA,NA,NA,_1111836,AhyaMartin11,Martin,AC1_1_4,Ambient
+417,AC1,Ambient,1,5,Arlington,A. hyacinthus,Arlington9,NA,NA,T5,1,NA,NA,NA,_1111836,AhyaArlington9,Arlington,AC1_1_5,Ambient
+418,AC1,Ambient,1,6,Arlington,A. hyacinthus,Arlington1,NA,NA,T5,1,NA,NA,NA,_1111836,AhyaArlington1,Arlington,AC1_1_6,Ambient
+419,AC1,Ambient,1,7,Wood,A. hyacinthus,Wood17,NA,NA,T5,1,NA,NA,NA,_1111836,AhyaWood17,Wood,AC1_1_7,Ambient
+420,AC1,Ambient,1,9,Palms,A. hyacinthus,Palms3,NA,NA,T5,1,NA,NA,NA,_1111836,AhyaPalms3,Palms,AC1_1_9,Ambient
+421,AC1,Ambient,1,10,Arlington,A. hyacinthus,Arlington6,NA,NA,T5,1,NA,NA,NA,_1111836,AhyaArlington6,Arlington,AC1_1_10,Ambient
+422,AC1,Ambient,1,11,Davies,A. hyacinthus,Davies18,NA,NA,T5,1,NA,NA,NA,_1111836,AhyaDavies18,Davies,AC1_1_11,Ambient
+423,AC1,Ambient,3,1,Davies,A. hyacinthus,Davies15,NA,NA,T5,1,NA,NA,NA,_1111839,AhyaDavies15,Davies,AC1_3_1,Ambient
+424,AC1,Ambient,3,3,Davies,A. hyacinthus,Davies14,NA,NA,T5,1,NA,NA,NA,_1111839,AhyaDavies14,Davies,AC1_3_3,Ambient
+425,AC1,Ambient,3,4,Arlington,A. hyacinthus,Arlington10,NA,NA,T5,1,NA,NA,NA,_1111839,AhyaArlington10,Arlington,AC1_3_4,Ambient
+426,AC1,Ambient,3,5,Davies,A. hyacinthus,Davies9,NA,NA,T5,1,NA,NA,NA,_1111839,AhyaDavies9,Davies,AC1_3_5,Ambient
+427,AC1,Ambient,3,6,Wood,A. hyacinthus,Wood16,NA,NA,T5,1,NA,NA,NA,_1111839,AhyaWood16,Wood,AC1_3_6,Ambient
+428,AC1,Ambient,3,7,Martin,A. hyacinthus,Martin3,NA,NA,T5,1,NA,NA,NA,_1111839,AhyaMartin3,Martin,AC1_3_7,Ambient
+429,AC1,Ambient,3,8,Palms,A. hyacinthus,Palms6,NA,NA,T5,1,NA,NA,NA,_1111839,AhyaPalms6,Palms,AC1_3_8,Ambient
+430,AC1,Ambient,3,10,Wood,A. hyacinthus,Wood8,NA,NA,T5,1,NA,NA,NA,_1111839,AhyaWood8,Wood,AC1_3_10,Ambient
+431,AC1,Ambient,3,11,Palms,A. hyacinthus,Palms4,NA,NA,T5,1,NA,NA,NA,_1111839,AhyaPalms4,Palms,AC1_3_11,Ambient
+432,AC1,Ambient,5,1,Martin,A. hyacinthus,Martin12,NA,NA,T5,1,NA,NA,NA,_1111842,AhyaMartin12,Martin,AC1_5_1,Ambient
+433,AC1,Ambient,5,2,Wood,A. hyacinthus,Wood5A,NA,NA,T5,1,NA,NA,NA,_1111842,AhyaWood5A,Wood,AC1_5_2,Ambient
+434,AC1,Ambient,5,3,Wood,A. hyacinthus,Wood7A,NA,NA,T5,1,NA,NA,NA,_1111842,AhyaWood7A,Wood,AC1_5_3,Ambient
+435,AC1,Ambient,5,4,Palms,A. hyacinthus,Palms10,NA,NA,T5,1,NA,NA,NA,_1111842,AhyaPalms10,Palms,AC1_5_4,Ambient
+436,AC1,Ambient,5,5,Arlington,A. hyacinthus,Arlington11,NA,NA,T5,1,NA,NA,NA,_1111842,AhyaArlington11,Arlington,AC1_5_5,Ambient
+437,AC1,Ambient,5,7,Davies,A. hyacinthus,Davies16,NA,NA,T5,1,NA,NA,NA,_1111842,AhyaDavies16,Davies,AC1_5_7,Ambient
+438,AC1,Ambient,5,8,Davies,A. hyacinthus,Davies12,NA,NA,T5,1,NA,NA,NA,_1111842,AhyaDavies12,Davies,AC1_5_8,Ambient
+439,AC1,Ambient,5,10,Palms,A. hyacinthus,Palms16,NA,NA,T5,1,NA,NA,NA,_1111842,AhyaPalms16,Palms,AC1_5_10,Ambient
+440,AC1,Ambient,5,11,Martin,A. hyacinthus,Martin13,NA,NA,T5,1,NA,NA,NA,_1111842,AhyaMartin13,Martin,AC1_5_11,Ambient
+441,AC2,Ambient,1,2,Davies,A. hyacinthus,Davies16,NA,NA,T5,1,NA,NA,NA,_1111863,AhyaDavies16,Davies,AC2_1_2,Ambient
+442,AC2,Ambient,1,3,Martin,A. hyacinthus,Martin17,NA,NA,T5,1,NA,NA,NA,_1111863,AhyaMartin17,Martin,AC2_1_3,Ambient
+443,AC2,Ambient,1,4,Wood,A. hyacinthus,Wood8,NA,NA,T5,1,NA,NA,NA,_1111863,AhyaWood8,Wood,AC2_1_4,Ambient
+444,AC2,Ambient,1,5,Wood,A. hyacinthus,Wood16,NA,NA,T5,1,NA,NA,NA,_1111863,AhyaWood16,Wood,AC2_1_5,Ambient
+445,AC2,Ambient,1,6,Arlington,A. hyacinthus,Arlington6,NA,NA,T5,1,NA,NA,NA,_1111863,AhyaArlington6,Arlington,AC2_1_6,Ambient
+446,AC2,Ambient,1,7,Davies,A. hyacinthus,Davies14,NA,NA,T5,1,NA,NA,NA,_1111863,AhyaDavies14,Davies,AC2_1_7,Ambient
+447,AC2,Ambient,1,8,Arlington,A. hyacinthus,Arlington9,NA,NA,T5,1,NA,NA,NA,_1111863,AhyaArlington9,Arlington,AC2_1_8,Ambient
+448,AC2,Ambient,1,11,Arlington,A. hyacinthus,Arlington1,NA,NA,T5,1,NA,NA,NA,_1111863,AhyaArlington1,Arlington,AC2_1_11,Ambient
+449,AC2,Ambient,3,1,Davies,A. hyacinthus,Davies15,NA,NA,T5,1,NA,NA,NA,_1111866,AhyaDavies15,Davies,AC2_3_1,Ambient
+450,AC2,Ambient,3,3,Martin,A. hyacinthus,Martin11,NA,NA,T5,1,NA,NA,NA,_1111866,AhyaMartin11,Martin,AC2_3_3,Ambient
+451,AC2,Ambient,3,4,Martin,A. hyacinthus,Martin3,NA,NA,T5,1,NA,NA,NA,_1111866,AhyaMart3,Martin,AC2_3_4,Ambient
+452,AC2,Ambient,3,6,Davies,A. hyacinthus,Davies12,NA,NA,T5,1,NA,NA,NA,_1111866,AhyaDavies12,Davies,AC2_3_6,Ambient
+453,AC2,Ambient,3,7,Davies,A. hyacinthus,Davies18,NA,NA,T5,1,NA,NA,NA,_1111866,AhyaDavies18,Davies,AC2_3_7,Ambient
+454,AC2,Ambient,3,8,Martin,A. hyacinthus,Martin13,NA,NA,T5,1,NA,NA,NA,_1111866,AhyaMartin13,Martin,AC2_3_8,Ambient
+455,AC2,Ambient,3,9,Wood,A. hyacinthus,Wood7A,NA,NA,T5,1,NA,NA,NA,_1111866,AhyaWood7A,Wood,AC2_3_9,Ambient
+456,AC2,Ambient,3,10,Palms,A. hyacinthus,Palms6,NA,NA,T5,1,NA,NA,NA,_1111866,AhyaPalms6,Palms,AC2_3_10,Ambient
+457,AC2,Ambient,3,11,Palms,A. hyacinthus,Palms3,NA,NA,T5,1,NA,NA,NA,_1111866,AhyaPalms3,Palms,AC2_3_11,Ambient
+458,AC2,Ambient,5,1,Wood,A. hyacinthus,Wood17,NA,NA,T5,1,NA,NA,NA,_1111869,AhyaWood17,Wood,AC2_5_1,Ambient
+459,AC2,Ambient,5,2,Arlington,A. hyacinthus,Arlington8,NA,NA,T5,1,NA,NA,NA,_1111869,AhyaArlington8,Arlington,AC2_5_2,Ambient
+460,AC2,Ambient,5,3,Arlington,A. hyacinthus,Arlington11,NA,NA,T5,1,NA,NA,NA,_1111869,AhyaArlington11,Arlington,AC2_5_3,Ambient
+461,AC2,Ambient,5,4,Martin,A. hyacinthus,Martin12,NA,NA,T5,1,NA,NA,NA,_1111869,AhyaMartin12,Martin,AC2_5_4,Ambient
+462,AC2,Ambient,5,5,Palms,A. hyacinthus,Palms16,NA,NA,T5,1,NA,NA,NA,_1111869,AhyaPalms16,Palms,AC2_5_5,Ambient
+463,AC2,Ambient,5,6,Arlington,A. hyacinthus,Arlington10,NA,NA,T5,1,NA,NA,NA,_1111869,AhyaArlington10,Arlington,AC2_5_6,Ambient
+464,AC2,Ambient,5,7,Davies,A. hyacinthus,Davies9,NA,NA,T5,1,NA,NA,NA,_1111869,AhyaDavies9,Davies,AC2_5_7,Ambient
+465,AC2,Ambient,5,8,Palms,A. hyacinthus,Palms10,NA,NA,T5,1,NA,NA,NA,_1111869,AhyaPalms10,Palms,AC2_5_8,Ambient
+466,AC2,Ambient,5,9,Palms,A. hyacinthus,Palms5,NA,NA,T5,1,NA,NA,NA,_1111869,AhyaPalms5,Palms,AC2_5_9,Ambient
+467,AC2,Ambient,5,10,Wood,A. hyacinthus,Wood5A,NA,NA,T5,1,NA,NA,NA,_1111869,AhyaWood5A,Wood,AC2_5_10,Ambient
+468,AC2,Ambient,5,11,Palms,A. hyacinthus,Palms4,NA,NA,T5,1,NA,NA,NA,_1111869,AhyaPalms4,Palms,AC2_5_11,Ambient
+469,AC3,Ambient,1,1,Wood,A. hyacinthus,Wood17,NA,NA,T5,1,NA,NA,NA,_1111872,AhyaWood17,Wood,AC3_1_1,Ambient
+470,AC3,Ambient,1,2,Martin,A. hyacinthus,Martin13,NA,NA,T5,1,NA,NA,NA,_1111872,AhyaMartin13,Martin,AC3_1_2,Ambient
+471,AC3,Ambient,1,3,Arlington,A. hyacinthus,Arlington8,NA,NA,T5,1,NA,NA,NA,_1111872,AhyaArlington8,Arlington,AC3_1_3,Ambient
+472,AC3,Ambient,1,5,Wood,A. hyacinthus,Wood16,NA,NA,T5,1,NA,NA,NA,_1111872,AhyaWood16,Wood,AC3_1_5,Ambient
+473,AC3,Ambient,1,6,Arlington,A. hyacinthus,Arlington1,NA,NA,T5,1,NA,NA,NA,_1111872,AhyaArlington1,Arlington,AC3_1_6,Ambient
+474,AC3,Ambient,1,7,Palms,A. hyacinthus,Palms5,NA,NA,T5,1,NA,NA,NA,_1111872,AhyaPalms5,Palms,AC3_1_7,Ambient
+475,AC3,Ambient,1,8,Martin,A. hyacinthus,Martin11,NA,NA,T5,1,NA,NA,NA,_1111872,AhyaMartin11,Martin,AC3_1_8,Ambient
+476,AC3,Ambient,1,10,Palms,A. hyacinthus,Palms16,NA,NA,T5,1,NA,NA,NA,_1111872,AhyaPalms16,Palms,AC3_1_10,Ambient
+477,AC3,Ambient,1,11,Arlington,A. hyacinthus,Arlington10,NA,NA,T5,1,NA,NA,NA,_1111872,AhyaArlington10,Arlington,AC3_1_11,Ambient
+478,AC3,Ambient,3,1,Davies,A. hyacinthus,Davies12,NA,NA,T5,1,NA,NA,NA,_1111875,AhyaDavies12,Davies,AC3_3_1,Ambient
+479,AC3,Ambient,3,2,Wood,A. hyacinthus,Wood5A,NA,NA,T5,1,NA,NA,NA,_1111875,AhyaWood5A,Wood,AC3_3_2,Ambient
+480,AC3,Ambient,3,4,Martin,A. hyacinthus,Martin17,NA,NA,T5,1,NA,NA,NA,_1111875,AhyaMartin17,Martin,AC3_3_4,Ambient
+481,AC3,Ambient,3,5,Wood,A. hyacinthus,Wood7A,NA,NA,T5,1,NA,NA,NA,_1111875,AhyaWood7A,Wood,AC3_3_5,Ambient
+482,AC3,Ambient,3,6,Palms,A. hyacinthus,Palms3,NA,NA,T5,1,NA,NA,NA,_1111875,AhyaPalms3,Palms,AC3_3_6,Ambient
+483,AC3,Ambient,3,7,Palms,A. hyacinthus,Palms4,NA,NA,T5,1,NA,NA,NA,_1111875,AhyaPalms4,Palms,AC3_3_7,Ambient
+484,AC3,Ambient,3,8,Martin,A. hyacinthus,Martin12,NA,NA,T5,1,NA,NA,NA,_1111875,AhyaMartin12,Martin,AC3_3_8,Ambient
+485,AC3,Ambient,3,9,Davies,A. hyacinthus,Davies18,NA,NA,T5,1,NA,NA,NA,_1111875,AhyaDavies18,Davies,AC3_3_9,Ambient
+486,AC3,Ambient,3,11,Davies,A. hyacinthus,Davies15,NA,NA,T5,1,NA,NA,NA,_1111875,AhyaDavies15,Davies,AC3_3_11,Ambient
+487,AC3,Ambient,5,1,Martin,A. hyacinthus,Martin3,NA,NA,T5,1,NA,NA,NA,_1111878,AhyaMartin3,Martin,AC3_5_1,Ambient
+488,AC3,Ambient,5,2,Arlington,A. hyacinthus,Arlington6,NA,NA,T5,1,NA,NA,NA,_1111878,AhyaArlington6,Arlington,AC3_5_2,Ambient
+489,AC3,Ambient,5,3,Arlington,A. hyacinthus,Arlington9,NA,NA,T5,1,NA,NA,NA,_1111878,AhyaArlington9,Arlington,AC3_5_3,Ambient
+490,AC3,Ambient,5,4,Davies,A. hyacinthus,Davies16,NA,NA,T5,1,NA,NA,NA,_1111878,AhyaDavies16,Davies,AC3_5_4,Ambient
+491,AC3,Ambient,5,5,Wood,A. hyacinthus,Wood8,NA,NA,T5,1,NA,NA,NA,_1111878,AhyaWood8,Wood,AC3_5_5,Ambient
+492,AC3,Ambient,5,6,Davies,A. hyacinthus,Davies9,NA,NA,T5,1,NA,NA,NA,_1111878,AhyaDavies9,Davies,AC3_5_6,Ambient
+493,AC3,Ambient,5,7,Palms,A. hyacinthus,Palms10,NA,NA,T5,1,NA,NA,NA,_1111878,AhyaPalms10,Palms,AC3_5_7,Ambient
+494,AC3,Ambient,5,9,Arlington,A. hyacinthus,Arlington11,NA,NA,T5,1,NA,NA,NA,_1111878,AhyaArlington11,Arlington,AC3_5_9,Ambient
+495,AC3,Ambient,5,10,Davies,A. hyacinthus,Davies14,NA,NA,T5,1,NA,NA,NA,_1111878,AhyaDavies14,Davies,AC3_5_10,Ambient
+496,AC3,Ambient,5,11,Palms,A. hyacinthus,Palms6,NA,NA,T5,1,NA,NA,NA,_1111878,AhyaPalms6,Palms,AC3_5_11,Ambient
+497,AC4,Ambient,1,1,Wood,A. hyacinthus,Wood7A,NA,NA,T5,1,NA,NA,NA,_1111881,AhyaWood7A,Wood,AC4_1_1,Ambient
+498,AC4,Ambient,1,2,Arlington,A. hyacinthus,Arlington11,NA,NA,T5,1,NA,NA,NA,_1111881,AhyaArlington11,Arlington,AC4_1_2,Ambient
+499,AC4,Ambient,1,3,Davies,A. hyacinthus,Davies12,NA,NA,T5,1,NA,NA,NA,_1111881,AhyaDavies12,Davies,AC4_1_3,Ambient
+500,AC4,Ambient,1,5,Palms,A. hyacinthus,Palms3,NA,NA,T5,1,NA,NA,NA,_1111881,AhyaPalms3,Palms,AC4_1_5,Ambient
+501,AC4,Ambient,1,6,Wood,A. hyacinthus,Wood17,NA,NA,T5,1,NA,NA,NA,_1111881,AhyaWood17,Wood,AC4_1_6,Ambient
+502,AC4,Ambient,1,7,Palms,A. hyacinthus,Palms6,NA,NA,T5,1,NA,NA,NA,_1111881,AhyaPalms6,Palms,AC4_1_7,Ambient
+503,AC4,Ambient,1,8,Arlington,A. hyacinthus,Arlington1,NA,NA,T5,1,NA,NA,NA,_1111881,AhyaArlington1,Arlington,AC4_1_8,Ambient
+504,AC4,Ambient,1,9,Wood,A. hyacinthus,Wood8,NA,NA,T5,1,NA,NA,NA,_1111881,AhyaWood8,Wood,AC4_1_9,Ambient
+505,AC4,Ambient,1,10,Palms,A. hyacinthus,Palms5,NA,NA,T5,1,NA,NA,NA,_1111881,AhyaPalms5,Palms,AC4_1_10,Ambient
+506,AC4,Ambient,1,11,Palms,A. hyacinthus,Palms16,NA,NA,T5,1,NA,NA,NA,_1111881,AhyaPalms16,Palms,AC4_1_11,Ambient
+507,AC4,Ambient,3,1,Martin,A. hyacinthus,Martin3,NA,NA,T5,1,NA,NA,NA,_1111884,AhyaMartin3,Martin,AC4_3_1,Ambient
+508,AC4,Ambient,3,3,Davies,A. hyacinthus,Davies18,NA,NA,T5,1,NA,NA,NA,_1111884,AhyaDavies18,Davies,AC4_3_3,Ambient
+509,AC4,Ambient,3,4,Davies,A. hyacinthus,Davies14,NA,NA,T5,1,NA,NA,NA,_1111884,AhyaDavies14,Davies,AC4_3_4,Ambient
+510,AC4,Ambient,3,5,Wood,A. hyacinthus,Wood16,NA,NA,T5,1,NA,NA,NA,_1111884,AhyaWood16,Wood,AC4_3_5,Ambient
+511,AC4,Ambient,3,6,Arlington,A. hyacinthus,Arlington9,NA,NA,T5,1,NA,NA,NA,_1111884,AhyaArlington9,Arlington,AC4_3_6,Ambient
+512,AC4,Ambient,3,7,Wood,A. hyacinthus,Wood5A,NA,NA,T5,1,NA,NA,NA,_1111884,AhyaWood5A,Wood,AC4_3_7,Ambient
+513,AC4,Ambient,3,8,Palms,A. hyacinthus,Palms10,NA,NA,T5,1,NA,NA,NA,_1111884,AhyaPalms10,Palms,AC4_3_8,Ambient
+514,AC4,Ambient,3,9,Arlington,A. hyacinthus,Arlington6,NA,NA,T5,1,NA,NA,NA,_1111884,AhyaArlington6,Arlington,AC4_3_9,Ambient
+515,AC4,Ambient,3,10,Arlington,A. hyacinthus,Arlington10,NA,NA,T5,1,NA,NA,NA,_1111884,AhyaArlington10,Arlington,AC4_3_10,Ambient
+516,AC4,Ambient,5,1,Martin,A. hyacinthus,Martin13,NA,NA,T5,1,NA,NA,NA,_1111887,AhyaMartin13,Martin,AC4_5_1,Ambient
+517,AC4,Ambient,5,3,Arlington,A. hyacinthus,Arlington8,NA,NA,T5,1,NA,NA,NA,_1111887,AhyaArlington8,Arlington,AC4_5_3,Ambient
+518,AC4,Ambient,5,4,Davies,A. hyacinthus,Davies9,NA,NA,T5,1,NA,NA,NA,_1111887,AhyaDavies9,Davies,AC4_5_4,Ambient
+519,AC4,Ambient,5,6,Palms,A. hyacinthus,Palms4,NA,NA,T5,1,NA,NA,NA,_1111887,AhyaPalms4,Palms,AC4_5_6,Ambient
+520,AC4,Ambient,5,7,Davies,A. hyacinthus,Davies15,NA,NA,T5,1,NA,NA,NA,_1111887,AhyaDavies15,Davies,AC4_5_7,Ambient
+521,AC4,Ambient,5,8,Martin,A. hyacinthus,Martin12,NA,NA,T5,1,NA,NA,NA,_1111887,AhyaMartin12,Martin,AC4_5_8,Ambient
+522,AC4,Ambient,5,9,Davies,A. hyacinthus,Davies16,NA,NA,T5,1,NA,NA,NA,_1111887,AhyaDavies16,Davies,AC4_5_9,Ambient
+523,AC4,Ambient,5,10,Martin,A. hyacinthus,Martin17,NA,NA,T5,1,NA,NA,NA,_1111887,AhyaMartin17,Martin,AC4_5_10,Ambient
+524,AC4,Ambient,5,11,Martin,A. hyacinthus,Martin11,NA,NA,T5,1,NA,NA,NA,_1111887,AhyaMartin11,Martin,AC4_5_11,Ambient
+525,AC5,Ambient,1,1,Palms,A. hyacinthus,Palms16,NA,NA,T5,1,NA,NA,NA,_1111899,AhyaPalms16,Palms,AC5_1_1,Ambient
+526,AC5,Ambient,1,3,Davies,A. hyacinthus,Davies15,NA,NA,T5,1,NA,NA,NA,_1111899,AhyaDavies15,Davies,AC5_1_3,Ambient
+527,AC5,Ambient,1,4,Arlington,A. hyacinthus,Arlington10,NA,NA,T5,1,NA,NA,NA,_1111899,AhyaArlington10,Arlington,AC5_1_4,Ambient
+528,AC5,Ambient,1,5,Martin,A. hyacinthus,Martin3,NA,NA,T5,1,NA,NA,NA,_1111899,AhyaMartin3,Martin,AC5_1_5,Ambient
+529,AC5,Ambient,1,6,Wood,A. hyacinthus,Wood17,NA,NA,T5,1,NA,NA,NA,_1111899,AhyaWood17,Wood,AC5_1_6,Ambient
+530,AC5,Ambient,1,7,Palms,A. hyacinthus,Palms6,NA,NA,T5,1,NA,NA,NA,_1111899,AhyaPalms6,Palms,AC5_1_7,Ambient
+531,AC5,Ambient,1,8,Palms,A. hyacinthus,Palms5,NA,NA,T5,1,NA,NA,NA,_1111899,AhyaPalms5,Palms,AC5_1_8,Ambient
+532,AC5,Ambient,1,10,Davies,A. hyacinthus,Davies18,NA,NA,T5,1,NA,NA,NA,_1111899,AhyaDavies18,Davies,AC5_1_10,Ambient
+533,AC5,Ambient,1,11,Davies,A. hyacinthus,Davies12,NA,NA,T5,1,NA,NA,NA,_1111899,AhyaDavies12,Davies,AC5_1_11,Ambient
+534,AC5,Ambient,3,1,Palms,A. hyacinthus,Palms3,NA,NA,T5,1,NA,NA,NA,_1111902,AhyaPalms3,Palms,AC5_3_1,Ambient
+535,AC5,Ambient,3,2,Martin,A. hyacinthus,Martin11,NA,NA,T5,1,NA,NA,NA,_1111902,AhyaMartin11,Martin,AC5_3_2,Ambient
+536,AC5,Ambient,3,3,Arlington,A. hyacinthus,Arlington1,NA,NA,T5,1,NA,NA,NA,_1111902,AhyaArlington1,Arlington,AC5_3_3,Ambient
+537,AC5,Ambient,3,5,Arlington,A. hyacinthus,Arlington6,NA,NA,T5,1,NA,NA,NA,_1111902,AhyaArlington6,Arlington,AC5_3_5,Ambient
+538,AC5,Ambient,3,6,Davies,A. hyacinthus,Davies9,NA,NA,T5,1,NA,NA,NA,_1111902,AhyaDavies9,Davies,AC5_3_6,Ambient
+539,AC5,Ambient,3,8,Wood,A. hyacinthus,Wood5A,NA,NA,T5,1,NA,NA,NA,_1111902,AhyaWood5A,Wood,AC5_3_8,Ambient
+540,AC5,Ambient,3,9,Martin,A. hyacinthus,Martin13,NA,NA,T5,1,NA,NA,NA,_1111902,AhyaMartin13,Martin,AC5_3_9,Ambient
+541,AC5,Ambient,3,10,Palms,A. hyacinthus,Palms10,NA,NA,T5,1,NA,NA,NA,_1111902,AhyaPalms10,Palms,AC5_3_10,Ambient
+542,AC5,Ambient,3,11,Wood,A. hyacinthus,Wood8,NA,NA,T5,1,NA,NA,NA,_1111902,AhyaWood8,Wood,AC5_3_11,Ambient
+543,AC5,Ambient,5,2,Arlington,A. hyacinthus,Arlington8,NA,NA,T5,1,NA,NA,NA,_1111905,AhyaArlington8,Arlington,AC5_5_2,Ambient
+544,AC5,Ambient,5,3,Wood,A. hyacinthus,Wood16,NA,NA,T5,1,NA,NA,NA,_1111905,AhyaWood16,Wood,AC5_5_3,Ambient
+545,AC5,Ambient,5,4,Martin,A. hyacinthus,Martin17,NA,NA,T5,1,NA,NA,NA,_1111905,AhyaMartin17,Martin,AC5_5_4,Ambient
+546,AC5,Ambient,5,5,Arlington,A. hyacinthus,Arlington9,NA,NA,T5,1,NA,NA,NA,_1111905,AhyaArlington9,Arlington,AC5_5_5,Ambient
+547,AC5,Ambient,5,6,Arlington,A. hyacinthus,Arlington11,NA,NA,T5,1,NA,NA,NA,_1111905,AhyaArlington11,Arlington,AC5_5_6,Ambient
+548,AC5,Ambient,5,7,Davies,A. hyacinthus,Davies16,NA,NA,T5,1,NA,NA,NA,_1111905,AhyaDavies16,Davies,AC5_5_7,Ambient
+549,AC5,Ambient,5,8,Martin,A. hyacinthus,Martin12,NA,NA,T5,1,NA,NA,NA,_1111905,AhyaMartin12,Martin,AC5_5_8,Ambient
+550,AC5,Ambient,5,9,Palms,A. hyacinthus,Palms4,NA,NA,T5,1,NA,NA,NA,_1111905,AhyaPalms4,Palms,AC5_5_9,Ambient
+551,AC5,Ambient,5,10,Wood,A. hyacinthus,Wood7A,NA,NA,T5,1,NA,NA,NA,_1111905,AhyaWood7A,Wood,AC5_5_10,Ambient
+552,AC5,Ambient,5,11,Davies,A. hyacinthus,Davies14,NA,NA,T5,1,NA,NA,NA,_1111905,AhyaDavies14,Davies,AC5_5_11,Ambient
+553,AC6,Ambient,1,1,Palms,A. hyacinthus,Palms6,NA,NA,T5,1,NA,NA,NA,_1111908,AhyaPalms6,Palms,AC6_1_1,Ambient
+554,AC6,Ambient,1,2,Wood,A. hyacinthus,Wood5A,NA,NA,T5,1,NA,NA,NA,_1111908,AhyaWood5A,Wood,AC6_1_2,Ambient
+555,AC6,Ambient,1,3,Palms,A. hyacinthus,Palms4,NA,NA,T5,1,NA,NA,NA,_1111908,AhyaPalms4,Palms,AC6_1_3,Ambient
+556,AC6,Ambient,1,4,Wood,A. hyacinthus,Wood8,NA,NA,T5,1,NA,NA,NA,_1111908,AhyaWood8,Wood,AC6_1_4,Ambient
+557,AC6,Ambient,1,5,Martin,A. hyacinthus,Martin12,NA,NA,T5,1,NA,NA,NA,_1111908,AhyaMartin12,Martin,AC6_1_5,Ambient
+558,AC6,Ambient,1,6,Wood,A. hyacinthus,Wood7A,NA,NA,T5,1,NA,NA,NA,_1111908,AhyaWood7A,Wood,AC6_1_6,Ambient
+559,AC6,Ambient,1,8,Wood,A. hyacinthus,Wood17,NA,NA,T5,1,NA,NA,NA,_1111908,AhyaWood17,Wood,AC6_1_8,Ambient
+560,AC6,Ambient,1,9,Martin,A. hyacinthus,Martin13,NA,NA,T5,1,NA,NA,NA,_1111908,AhyaMartin13,Martin,AC6_1_9,Ambient
+561,AC6,Ambient,1,10,Arlington,A. hyacinthus,Arlington6,NA,NA,T5,1,NA,NA,NA,_1111908,AhyaArlington6,Arlington,AC6_1_10,Ambient
+562,AC6,Ambient,1,11,Arlington,A. hyacinthus,Arlington8,NA,NA,T5,1,NA,NA,NA,_1111908,AhyaArlington8,Arlington,AC6_1_11,Ambient
+563,AC6,Ambient,3,2,Arlington,A. hyacinthus,Arlington1,NA,NA,T5,1,NA,NA,NA,_1111911,AhyaArlington1,Arlington,AC6_3_2,Ambient
+564,AC6,Ambient,3,3,Arlington,A. hyacinthus,Arlington11,NA,NA,T5,1,NA,NA,NA,_1111911,AhyaArlington11,Arlington,AC6_3_3,Ambient
+565,AC6,Ambient,3,4,Palms,A. hyacinthus,Palms5,NA,NA,T5,1,NA,NA,NA,_1111911,AhyaPalms5,Palms,AC6_3_4,Ambient
+566,AC6,Ambient,3,6,Davies,A. hyacinthus,Davies9,NA,NA,T5,1,NA,NA,NA,_1111911,AhyaDavies9,Davies,AC6_3_6,Ambient
+567,AC6,Ambient,3,7,Martin,A. hyacinthus,Martin11,NA,NA,T5,1,NA,NA,NA,_1111911,AhyaMartin11,Martin,AC6_3_7,Ambient
+568,AC6,Ambient,3,8,Davies,A. hyacinthus,Davies14,NA,NA,T5,1,NA,NA,NA,_1111911,AhyaDavies14,Davies,AC6_3_8,Ambient
+569,AC6,Ambient,3,9,Arlington,A. hyacinthus,Arlington9,NA,NA,T5,1,NA,NA,NA,_1111911,AhyaArlington9,Arlington,AC6_3_9,Ambient
+570,AC6,Ambient,3,10,Palms,A. hyacinthus,Palms3,NA,NA,T5,1,NA,NA,NA,_1111911,AhyaPalms3,Palms,AC6_3_10,Ambient
+571,AC6,Ambient,3,11,Davies,A. hyacinthus,Davies16,NA,NA,T5,1,NA,NA,NA,_1111911,AhyaDavies16,Davies,AC6_3_11,Ambient
+572,AC6,Ambient,5,1,Martin,A. hyacinthus,Martin17,NA,NA,T5,1,NA,NA,NA,_1111914,AhyaMartin17,Martin,AC6_5_1,Ambient
+573,AC6,Ambient,5,2,Palms,A. hyacinthus,Palms10,NA,NA,T5,1,NA,NA,NA,_1111914,AhyaPalms10,Palms,AC6_5_2,Ambient
+574,AC6,Ambient,5,4,Davies,A. hyacinthus,Davies12,NA,NA,T5,1,NA,NA,NA,_1111914,AhyaDavies12,Davies,AC6_5_4,Ambient
+575,AC6,Ambient,5,5,Arlington,A. hyacinthus,Arlington10,NA,NA,T5,1,NA,NA,NA,_1111914,AhyaArlington10,Arlington,AC6_5_5,Ambient
+576,AC6,Ambient,5,6,Davies,A. hyacinthus,Davies18,NA,NA,T5,1,NA,NA,NA,_1111914,AhyaDavies18,Davies,AC6_5_6,Ambient
+577,AC6,Ambient,5,7,Wood,A. hyacinthus,Wood16,NA,NA,T5,1,NA,NA,NA,_1111914,AhyaWood16,Wood,AC6_5_7,Ambient
+578,AC6,Ambient,5,8,Davies,A. hyacinthus,Davies15,NA,NA,T5,1,NA,NA,NA,_1111914,AhyaDavies15,Davies,AC6_5_8,Ambient
+579,AC6,Ambient,5,10,Palms,A. hyacinthus,Palms16,NA,NA,T5,1,NA,NA,NA,_1111914,AhyaPalms16,Palms,AC6_5_10,Ambient
+580,AC6,Ambient,5,11,Martin,A. hyacinthus,Martin3,NA,NA,T5,1,NA,NA,NA,_1111914,AhyaMartin3,Martin,AC6_5_11,Ambient
+581,AR1,Hot,1,1,Palms,A. hyacinthus,Palms4,NA,NA,T5,1,NA,NA,NA,_1111818,AhyaPalms4,Palms,AR1_1_1,Hot
+582,AR1,Hot,1,2,Davies,A. hyacinthus,Davies16,NA,NA,T5,1,NA,NA,NA,_1111818,AhyaDavies16,Davies,AR1_1_2,Hot
+583,AR1,Hot,1,3,Palms,A. hyacinthus,Palms16,NA,NA,T5,1,NA,NA,NA,_1111818,AhyaPalms16,Palms,AR1_1_3,Hot
+584,AR1,Hot,1,4,Arlington,A. hyacinthus,Arlington11,NA,NA,T5,1,NA,NA,NA,_1111818,AhyaArlington11,Arlington,AR1_1_4,Hot
+585,AR1,Hot,1,5,Palms,A. hyacinthus,Palms6,NA,NA,T5,0,NA,NA,NA,_1111818,AhyaPalms6,Palms,AR1_1_5,Hot
+586,AR1,Hot,1,6,Martin,A. hyacinthus,Martin12,NA,NA,T5,1,NA,NA,NA,_1111818,AhyaMartin12,Martin,AR1_1_6,Hot
+587,AR1,Hot,1,7,Arlington,A. hyacinthus,Arlington9,NA,NA,T5,0,NA,NA,NA,_1111818,AhyaArlington9,Arlington,AR1_1_7,Hot
+588,AR1,Hot,1,8,Palms,A. hyacinthus,Palms10,NA,NA,T5,1,NA,NA,NA,_1111818,AhyaPalms10,Palms,AR1_1_8,Hot
+589,AR1,Hot,1,9,Arlington,A. hyacinthus,Arlington10,NA,NA,T5,0,NA,NA,NA,_1111818,AhyaArlington10,Arlington,AR1_1_9,Hot
+590,AR1,Hot,1,10,Wood,A. hyacinthus,Wood17,NA,NA,T5,1,NA,NA,NA,_1111818,AhyaWood17,Wood,AR1_1_10,Hot
+591,AR1,Hot,1,11,Wood,A. hyacinthus,Wood5A,NA,NA,T5,0,NA,NA,NA,_1111818,AhyaWood5A,Wood,AR1_1_11,Hot
+592,AR1,Hot,3,1,Martin,A. hyacinthus,Martin3,NA,NA,T5,0,NA,NA,NA,_1111821,AhyaMartin3,Martin,AR1_3_1,Hot
+593,AR1,Hot,3,2,Wood,A. hyacinthus,Wood8,NA,NA,T5,1,NA,NA,NA,_1111821,AhyaWood8,Wood,AR1_3_2,Hot
+594,AR1,Hot,3,4,Palms,A. hyacinthus,Palms5,NA,NA,T5,1,NA,NA,NA,_1111821,AhyaPalms5,Palms,AR1_3_4,Hot
+595,AR1,Hot,3,5,Palms,A. hyacinthus,Palms3,NA,NA,T5,1,NA,NA,NA,_1111821,AhyaPalms3,Palms,AR1_3_5,Hot
+596,AR1,Hot,3,6,Davies,A. hyacinthus,Davies15,NA,NA,T5,0,NA,NA,NA,_1111821,AhyaDavies15,Davies,AR1_3_6,Hot
+597,AR1,Hot,3,8,Martin,A. hyacinthus,Martin17,NA,NA,T5,1,NA,NA,NA,_1111821,AhyaMartin17,Martin,AR1_3_8,Hot
+598,AR1,Hot,3,9,Martin,A. hyacinthus,Martin13,NA,NA,T5,1,NA,NA,NA,_1111821,AhyaMartin13,Martin,AR1_3_9,Hot
+599,AR1,Hot,3,10,Martin,A. hyacinthus,Martin11,NA,NA,T5,1,NA,NA,NA,_1111821,AhyaMartin11,Martin,AR1_3_10,Hot
+600,AR1,Hot,3,11,Arlington,A. hyacinthus,Arlington6,NA,NA,T5,1,NA,NA,NA,_1111821,AhyaArlington6,Arlington,AR1_3_11,Hot
+601,AR1,Hot,5,1,Davies,A. hyacinthus,Davies12,NA,NA,T5,1,NA,NA,NA,_1111824,AhyaDavies12,Davies,AR1_5_1,Hot
+602,AR1,Hot,5,3,Davies,A. hyacinthus,Davies18,NA,NA,T5,0,NA,NA,NA,_1111824,AhyaDavies18,Davies,AR1_5_3,Hot
+603,AR1,Hot,5,4,Davies,A. hyacinthus,Davies9,NA,NA,T5,1,NA,NA,NA,_1111824,AhyaDavies9,Davies,AR1_5_4,Hot
+604,AR1,Hot,5,7,Arlington,A. hyacinthus,Arlington1,NA,NA,T5,1,NA,NA,NA,_1111824,AhyaArlington1,Arlington,AR1_5_7,Hot
+605,AR1,Hot,5,8,Wood,A. hyacinthus,Wood16,NA,NA,T5,1,NA,NA,NA,_1111824,AhyaWood16,Wood,AR1_5_8,Hot
+606,AR1,Hot,5,9,Davies,A. hyacinthus,Davies14,NA,NA,T5,1,NA,NA,NA,_1111824,AhyaDavies14,Davies,AR1_5_9,Hot
+607,AR1,Hot,5,10,Wood,A. hyacinthus,Wood7A,NA,NA,T5,1,NA,NA,NA,_1111824,AhyaWood7A,Wood,AR1_5_10,Hot
+608,AR1,Hot,5,11,Arlington,A. hyacinthus,Arlington8,NA,NA,T5,1,NA,NA,NA,_1111824,AhyaArlington8,Arlington,AR1_5_11,Hot
+609,AR2,Hot,1,1,Arlington,A. hyacinthus,Arlington11,NA,NA,T5,1,NA,NA,NA,_1111827,AhyaArlington11,Arlington,AR2_1_1,Hot
+610,AR2,Hot,1,2,Davies,A. hyacinthus,Davies12,NA,NA,T5,1,NA,NA,NA,_1111827,AhyaDavies12,Davies,AR2_1_2,Hot
+611,AR2,Hot,1,3,Martin,A. hyacinthus,Martin11,NA,NA,T5,1,NA,NA,NA,_1111827,AhyaMartin11,Martin,AR2_1_3,Hot
+612,AR2,Hot,1,4,Wood,A. hyacinthus,Wood8,NA,NA,T5,1,NA,NA,NA,_1111827,AhyaWood8,Wood,AR2_1_4,Hot
+613,AR2,Hot,1,5,Wood,A. hyacinthus,Wood5A,NA,NA,T5,1,NA,NA,NA,_1111827,AhyaWood5A,Wood,AR2_1_5,Hot
+614,AR2,Hot,1,6,Arlington,A. hyacinthus,Arlington6,NA,NA,T5,1,NA,NA,NA,_1111827,AhyaArlington6,Arlington,AR2_1_6,Hot
+615,AR2,Hot,1,7,Davies,A. hyacinthus,Davies18,NA,NA,T5,0,NA,NA,NA,_1111827,AhyaDavies18,Davies,AR2_1_7,Hot
+616,AR2,Hot,1,8,Martin,A. hyacinthus,Martin13,NA,NA,T5,1,NA,NA,NA,_1111827,AhyaMartin13,Martin,AR2_1_8,Hot
+617,AR2,Hot,1,9,Davies,A. hyacinthus,Davies16,NA,NA,T5,1,NA,NA,NA,_1111827,AhyaDavies16,Davies,AR2_1_9,Hot
+618,AR2,Hot,1,10,Davies,A. hyacinthus,Davies9,NA,NA,T5,0,NA,NA,NA,_1111827,AhyaDavies9,Davies,AR2_1_10,Hot
+619,AR2,Hot,1,11,Palms,A. hyacinthus,Palms6,NA,NA,T5,0,NA,NA,NA,_1111827,AhyaPalms6,Palms,AR2_1_11,Hot
+620,AR2,Hot,3,2,Palms,A. hyacinthus,Palms10,NA,NA,T5,1,NA,NA,NA,_1111830,AhyaPalms10,Palms,AR2_3_2,Hot
+621,AR2,Hot,3,4,Davies,A. hyacinthus,Davies15,NA,NA,T5,0,NA,NA,NA,_1111830,AhyaDavies15,Davies,AR2_3_4,Hot
+622,AR2,Hot,3,5,Wood,A. hyacinthus,Wood17,NA,NA,T5,1,NA,NA,NA,_1111830,AhyaWood17,Wood,AR2_3_5,Hot
+623,AR2,Hot,3,6,Palms,A. hyacinthus,Palms5,NA,NA,T5,1,NA,NA,NA,_1111830,AhyaPalms5,Palms,AR2_3_6,Hot
+624,AR2,Hot,3,8,Wood,A. hyacinthus,Wood7A,NA,NA,T5,1,NA,NA,NA,_1111830,AhyaWood7A,Wood,AR2_3_8,Hot
+625,AR2,Hot,3,9,Arlington,A. hyacinthus,Arlington8,NA,NA,T5,0,NA,NA,NA,_1111830,AhyaArlington8,Arlington,AR2_3_9,Hot
+626,AR2,Hot,3,10,Martin,A. hyacinthus,Martin12,NA,NA,T5,1,NA,NA,NA,_1111830,AhyaMartin12,Martin,AR2_3_10,Hot
+627,AR2,Hot,3,11,Arlington,A. hyacinthus,Arlington10,NA,NA,T5,0,NA,NA,NA,_1111830,AhyaArlington10,Arlington,AR2_3_11,Hot
+628,AR2,Hot,5,1,Wood,A. hyacinthus,Wood16,NA,NA,T5,1,NA,NA,NA,_1111833,AhyaWood16,Wood,AR2_5_1,Hot
+629,AR2,Hot,5,2,Arlington,A. hyacinthus,Arlington1,NA,NA,T5,1,NA,NA,NA,_1111833,AhyaArlington1,Arlington,AR2_5_2,Hot
+630,AR2,Hot,5,4,Palms,A. hyacinthus,Palms4,NA,NA,T5,1,NA,NA,NA,_1111833,AhyaPalms4,Palms,AR2_5_4,Hot
+631,AR2,Hot,5,5,Palms,A. hyacinthus,Palms3,NA,NA,T5,1,NA,NA,NA,_1111833,AhyaPalms3,Palms,AR2_5_5,Hot
+632,AR2,Hot,5,6,Martin,A. hyacinthus,Martin3,NA,NA,T5,1,NA,NA,NA,_1111833,AhyaMartin3,Martin,AR2_5_6,Hot
+633,AR2,Hot,5,7,Arlington,A. hyacinthus,Arlington9,NA,NA,T5,1,NA,NA,NA,_1111833,AhyaArlington9,Arlington,AR2_5_7,Hot
+634,AR2,Hot,5,8,Martin,A. hyacinthus,Martin17,NA,NA,T5,1,NA,NA,NA,_1111833,AhyaMartin17,Martin,AR2_5_8,Hot
+635,AR2,Hot,5,10,Davies,A. hyacinthus,Davies14,NA,NA,T5,1,NA,NA,NA,_1111833,AhyaDavies14,Davies,AR2_5_10,Hot
+636,AR2,Hot,5,11,Palms,A. hyacinthus,Palms16,NA,NA,T5,1,NA,NA,NA,_1111833,AhyaPalms16,Palms,AR2_5_11,Hot
+637,AR3,Hot,1,1,Wood,A. hyacinthus,Wood16,NA,NA,T5,1,NA,NA,NA,_1111845,AhyaWood16,Wood,AR3_1_1,Hot
+638,AR3,Hot,1,2,Wood,A. hyacinthus,Wood5A,NA,NA,T5,1,NA,NA,NA,_1111845,AhyaWood5A,Wood,AR3_1_2,Hot
+639,AR3,Hot,1,4,Martin,A. hyacinthus,Martin3,NA,NA,T5,1,NA,NA,NA,_1111845,AhyaMartin3,Martin,AR3_1_4,Hot
+640,AR3,Hot,1,5,Wood,A. hyacinthus,Wood17,NA,NA,T5,1,NA,NA,NA,_1111845,AhyaWood17,Wood,AR3_1_5,Hot
+641,AR3,Hot,1,6,Palms,A. hyacinthus,Palms4,NA,NA,T5,1,NA,NA,NA,_1111845,AhyaPalms4,Palms,AR3_1_6,Hot
+642,AR3,Hot,1,7,Arlington,A. hyacinthus,Arlington6,NA,NA,T5,1,NA,NA,NA,_1111845,AhyaArlington6,Arlington,AR3_1_7,Hot
+643,AR3,Hot,1,8,Palms,A. hyacinthus,Palms5,NA,NA,T5,1,NA,NA,NA,_1111845,AhyaPalms5,Palms,AR3_1_8,Hot
+644,AR3,Hot,1,9,Martin,A. hyacinthus,Martin13,NA,NA,T5,1,NA,NA,NA,_1111845,AhyaMartin13,Martin,AR3_1_9,Hot
+645,AR3,Hot,1,11,Davies,A. hyacinthus,Davies14,NA,NA,T5,0,NA,NA,NA,_1111845,AhyaDavies14,Davies,AR3_1_11,Hot
+646,AR3,Hot,3,1,Arlington,A. hyacinthus,Arlington11,NA,NA,T5,1,NA,NA,NA,_1111848,AhyaArlington11,Arlington,AR3_3_1,Hot
+647,AR3,Hot,3,2,Davies,A. hyacinthus,Davies15,NA,NA,T5,0,NA,NA,NA,_1111848,AhyaDavies15,Davies,AR3_3_2,Hot
+648,AR3,Hot,3,4,Wood,A. hyacinthus,Wood8,NA,NA,T5,1,NA,NA,NA,_1111848,AhyaWood8,Wood,AR3_3_4,Hot
+649,AR3,Hot,3,6,Palms,A. hyacinthus,Palms10,NA,NA,T5,1,NA,NA,NA,_1111848,AhyaPalms10,Palms,AR3_3_6,Hot
+650,AR3,Hot,3,7,Palms,A. hyacinthus,Palms3,NA,NA,T5,1,NA,NA,NA,_1111848,AhyaPalms3,Palms,AR3_3_7,Hot
+651,AR3,Hot,3,8,Arlington,A. hyacinthus,Arlington1,NA,NA,T5,1,NA,NA,NA,_1111848,AhyaArlington1,Arlington,AR3_3_8,Hot
+652,AR3,Hot,3,9,Martin,A. hyacinthus,Martin12,NA,NA,T5,1,NA,NA,NA,_1111848,AhyaMartin12,Martin,AR3_3_9,Hot
+653,AR3,Hot,3,10,Davies,A. hyacinthus,Davies12,NA,NA,T5,1,NA,NA,NA,_1111848,AhyaDavies12,Davies,AR3_3_10,Hot
+654,AR3,Hot,3,11,Davies,A. hyacinthus,Davies9,NA,NA,T5,1,NA,NA,NA,_1111848,AhyaDavies9,Davies,AR3_3_11,Hot
+655,AR3,Hot,5,1,Martin,A. hyacinthus,Martin11,NA,NA,T5,1,NA,NA,NA,_1111851,AhyaMartin11,Martin,AR3_5_1,Hot
+656,AR3,Hot,5,3,Arlington,A. hyacinthus,Arlington9,NA,NA,T5,1,NA,NA,NA,_1111851,AhyaArlington9,Arlington,AR3_5_3,Hot
+657,AR3,Hot,5,4,Palms,A. hyacinthus,Palms16,NA,NA,T5,1,NA,NA,NA,_1111851,AhyaPalms16,Palms,AR3_5_4,Hot
+658,AR3,Hot,5,5,Davies,A. hyacinthus,Davies16,NA,NA,T5,1,NA,NA,NA,_1111851,AhyaDavies16,Davies,AR3_5_5,Hot
+659,AR3,Hot,5,6,Wood,A. hyacinthus,Wood7A,NA,NA,T5,1,NA,NA,NA,_1111851,AhyaWood7A,Wood,AR3_5_6,Hot
+660,AR3,Hot,5,7,Arlington,A. hyacinthus,Arlington10,NA,NA,T5,1,NA,NA,NA,_1111851,AhyaArlington10,Arlington,AR3_5_7,Hot
+661,AR3,Hot,5,8,Martin,A. hyacinthus,Martin17,NA,NA,T5,1,NA,NA,NA,_1111851,AhyaMartin17,Martin,AR3_5_8,Hot
+662,AR3,Hot,5,9,Davies,A. hyacinthus,Davies18,NA,NA,T5,0,NA,NA,NA,_1111851,AhyaDavies18,Davies,AR3_5_9,Hot
+663,AR3,Hot,5,11,Arlington,A. hyacinthus,Arlington8,NA,NA,T5,0,NA,NA,NA,_1111851,AhyaArlington8,Arlington,AR3_5_11,Hot
+664,AR4,Hot,1,1,Palms,A. hyacinthus,Palms10,NA,NA,T5,1,NA,NA,NA,_1111854,AhyaPalms10,Palms,AR4_1_1,Hot
+665,AR4,Hot,1,3,Arlington,A. hyacinthus,Arlington11,NA,NA,T5,1,NA,NA,NA,_1111854,AhyaArlington11,Arlington,AR4_1_3,Hot
+666,AR4,Hot,1,4,Davies,A. hyacinthus,Davies12,NA,NA,T5,1,NA,NA,NA,_1111854,AhyaDavies12,Davies,AR4_1_4,Hot
+667,AR4,Hot,1,5,Arlington,A. hyacinthus,Arlington6,NA,NA,T5,1,NA,NA,NA,_1111854,AhyaArlington6,Arlington,AR4_1_5,Hot
+668,AR4,Hot,1,6,Palms,A. hyacinthus,Palms3,NA,NA,T5,1,NA,NA,NA,_1111854,AhyaPalms3,Palms,AR4_1_6,Hot
+669,AR4,Hot,1,7,Wood,A. hyacinthus,Wood8,NA,NA,T5,1,NA,NA,NA,_1111854,AhyaWood8,Wood,AR4_1_7,Hot
+670,AR4,Hot,1,8,Arlington,A. hyacinthus,Arlington8,NA,NA,T5,1,NA,NA,NA,_1111854,AhyaArlington8,Arlington,AR4_1_8,Hot
+671,AR4,Hot,1,9,Palms,A. hyacinthus,Palms4,NA,NA,T5,1,NA,NA,NA,_1111854,AhyaPalms4,Palms,AR4_1_9,Hot
+672,AR4,Hot,1,10,Martin,A. hyacinthus,Martin11,NA,NA,T5,1,NA,NA,NA,_1111854,AhyaMartin11,Martin,AR4_1_10,Hot
+673,AR4,Hot,3,1,Palms,A. hyacinthus,Palms5,NA,NA,T5,1,NA,NA,NA,_1111857,AhyaPalms5,Palms,AR4_3_1,Hot
+674,AR4,Hot,3,2,Wood,A. hyacinthus,Wood5A,NA,NA,T5,0,NA,NA,NA,_1111857,AhyaWood5A,Wood,AR4_3_2,Hot
+675,AR4,Hot,3,4,Palms,A. hyacinthus,Palms6,NA,NA,T5,0,NA,NA,NA,_1111857,AhyaPalms6,Palms,AR4_3_4,Hot
+676,AR4,Hot,3,5,Davies,A. hyacinthus,Davies15,NA,NA,T5,0,NA,NA,NA,_1111857,AhyaDavies15,Davies,AR4_3_5,Hot
+677,AR4,Hot,3,6,Wood,A. hyacinthus,Wood17,NA,NA,T5,1,NA,NA,NA,_1111857,AhyaWood17,Wood,AR4_3_6,Hot
+678,AR4,Hot,3,7,Davies,A. hyacinthus,Davies18,NA,NA,T5,0,NA,NA,NA,_1111857,AhyaDavies18,Davies,AR4_3_7,Hot
+679,AR4,Hot,3,8,Martin,A. hyacinthus,Martin12,NA,NA,T5,1,NA,NA,NA,_1111857,AhyaMartin12,Martin,AR4_3_8,Hot
+680,AR4,Hot,3,9,Martin,A. hyacinthus,Martin13,NA,NA,T5,1,NA,NA,NA,_1111857,AhyaMartin13,Martin,AR4_3_9,Hot
+681,AR4,Hot,3,10,Davies,A. hyacinthus,Davies14,NA,NA,T5,1,NA,NA,NA,_1111857,AhyaDavies14,Davies,AR4_3_10,Hot
+682,AR4,Hot,3,11,Arlington,A. hyacinthus,Arlington9,NA,NA,T5,1,NA,NA,NA,_1111857,AhyaArlington9,Arlington,AR4_3_11,Hot
+683,AR4,Hot,5,1,Martin,A. hyacinthus,Martin3,NA,NA,T5,1,NA,NA,NA,_1111860,AhyaMartin3,Martin,AR4_5_1,Hot
+684,AR4,Hot,5,3,Wood,A. hyacinthus,Wood7A,NA,NA,T5,1,NA,NA,NA,_1111860,AhyaWood7A,Wood,AR4_5_3,Hot
+685,AR4,Hot,5,4,Davies,A. hyacinthus,Davies16,NA,NA,T5,1,NA,NA,NA,_1111860,AhyaDavies16,Davies,AR4_5_4,Hot
+686,AR4,Hot,5,5,Martin,A. hyacinthus,Martin17,NA,NA,T5,1,NA,NA,NA,_1111860,AhyaMartin17,Martin,AR4_5_5,Hot
+687,AR4,Hot,5,6,Palms,A. hyacinthus,Palms16,NA,NA,T5,1,NA,NA,NA,_1111860,AhyaPalms16,Palms,AR4_5_6,Hot
+688,AR4,Hot,5,7,Arlington,A. hyacinthus,Arlington1,NA,NA,T5,1,NA,NA,NA,_1111860,AhyaArlington1,Arlington,AR4_5_7,Hot
+689,AR4,Hot,5,8,Arlington,A. hyacinthus,Arlington10,NA,NA,T5,1,NA,NA,NA,_1111860,AhyaArlington10,Arlington,AR4_5_8,Hot
+690,AR4,Hot,5,9,Wood,A. hyacinthus,Wood16,NA,NA,T5,1,NA,NA,NA,_1111860,AhyaWood16,Wood,AR4_5_9,Hot
+691,AR4,Hot,5,10,Davies,A. hyacinthus,Davies9,NA,NA,T5,1,NA,NA,NA,_1111860,AhyaDavies9,Davies,AR4_5_10,Hot
+692,AR5,Hot,1,1,Arlington,A. hyacinthus,Arlington11,NA,NA,T5,0,NA,NA,NA,_1111890,AhyaArlington11,Arlington,AR5_1_1,Hot
+693,AR5,Hot,1,2,Wood,A. hyacinthus,Wood7A,NA,NA,T5,1,NA,NA,NA,_1111890,AhyaWood7A,Wood,AR5_1_2,Hot
+694,AR5,Hot,1,4,Arlington,A. hyacinthus,Arlington6,NA,NA,T5,1,NA,NA,NA,_1111890,AhyaArlington6,Arlington,AR5_1_4,Hot
+695,AR5,Hot,1,5,Arlington,A. hyacinthus,Arlington10,NA,NA,T5,1,NA,NA,NA,_1111890,AhyaArlington10,Arlington,AR5_1_5,Hot
+696,AR5,Hot,1,6,Palms,A. hyacinthus,Palms4,NA,NA,T5,1,NA,NA,NA,_1111890,AhyaPalms4,Palms,AR5_1_6,Hot
+697,AR5,Hot,1,7,Arlington,A. hyacinthus,Arlington9,NA,NA,T5,1,NA,NA,NA,_1111890,AhyaArlington9,Arlington,AR5_1_7,Hot
+698,AR5,Hot,1,8,Wood,A. hyacinthus,Wood5A,NA,NA,T5,1,NA,NA,NA,_1111890,AhyaWood5A,Wood,AR5_1_8,Hot
+699,AR5,Hot,1,9,Palms,A. hyacinthus,Palms3,NA,NA,T5,1,NA,NA,NA,_1111890,AhyaPalms3,Palms,AR5_1_9,Hot
+700,AR5,Hot,1,10,Davies,A. hyacinthus,Davies12,NA,NA,T5,1,NA,NA,NA,_1111890,AhyaDavies12,Davies,AR5_1_10,Hot
+701,AR5,Hot,1,11,Palms,A. hyacinthus,Palms10,NA,NA,T5,1,NA,NA,NA,_1111890,AhyaPalms10,Palms,AR5_1_11,Hot
+702,AR5,Hot,3,2,Davies,A. hyacinthus,Davies14,NA,NA,T5,1,NA,NA,NA,_1111893,AhyaDavies14,Davies,AR5_3_2,Hot
+703,AR5,Hot,3,3,Martin,A. hyacinthus,Martin13,NA,NA,T5,1,NA,NA,NA,_1111893,AhyaMartin13,Martin,AR5_3_3,Hot
+704,AR5,Hot,3,4,Arlington,A. hyacinthus,Arlington1,NA,NA,T5,1,NA,NA,NA,_1111893,AhyaArlington1,Arlington,AR5_3_4,Hot
+705,AR5,Hot,3,5,Davies,A. hyacinthus,Davies9,NA,NA,T5,1,NA,NA,NA,_1111893,AhyaDavies9,Davies,AR5_3_5,Hot
+706,AR5,Hot,3,7,Wood,A. hyacinthus,Wood16,NA,NA,T5,1,NA,NA,NA,_1111893,AhyaWood16,Wood,AR5_3_7,Hot
+707,AR5,Hot,3,8,Wood,A. hyacinthus,Wood17,NA,NA,T5,1,NA,NA,NA,_1111893,AhyaWood17,Wood,AR5_3_8,Hot
+708,AR5,Hot,3,9,Martin,A. hyacinthus,Martin11,NA,NA,T5,1,NA,NA,NA,_1111893,AhyaMartin11,Martin,AR5_3_9,Hot
+709,AR5,Hot,3,10,Martin,A. hyacinthus,Martin3,NA,NA,T5,1,NA,NA,NA,_1111893,AhyaMartin3,Martin,AR5_3_10,Hot
+710,AR5,Hot,3,11,Davies,A. hyacinthus,Davies18,NA,NA,T5,1,NA,NA,NA,_1111893,AhyaDavies18,Davies,AR5_3_11,Hot
+711,AR5,Hot,5,2,Martin,A. hyacinthus,Martin12,NA,NA,T5,1,NA,NA,NA,_1111896,AhyaMartin12,Martin,AR5_5_2,Hot
+712,AR5,Hot,5,3,Arlington,A. hyacinthus,Arlington8,NA,NA,T5,0,NA,NA,NA,_1111896,AhyaArlington8,Arlington,AR5_5_3,Hot
+713,AR5,Hot,5,4,Palms,A. hyacinthus,Palms16,NA,NA,T5,1,NA,NA,NA,_1111896,AhyaPalms16,Palms,AR5_5_4,Hot
+714,AR5,Hot,5,5,Davies,A. hyacinthus,Davies16,NA,NA,T5,1,NA,NA,NA,_1111896,AhyaDavies16,Davies,AR5_5_5,Hot
+715,AR5,Hot,5,6,Wood,A. hyacinthus,Wood8,NA,NA,T5,1,NA,NA,NA,_1111896,AhyaWood8,Wood,AR5_5_6,Hot
+716,AR5,Hot,5,7,Palms,A. hyacinthus,Palms5,NA,NA,T5,1,NA,NA,NA,_1111896,AhyaPalms5,Palms,AR5_5_7,Hot
+717,AR5,Hot,5,9,Davies,A. hyacinthus,Davies15,NA,NA,T5,0,NA,NA,NA,_1111896,AhyaDavies15,Davies,AR5_5_9,Hot
+718,AR5,Hot,5,11,Martin,A. hyacinthus,Martin17,NA,NA,T5,1,NA,NA,NA,_1111896,AhyaMartin17,Martin,AR5_5_11,Hot
+719,AR6,Hot,1,2,Wood,A. hyacinthus,Wood8,NA,NA,T5,1,NA,NA,NA,_1111917,AhyaWood8,Wood,AR6_1_2,Hot
+720,AR6,Hot,1,3,Arlington,A. hyacinthus,Arlington9,NA,NA,T5,0,NA,NA,NA,_1111917,AhyaArlington9,Arlington,AR6_1_3,Hot
+721,AR6,Hot,1,4,Davies,A. hyacinthus,Davies9,NA,NA,T5,0,NA,NA,NA,_1111917,AhyaDavies9,Davies,AR6_1_4,Hot
+722,AR6,Hot,1,5,Arlington,A. hyacinthus,Arlington1,NA,NA,T5,1,NA,NA,NA,_1111917,AhyaArlington1,Arlington,AR6_1_5,Hot
+723,AR6,Hot,1,6,Palms,A. hyacinthus,Palms4,NA,NA,T5,1,NA,NA,NA,_1111917,AhyaPalms4,Palms,AR6_1_6,Hot
+724,AR6,Hot,1,7,Wood,A. hyacinthus,Wood7A,NA,NA,T5,0,NA,NA,NA,_1111917,AhyaWood7A,Wood,AR6_1_7,Hot
+725,AR6,Hot,1,8,Arlington,A. hyacinthus,Arlington11,NA,NA,T5,1,NA,NA,NA,_1111917,AhyaArlington11,Arlington,AR6_1_8,Hot
+726,AR6,Hot,1,9,Arlington,A. hyacinthus,Arlington6,NA,NA,T5,1,NA,NA,NA,_1111917,AhyaArlington6,Arlington,AR6_1_9,Hot
+727,AR6,Hot,1,10,Wood,A. hyacinthus,Wood16,NA,NA,T5,1,NA,NA,NA,_1111917,AhyaWood16,Wood,AR6_1_10,Hot
+728,AR6,Hot,1,11,Arlington,A. hyacinthus,Arlington10,NA,NA,T5,0,NA,NA,NA,_1111917,AhyaArlington10,Arlington,AR6_1_11,Hot
+729,AR6,Hot,3,1,Davies,A. hyacinthus,Davies16,NA,NA,T5,1,NA,NA,NA,_1111920,AhyaDavies16,Davies,AR6_3_1,Hot
+730,AR6,Hot,3,2,Palms,A. hyacinthus,Palms3,NA,NA,T5,1,NA,NA,NA,_1111920,AhyaPalms3,Palms,AR6_3_2,Hot
+731,AR6,Hot,3,3,Davies,A. hyacinthus,Davies12,NA,NA,T5,1,NA,NA,NA,_1111920,AhyaDavies12,Davies,AR6_3_3,Hot
+732,AR6,Hot,3,4,Wood,A. hyacinthus,Wood5A,NA,NA,T5,1,NA,NA,NA,_1111920,AhyaWood5A,Wood,AR6_3_4,Hot
+733,AR6,Hot,3,5,Martin,A. hyacinthus,Martin13,NA,NA,T5,1,NA,NA,NA,_1111920,AhyaMartin13,Martin,AR6_3_5,Hot
+734,AR6,Hot,3,7,Davies,A. hyacinthus,Davies14,NA,NA,T5,1,NA,NA,NA,_1111920,AhyaDavies14,Davies,AR6_3_7,Hot
+735,AR6,Hot,3,9,Davies,A. hyacinthus,Davies18,NA,NA,T5,0,NA,NA,NA,_1111920,AhyaDavies18,Davies,AR6_3_9,Hot
+736,AR6,Hot,3,10,Palms,A. hyacinthus,Palms16,NA,NA,T5,1,NA,NA,NA,_1111920,AhyaPalms16,Palms,AR6_3_10,Hot
+737,AR6,Hot,3,11,Martin,A. hyacinthus,Martin12,NA,NA,T5,1,NA,NA,NA,_1111920,AhyaMartin12,Martin,AR6_3_11,Hot
+738,AR6,Hot,5,1,Palms,A. hyacinthus,Palms5,NA,NA,T5,1,NA,NA,NA,_1111923,AhyaPalms5,Palms,AR6_5_1,Hot
+739,AR6,Hot,5,2,Palms,A. hyacinthus,Palms10,NA,NA,T5,1,NA,NA,NA,_1111923,AhyaPalms10,Palms,AR6_5_2,Hot
+740,AR6,Hot,5,4,Martin,A. hyacinthus,Martin3,NA,NA,T5,1,NA,NA,NA,_1111923,AhyaMartin3,Martin,AR6_5_4,Hot
+741,AR6,Hot,5,5,Arlington,A. hyacinthus,Arlington8,NA,NA,T5,1,NA,NA,NA,_1111923,AhyaArlington8,Arlington,AR6_5_5,Hot
+742,AR6,Hot,5,6,Palms,A. hyacinthus,Palms6,NA,NA,T5,0,NA,NA,NA,_1111923,AhyaPalms6,Palms,AR6_5_6,Hot
+743,AR6,Hot,5,7,Wood,A. hyacinthus,Wood17,NA,NA,T5,1,NA,NA,NA,_1111923,AhyaWood17,Wood,AR6_5_7,Hot
+744,AR6,Hot,5,8,Davies,A. hyacinthus,Davies15,NA,NA,T5,1,NA,NA,NA,_1111923,AhyaDavies15,Davies,AR6_5_8,Hot
+745,AR6,Hot,5,9,Martin,A. hyacinthus,Martin17,NA,NA,T5,1,NA,NA,NA,_1111923,AhyaMartin17,Martin,AR6_5_9,Hot
+746,AR6,Hot,5,10,Martin,A. hyacinthus,Martin11,NA,NA,T5,1,NA,NA,NA,_1111923,AhyaMartin11,Martin,AR6_5_10,Hot

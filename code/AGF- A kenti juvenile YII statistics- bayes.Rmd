@@ -1,0 +1,432 @@
+---
+title: "Physiology- A. tenuis juvenile YII"
+author: "Alex Macadam"
+date: "2023-10-24"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Load packages
+```{r}
+set.seed(123)
+library(tidyverse) #for data wrangling
+library(car)       #for regression diagnostics
+library(broom)     #for tidy output
+library(ggfortify) #for model diagnostics
+library(sjPlot)    #for outputs
+library(knitr)     #for kable
+library(effects)   #for partial effects plots
+library(emmeans)   #for estimating marginal means
+library(MASS)      #for glm.nb
+library(MuMIn)     #for AICc
+library(brms)
+library(broom.mixed)
+library(tidybayes)
+library(bayesplot)
+library(rstanarm)
+library(ggeffects)
+library(rstan)
+library(DHARMa)
+library(ggridges)
+library(easystats)
+library(patchwork)
+source('/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/helperFunctions.R')
+
+# Function for summarising survival standard error
+summarySE <- function(data=NULL, measurevar=NULL, groupvars=NULL, na.rm=FALSE,
+                      conf.interval=.95, .drop=TRUE) {
+  require(plyr)
+  
+  # New version of length which can handle NA's: if na.rm==T, don't count them
+  length2 <- function (x, na.rm=FALSE) {
+    if (na.rm==TRUE) sum(!is.na(x))
+    else       length(x)
+  }
+  
+  # This does the summary. For each group's data frame, return a vector with
+  # N, mean, and sd
+  datac <- ddply(data, groupvars, .drop=.drop,
+                 .fun = function(xx, col) {
+                   c(N    = length2(xx[[col]], na.rm=na.rm),
+                     mean = mean   (xx[[col]], na.rm=na.rm),
+                     sd   = sd     (xx[[col]], na.rm=na.rm)
+                   )
+                 },
+                 measurevar
+  )
+  
+  # Commenting this rename mean column line, as not assigning measurevar name properly
+  # # Rename the "mean" column    
+  # datac <- rename(datac, measurevar = mean)
+  
+  datac$se <- datac$sd / sqrt(datac$N)  # Calculate standard error of the mean
+  
+  # Confidence interval multiplier for standard error
+  # Calculate t-statistic for confidence interval: 
+  # e.g., if conf.interval is .95, use .975 (above/below), and use df=N-1
+  ciMult <- qt(conf.interval/2 + .5, datac$N-1)
+  datac$ci <- datac$se * ciMult
+  
+  return(datac)
+}
+```
+
+Read in the data
+```{r readData, results='markdown', eval=TRUE}
+yii <- read.csv("/Users/alexmacadam/Dropbox/PhD/Chapter2_Physiology/Chapter 2 data/Bayes stats data/physiology/juv_PAM2020.csv", header=T, fileEncoding="UTF-8-BOM") |>
+  mutate(Family = factor(Family),
+         Species = factor(Species),
+         Temp = factor(Temp),
+         Tank = factor(Tank),
+         Timepoint = factor(Timepoint),
+         Cassette = factor(Cassette),
+         Plate.Slide = factor(Plate.Slide),
+         Treatment = factor(Treatment),
+         Cone = factor(Cone),
+         Crosstype = factor(Crosstype),
+         popcross = factor(popcross),
+         SINGLE.CLUMP = factor(SINGLE.CLUMP),
+         Mom = factor(Mom),
+         Dad = factor(Dad)
+         ) |>
+  filter(Crosstype == "IndivCross", SINGLE.CLUMP == "S", Timepoint %in% c("T-2","T6"))
+
+#Add Temp x Treatment column
+yii$symxtemp <- paste(yii$Treatment, yii$Temp, sep='_')
+yii$symxtemp <- as.factor(yii$symxtemp)
+```
+
+```{r}
+#reshape data
+yii2<- yii |>
+  dplyr::select(Treatment, Timepoint, Temp,  YII_micro, IndID, popcross, Tank, Cassette, Plate.Slide, symxtemp) |>
+  mutate(popcross = factor(popcross)) |>
+  pivot_wider(names_from = Timepoint, values_from = YII_micro) |>
+  tidyr::unnest()
+
+yii2<- yii2 |>
+  mutate(YII_change = (`T6` - `T-2`)*1000) |> #times 1000 to make bigger numbers
+  drop_na(YII_change)
+
+yii2$`T-2`[yii2$`T-2`<0.001] <- 0.001
+yii2$T6[yii2$T6<0.001] <- 0.001
+
+yii2<- yii2 |>
+  mutate(YII_p_change = ((`T6` - `T-2`)/`T-2`)*100) |>
+  drop_na(YII_p_change)
+```
+
+```{r}
+#create final YII
+final_yii<- yii |>
+  filter(Timepoint == "T6") |>
+  mutate(YII_micro = YII_micro * 100)
+```
+
+Sumarise change in YII
+```{r}
+yii.sum.se <- summarySE(yii2, measurevar="YII_change",
+                          groupvars=c("Temp", "Treatment"), na.rm=TRUE)
+```
+
+form
+```{r}
+yii.form <- bf(YII_change ~ symxtemp + (1|Plate.Slide),
+                     family = gaussian()
+                   )
+```
+
+
+```{r fitModel2h1, results='markdown', eval=TRUE, hidden=TRUE, cache=TRUE}
+priors<- prior("normal(0, 200)", class = "Intercept") +
+    prior("normal(0, 200)", class = "b") +
+    #prior("normal(0, 0.5)", class = "sd", group = "Tank") +
+    prior("normal(0, 300)", class = "sd", group = "Plate.Slide") +
+    prior(student_t(3, 0, 100), class = 'sigma') +
+    prior(cauchy(0,2.5), class = 'sd')
+```
+
+```{r}
+YII.brm3 <- brm(yii.form, 
+                  data = yii2,
+                  prior = priors,
+                  sample_prior = 'yes',
+                  iter = 10000,
+                  warmup = 5000,
+                  chains = 4,
+                  thin = 20,
+                  control = list(adapt_delta = 0.99, max_treedepth = 20),
+                  refresh = 0
+                  )
+
+#saveRDS(YII.brm3, file = "YII.brm3_A.tenuis_juv.rds")
+YII.brm3 <- readRDS("/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/YII.brm3_A.tenuis_juv.rds")
+```
+
+View prior and posterior
+```{r}
+YII.brm3 %>% SUYR_prior_and_posterior()
+```
+
+Trace plots
+```{r}
+YII.brm3$fit |> stan_trace()
+```
+
+Autocorrelation
+```{r}
+YII.brm3$fit |> stan_ac()
+```
+
+Rhat
+```{r}
+YII.brm3$fit |> stan_rhat()
+```
+
+Effective sample size
+```{r}
+YII.brm3$fit |> stan_ess()
+```
+
+Density overlay
+```{r modelValidation5b, results='markdown', eval=TRUE, hidden=TRUE, fig.width=6, fig.height=4}
+YII.brm3 %>% pp_check(type = 'dens_overlay', nsamples = 250)
+```
+
+DHARMa residuals
+```{r}
+YII.resids<- make_brms_dharma_res(YII.brm3, integerResponse = FALSE)
+wrap_elements(~testUniformity(YII.resids)) +
+wrap_elements(~plotResiduals(YII.resids, form = factor(rep(1,nrow(YII))))) +
+wrap_elements(~plotResiduals(YII.resids, quantreg = FALSE))+
+wrap_elements(~testDispersion(YII.resids))
+```
+
+Summarise model
+conditional effects
+```{r partialPlot2d, results='markdown', eval=TRUE, hidden=TRUE, fig.width=8, fig.height=5}
+YII.brm3 %>%
+    conditional_effects("symxtemp") %>%
+    plot(points = TRUE)
+```
+
+Summarise draws
+```{r}
+YII.brm3 |>
+  summarise_draws(
+    median,
+    HDInterval::hdi,
+    Pl = ~mean(.x < 0),
+    Pg = ~mean(.x > 0),
+    rhat,
+    ess_bulk
+    ) |>
+  knitr::kable()
+```
+
+Emmeans
+```{r}
+YII.brm3 |>
+  emmeans(~symxtemp, type = "response")
+```
+
+planned contrasts- compare situations
+                 D1 vs Sed       D1 vs SS        SS vs Sed       Central vs Hybrid       
+D1_AMB     |      0                -1/2                0                   -1/3
+D1_HOT     |     -1                -1/2                0                    1/4
+Jewell_AMB |      0              0                  1/2                 -1/3
+Jewell_HOT |      0              0                  1/2                  1/4
+SS_AMB     |      0                1/2               -1/2                 -1/3
+SS_HOT     |      1                1/2               -1/2                  1/4
+```{r}
+cmat<- cbind(
+             "D1_HOT vs Sed_HOT"=c(0, -1, 0, 1, 0, 0),
+             "D1_HOT vs SS_HOT" = c(0, -1, 0, 0, 0, 1),
+             "SS_HOT vs Sed_HOT" = c(0, 0, 0, 1, 0, -1),
+             "D1_AMB vs Sed_AMB"=c(-1, 0, 1, 0, 0, 0),
+             "D1_AMB vs SS_AMB" = c(-1, 0, 0, 0, 1, 0),
+             "SS_AMB vs Sed_AMB" = c(0, 0, 1, 0, -1, 0),
+             "D1_AMB vs D1_HOT" = c(1, -1, 0, 0, 0, 0),
+             "SS_AMB vs SS_HOT" = c(0, 0, 0, 0, 1, -1),
+             "SED_AMB vs SED_HOT" = c(0, 0, 1, -1, 0, 0)
+             )
+```
+
+```{r}
+YII.change.plot<- YII.brm3 %>%
+  emmeans(~symxtemp) %>%
+  gather_emmeans_draws() %>%
+    ggplot() +
+  #geom_vline(xintercept = 0, linetype = "dashed") +
+  stat_slab(aes(
+    x = .value, y = symxtemp,
+    fill = stat(ggdist::cut_cdf_qi(cdf,
+      .width = c(0.5, 0.8, 0.95),
+      labels = scales::percent_format()
+    ))
+  ), color = "black") +
+  scale_fill_brewer("Interval", direction = -1, na.translate = FALSE) +
+  theme_classic() +
+  labs(x = "Change in colour", y = "Treatment")
+YII.change.plot
+```
+
+
+
+#####################################################################
+Final YII
+
+Sumarise final YII
+```{r}
+yii.fin.sum.all.se <- summarySE(yii, measurevar="YII_micro",
+                          groupvars=c("Temp"), na.rm=TRUE)
+
+yii.fin.sum.se <- summarySE(yii, measurevar="YII_micro",
+                          groupvars=c("Temp", "Treatment"), na.rm=TRUE)
+```
+
+form
+```{r}
+yii.form <- bf(YII_micro ~ symxtemp + (1|Plate.Slide),
+                     family = gaussian()
+                   )
+```
+
+priors
+```{r fitModel2h1, results='markdown', eval=TRUE, hidden=TRUE, cache=TRUE}
+priors<- prior("normal(10, 20)", class = "Intercept") +
+    prior("normal(0, 20)", class = "b") +
+    #prior("normal(0, 0.5)", class = "sd", group = "Tank") +
+    prior("normal(0, 20)", class = "sd", group = "Plate.Slide") +
+    prior(student_t(3, 0, 20), class = 'sigma') +
+    prior(cauchy(0,2.5), class = 'sd')
+```
+
+run model
+```{r}
+YII.brm2 <- brm(yii.form, 
+                  data = yii,
+                  prior = priors,
+                  sample_prior = 'yes',
+                  iter = 10000,
+                  warmup = 5000,
+                  chains = 4,
+                  thin = 20,
+                  control = list(adapt_delta = 0.99, max_treedepth = 20),
+                  refresh = 0
+                  )
+
+#saveRDS(YII.brm2, file = "YII.brm2_A.tenuis_juv.rds")
+YII.brm2 <- readRDS("YII.brm2_A.tenuis_juv.rds")
+```
+
+View prior and posterior
+```{r}
+YII.brm2 %>% SUYR_prior_and_posterior()
+```
+
+Trace plots
+```{r}
+YII.brm2$fit |> stan_trace()
+```
+
+Autocorrelation
+```{r}
+YII.brm2$fit |> stan_ac()
+```
+
+Rhat
+```{r}
+YII.brm2$fit |> stan_rhat()
+```
+
+Effective sample size
+```{r}
+YII.brm2$fit |> stan_ess()
+```
+
+density overlay
+```{r modelValidation5b, results='markdown', eval=TRUE, hidden=TRUE, fig.width=6, fig.height=4}
+YII.brm2 %>% pp_check(type = 'dens_overlay', nsamples = 250)
+```
+
+DHARMa residuals
+```{r}
+YII.resids<- make_brms_dharma_res(YII.brm2, integerResponse = FALSE)
+wrap_elements(~testUniformity(YII.resids)) +
+wrap_elements(~plotResiduals(YII.resids, form = factor(rep(1,nrow(YII))))) +
+wrap_elements(~plotResiduals(YII.resids, quantreg = FALSE))+
+wrap_elements(~testDispersion(YII.resids))
+```
+
+Summarise model
+conditional effects
+```{r partialPlot2d, results='markdown', eval=TRUE, hidden=TRUE, fig.width=8, fig.height=5}
+YII.brm2 %>%
+    conditional_effects("symxtemp") %>%
+    plot(points = TRUE)
+```
+
+Summarise draws
+```{r}
+YII.brm2 |>
+  summarise_draws(
+    median,
+    HDInterval::hdi,
+    Pl = ~mean(.x < 0),
+    Pg = ~mean(.x > 0),
+    rhat,
+    ess_bulk
+    ) |>
+  knitr::kable()
+```
+
+Emmeans
+```{r}
+YII.brm2 |>
+  emmeans(~symxtemp, type = "response")
+```
+
+planned contrasts- compare situations
+                 D1 vs Sed       D1 vs SS        SS vs Sed       Central vs Hybrid       
+D1_AMB     |      0                -1/2                0                   -1/3
+D1_HOT     |     -1                -1/2                0                    1/4
+Jewell_AMB |      0              0                  1/2                 -1/3
+Jewell_HOT |      0              0                  1/2                  1/4
+SS_AMB     |      0                1/2               -1/2                 -1/3
+SS_HOT     |      1                1/2               -1/2                  1/4
+```{r}
+cmat<- cbind(
+             "D1_HOT vs Sed_HOT"=c(0, -1, 0, 1, 0, 0),
+             "D1_HOT vs SS_HOT" = c(0, -1, 0, 0, 0, 1),
+             "SS_HOT vs Sed_HOT" = c(0, 0, 0, 1, 0, -1),
+             "D1_AMB vs Sed_AMB"=c(-1, 0, 1, 0, 0, 0),
+             "D1_AMB vs SS_AMB" = c(-1, 0, 0, 0, 1, 0),
+             "SS_AMB vs Sed_AMB" = c(0, 0, 1, 0, -1, 0),
+             "D1_AMB vs D1_HOT" = c(1, -1, 0, 0, 0, 0),
+             "SS_AMB vs SS_HOT" = c(0, 0, 0, 0, 1, -1),
+             "SED_AMB vs SED_HOT" = c(0, 0, 1, -1, 0, 0)
+             )
+```
+ 
+```{r}
+YII.plot<- YII.brm2 %>%
+  emmeans(~symxtemp) %>%
+  gather_emmeans_draws() %>%
+    ggplot() +
+  #geom_vline(xintercept = 0, linetype = "dashed") +
+  stat_slab(aes(
+    x = .value, y = symxtemp,
+    fill = stat(ggdist::cut_cdf_qi(cdf,
+      .width = c(0.5, 0.8, 0.95),
+      labels = scales::percent_format()
+    ))
+  ), color = "black") +
+  scale_fill_brewer("Interval", direction = -1, na.translate = FALSE) +
+  theme_classic() +
+  labs(x = "Final YII", y = "Treatment")
+YII.plot
+```
