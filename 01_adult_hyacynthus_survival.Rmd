@@ -2,7 +2,7 @@
 title: "09_AGF- Hya Adult survival statistics- bayes"
 author: "Alex Macadam"
 date: "2023-11-23"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
@@ -34,12 +34,12 @@ library(DHARMa)
 library(ggridges)
 library(easystats)     #framework for stats, modelling and visualisation
 library(patchwork)
-source('helperFunctions.R')
+#source('helperFunctions.R')
 ```
 
 Read in data
 ```{r}
-survival.hya <- read.csv('Adult-survival.csv', header=T) |>
+survival.hya <- read.csv('data/Adult-survival.csv', header=T) |>
   filter(Species == "A. hyacinthus", Timepoint == "T5") |> #remove other species data
   mutate(Survival=as.numeric(Survival), Bleaching_D=as.numeric(Bleaching_D), TissueArea_cm2=as.numeric(TissueArea_cm2)) |> #format columns
   mutate(Tank = factor(Tank),
@@ -61,7 +61,7 @@ survival.form <- bf(Survival | trials(1) ~ Population * Temperature + (1|Tank),
 ```
 
 priors
-```{r fitModel2h1, results='markdown', eval=TRUE, mhidden=TRUE, cache=TRUE}
+```{r, results='markdown', eval=TRUE, mhidden=TRUE, cache=TRUE}
 priors <-
     prior(normal(1.5, 5), class = 'Intercept') +
     prior(normal(1, 10), class = 'b') +
