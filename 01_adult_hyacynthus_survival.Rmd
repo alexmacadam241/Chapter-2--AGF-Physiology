@@ -34,7 +34,7 @@ library(DHARMa)
 library(ggridges)
 library(easystats)     #framework for stats, modelling and visualisation
 library(patchwork)
-#source('helperFunctions.R')
+source('code/helperFunctions.R')
 ```
 
 Read in data
