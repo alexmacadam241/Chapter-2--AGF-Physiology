@@ -1,5 +1,5 @@
 ---
-title: "09_AGF- Gon Adult survival statistics- bayes"
+title: "G. retiformis Adult survival statistics- bayes"
 author: "Alex Macadam"
 date: "2023-11-23"
 output: html_document
@@ -34,12 +34,42 @@ library(DHARMa)
 library(ggridges)
 library(easystats)     #framework for stats, modelling and visualisation
 library(patchwork)
-source('helperFunctions.R')
+source('/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/code/helperFunctions.R')
+
+theme_Publication <- function(base_size=14, base_family="helvetica") {
+      library(grid)
+      library(ggthemes)
+      (theme_foundation(base_size=base_size, base_family=base_family)
+       + theme(plot.title = element_text(face = "bold",
+                                         size = rel(1.2), hjust = 0.5),
+               text = element_text(),
+               panel.background = element_rect(colour = NA),
+               plot.background = element_rect(colour = NA),
+               panel.border = element_rect(colour = NA),
+               axis.title = element_text(face = "bold",size = rel(1)),
+               axis.title.y = element_text(angle=90,vjust =2),
+               axis.title.x = element_text(vjust = -0.2),
+               axis.text = element_text(), 
+               axis.line = element_line(colour="black"),
+               axis.ticks = element_line(),
+               panel.grid.major = element_line(colour="#f0f0f0"),
+               panel.grid.minor = element_blank(),
+               legend.key = element_rect(colour = NA),
+               legend.position = "bottom",
+               legend.direction = "horizontal",
+               legend.key.size= unit(0.2, "cm"),
+               legend.margin = unit(0, "cm"),
+               legend.title = element_text(face="italic"),
+               plot.margin=unit(c(10,5,5,5),"mm"),
+               strip.background=element_rect(colour="#f0f0f0",fill="#f0f0f0"),
+               strip.text = element_text(face="bold")
+          ))
+}
 ```
 
 ```{r}
 # Read in data
-survival.gon <- read.csv('Adult-survival.csv', header=T) |>
+survival.gon <- read.csv('/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/Adult-survival.csv', header=T) |>
   filter(Species == "Goniastrea", Timepoint == "4") |> #remove other species data
   mutate(Survival=as.numeric(Survival), Bleaching_D=as.numeric(Bleaching_D), TissueArea_cm2=as.numeric(TissueArea_cm2)) |> #format columns
   mutate(Tank = factor(Tank),
@@ -101,9 +131,38 @@ survival.brm2 <- update(survival.brm,
 
 updated conditional effects
 ```{r}
-survival.brm2 %>%
+ce_survival_ret<- survival.brm2 %>%
     conditional_effects() %>%
     plot(points = TRUE)
+ce_survival_ret
+ce_survival_ret<- ce_survival_ret$`Population:Temperature`$data |>
+  mutate(Species = "G. retiformis")
+```
+
+plot conditional effects
+```{r}
+pd <- position_dodge(width=0.2)
+pal <- wes_palette("Zissou1", 5, type = "discrete")
+scalesize <- function(x) sprintf("%.1f", x)
+
+#plot survival
+survival_ret_plot1<- ce_survival_ret |>
+  ggplot(aes(x=Population, y=estimate__, shape=Temperature, color = Temperature)) +
+  geom_pointrange(aes(ymin=lower__, ymax=upper__, color=Temperature), position=position_dodge(width=0.2))+
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.2), labels = scalesize)+
+  scale_color_manual(values=pal[c(1,5)]) +
+  labs(x='Reef Cross', y="Survival (%)")+
+  theme_Publication() 
+  theme(legend.key.height = unit(0.3, "cm"),
+  #      legend.margin=margin(0,0,0,0),
+  #      legend.box.margin=margin(0,0,0,0),
+  #      plot.margin = margin(rep(0.5,4)),
+  #      legend.position="right",
+  #      legend.direction = "vertical",
+        axis.text.x = element_text(angle = 90)
+  #      axis.text.y = element_text(angle = 90)
+        )
+survival_ret_plot1
 ```
 
 View prior and posterior
@@ -166,7 +225,7 @@ survival.brm2 |>
 Probability scale
 ```{r}
 survival.brm2 |>
-  emmeans(~Population, type = "response")
+  emmeans(~Population * Temperature, type = "response")
 ```
 
 Planned contrast:
@@ -176,17 +235,20 @@ Switzer
 
 ```{r}
 cmat=cbind(
-  "Jew vs Not" = c(-1, 1/2, 1/2),
-  "Swi vs Not" = c(-1/2, -1/2, 1)
+  "Jew vs Not" = c(0, 0, 0, -1, 1/2, 1/2),
+  "Swi vs Not" = c(0, 0, 0, -1/2, -1/2, 1),
+  "Jewell" = c(-1, 0, 0, 1, 0, 0),
+  "Parke" = c(0, -1, 0, 0, 1, 0),
+  "Switzer" = c(0, 0, -1, 0, 0, 1)
 )
 
 survival.em<- survival.brm2 |>
-  emmeans(~Population, type = 'response') |>
+  emmeans(~Population * Temperature, type = 'response') |>
   contrast(method=list(cmat)) |>
   gather_emmeans_draws() |>
   mutate(across(everything(), exp)) |>
 #on odds ratio scale
-  summarise(median_hdci(.value),
+  dplyr::summarise(median_hdci(.value),
             Pl = mean(.value < 1),
             Pg = mean(.value > 1)
             )
@@ -368,4 +430,28 @@ surv.plot<- survival.brm3 %>%
   theme_classic() +
   labs(x = "Survival", y = "Treatment")
 surv.plot
+```
+
+###
+Plot
+```{r}
+ce_survival<- rbind(ce_survival_ten, ce_survival_hya, ce_survival_ret) |>
+  mutate(Species = factor(Species, levels = c("A. kenti", "A. hyacinthus", "G. retiformis")))
+
+library(patchwork)
+survival_ten_plot1 + survival_hya_plot1 + survival_ret_plot1 +
+  #plot_annotation(tag_levels = 'A') + 
+  plot_layout(guides = 'collect') +
+  theme(legend.position='bottom')
+
+#plot survival
+survival_plot1<- ce_survival |>
+  ggplot(aes(x=Population, y=estimate__, shape=Temperature, color = Temperature)) +
+  geom_pointrange(aes(ymin=lower__, ymax=upper__, color=Temperature), position=position_dodge(width=0.2)) +
+  scale_y_continuous(limits=c(0.2,1.2), breaks=seq(0.2,1.2,0.2), labels = scalesize) +
+  scale_color_manual(values=pal[c(1,5)]) +
+  facet_wrap(~Species, drop = TRUE, scales = "free", ncol = 1) +
+  labs(x='Reef Cross', y="Survival") +
+  theme_Publication()
+survival_plot1
 ```

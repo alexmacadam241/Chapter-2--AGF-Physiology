@@ -1,0 +1,644 @@
+---
+title: "A. hyacinthus Adult bleaching statistics- bayes"
+author: "Alex Macadam"
+date: "2023-11-23"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Load packages
+```{r}
+set.seed(123)
+library(tidyverse) #for data wrangling
+library(car)       #for regression diagnostics
+library(broom)     #for tidy output
+library(ggfortify) #for model diagnostics
+library(sjPlot)    #for outputs
+library(knitr)     #for kable
+library(effects)   #for partial effects plots
+library(emmeans)   #for estimating marginal means
+library(MASS)      #for glm.nb
+library(MuMIn)     #for AICc
+library(brms)
+library(broom.mixed)
+library(tidybayes)
+library(bayesplot)
+library(rstanarm)
+library(cmdstanr)
+library(ggeffects)
+library(rstan)
+library(DHARMa)
+library(ggridges)
+library(easystats)     #framework for stats, modelling and visualisation
+library(patchwork)
+library(wesanderson)
+source('/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/code/helperFunctions.R')
+
+theme_Publication <- function(base_size=14, base_family="helvetica") {
+      library(grid)
+      library(ggthemes)
+      (theme_foundation(base_size=base_size, base_family=base_family)
+       + theme(plot.title = element_text(face = "bold",
+                                         size = rel(1.2), hjust = 0.5),
+               text = element_text(),
+               panel.background = element_rect(colour = NA),
+               plot.background = element_rect(colour = NA),
+               panel.border = element_rect(colour = NA),
+               axis.title = element_text(face = "bold",size = rel(1)),
+               axis.title.y = element_text(angle=90,vjust =2),
+               axis.title.x = element_text(vjust = -0.2),
+               axis.text = element_text(), 
+               axis.line = element_line(colour="black"),
+               axis.ticks = element_line(),
+               panel.grid.major = element_line(colour="#f0f0f0"),
+               panel.grid.minor = element_blank(),
+               legend.key = element_rect(colour = NA),
+               legend.position = "bottom",
+               legend.direction = "horizontal",
+               legend.key.size= unit(0.2, "cm"),
+               legend.margin = unit(0, "cm"),
+               legend.title = element_text(face="italic"),
+               plot.margin=unit(c(10,5,5,5),"mm"),
+               strip.background=element_rect(colour="#f0f0f0",fill="#f0f0f0"),
+               strip.text = element_text(face="bold")
+          ))
+}
+```
+
+Read in data
+```{r}
+colour <- read.csv('/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/Adult-bleaching-yr2.csv', header=T) |>
+  mutate(Bleaching_D=as.numeric(Bleaching_D)) |>
+  mutate(Tank = factor(Tank),
+                         Position = factor(Position),
+                         Stick = factor(Stick),
+                         Genotype = factor(Genotype),
+                         Temperature = factor(Temperature, levels=c('Ambient', 'Hot')),
+                         Population = factor(Population, levels=c('Davies','Palms','Arlington','Martin','Wood')),
+                         Timepoint = factor(Timepoint),
+                         Species = factor(Species)
+                        ) # change columns to factors
+
+T1<- colour |> filter(Timepoint == "0")
+T3<- colour |> filter(Timepoint == "3")
+```
+
+###
+Fit the T0 model
+form
+```{r}
+colour.form <- bf(Bleaching_D ~ Population * Temperature + (1|Tank),
+                     family = gaussian()
+                   )
+```
+
+priors
+```{r fitModel2h1, results='markdown', eval=TRUE, mhidden=TRUE, cache=TRUE}
+priors<- prior("normal(2, 2.5)", class = "Intercept") +
+    prior("normal(0, 3)", class = "b") +
+    prior("normal(0, 0.5)", class = "sd", group = "Tank") +
+    prior(student_t(3, 0, 2.5), class = 'sigma') +
+    prior(cauchy(0,2), class = 'sd')
+```
+
+run model
+```{r}
+T1.brm <- brm(colour.form,
+                  data = T1,
+                  prior = priors,
+                  sample_prior = 'only',
+                  iter = 5000,
+                  warmup = 2500,
+                  chains = 3, cores = 3,
+                  thin = 5,
+                  control = list(adapt_delta = 0.99, max_treedepth = 20),
+                  refresh = 0,
+                  backend = "cmdstanr"
+                  )
+```
+
+conditional effects
+```{r}
+T1.brm %>%
+    conditional_effects() %>%
+    plot(points = TRUE)
+```
+
+rerun model with posterior
+```{r}
+T1.brm2 <- update(T1.brm,
+                      sample_prior = 'yes',
+                      cores = 3,
+                      refresh = 0)
+```
+
+updated conditional effects
+```{r}
+ce_T1_hya<- T1.brm2 %>%
+    conditional_effects() %>%
+    plot(points = TRUE)
+ce_T1_hya
+ce_T1_hya<- ce_T1_hya$`Population:Temperature`$data |>
+  mutate(Species = "A. hyacinthus", Timepoint = "1")
+```
+
+plot conditional effects
+```{r}
+pd <- position_dodge(width=0.2)
+pal <- wes_palette("Zissou1", 5, type = "discrete")
+scalesize <- function(x) sprintf("%.1f", x)
+
+#plot col
+T1_hya_plot1<- ce_T1_hya |>
+  ggplot(aes(x=Population, y=estimate__, shape=Temperature, color = Temperature)) +
+  geom_pointrange(aes(ymin=lower__, ymax=upper__, color=Temperature), position=position_dodge(width=0.2))+
+  scale_y_continuous(limits=c(0,6), breaks=seq(0,6,1), labels = scalesize)+
+  scale_color_manual(values=pal[c(1,5)]) +
+  labs(x='Reef Cross', y="Colour score")+
+  theme_Publication() +
+  theme(legend.key.height = unit(0.3, "cm"),
+  #      legend.margin=margin(0,0,0,0),
+  #      legend.box.margin=margin(0,0,0,0),
+  #      plot.margin = margin(rep(0.5,4)),
+  #      legend.position="right",
+  #      legend.direction = "vertical",
+        axis.text.x = element_text(angle = 90)
+  #      axis.text.y = element_text(angle = 90)
+        )
+T1_hya_plot1
+```
+
+View prior and posterior
+```{r}
+T1.brm2 %>% SUYR_prior_and_posterior()
+```
+
+Trace plots
+```{r}
+T1.brm2$fit |> stan_trace()
+```
+
+Autocorrelation
+```{r}
+T1.brm2$fit |> stan_ac()
+```
+
+Rhat
+```{r}
+T1.brm2$fit |> stan_rhat()
+```
+
+Effective sample size
+```{r}
+T1.brm2$fit |> stan_ess()
+```
+
+Denisty overlay
+```{r}
+T1.brm2 |> pp_check(type = 'dens_overlay', nsamples = 250)
+```
+
+Dharma residuals
+```{r}
+col.resids<- make_brms_dharma_res(T1.brm2, integerResponse = FALSE)
+wrap_elements(~testUniformity(col.resids)) +
+wrap_elements(~plotResiduals(col.resids, form = factor(rep(1,nrow(col))))) +
+wrap_elements(~plotResiduals(col.resids, quantreg = FALSE))+
+wrap_elements(~testDispersion(col.resids))
+```
+
+Summarise model
+back transform from logit scale: by exponentiating on the odds scale. comparing to 1
+```{r}
+T1.brm2 |>
+  as_draws_df() |>
+  mutate(across(everything(), exp)) |>
+  summarise_draws(
+    median,
+    HDInterval::hdi,
+    Pl = ~mean(.x < 0),
+    Pg = ~mean(.x > 0),
+    rhat,
+    ess_bulk,
+    ess_tail
+    ) |>
+  knitr::kable()
+```
+
+Probability scale
+```{r}
+T1.brm2 |>
+  emmeans(~Population* Temperature, type = "response")
+```
+
+Planned contrast:
+Davies
+Palms
+Arlington
+Martin
+Wood
+
+```{r}
+cmat=cbind(
+  "Central vs North" = c(0, 0, 0, 0, 0, -1/3, -1/3, -1/3, 1/2, 1/2),
+  "Davies" = c(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0),
+  "Palms" = c(0, -1, 0, 0, 0, 0, 1, 0, 0, 0),
+  "Arlington" = c(0, 0, -1, 0, 0, 0, 0, 1, 0, 0),
+  "Martin" = c(0, 0, 0, -1, 0, 0, 0, 0, 1, 0),
+  "Wood" = c(0, 0, 0, 0, -1, 0, 0, 0, 0, 1)
+)
+
+T1.em<- T1.brm2 |>
+  emmeans(~Population* Temperature, type = 'response') |>
+  contrast(method=list(cmat)) |>
+  gather_emmeans_draws() |>
+  mutate(across(everything(), exp)) |>
+#on odds ratio scale
+  dplyr::summarise(median_hdci(.value),
+            Pl = mean(.value < 0),
+            Pg = mean(.value > 0)
+            )
+T1.em
+```
+
+#Plot
+```{r}
+T1.brm2 %>% get_variables()
+```
+
+```{r}
+T1.brm2 %>%
+  gather_draws(`b_Intercept.*|b_Population.*`, regex = TRUE) %>%
+  ggplot() +
+  geom_vline(xintercept = 0, linetype = "dashed") +
+  stat_slab(aes(
+    x = .value, y = .variable,
+    fill = stat(ggdist::cut_cdf_qi(cdf,
+      .width = c(0.5, 0.8, 0.95),
+      labels = scales::percent_format()
+    ))
+  ), color = "black") +
+  scale_fill_brewer("Interval", direction = -1, na.translate = FALSE)
+```
+
+###
+T3
+Fit the T3 model
+form
+```{r}
+colour.form <- bf(Bleaching_D ~ Population * Temperature + (1|Tank),
+                     family = gaussian()
+                   )
+```
+
+priors
+```{r fitModel2h1, results='markdown', eval=TRUE, mhidden=TRUE, cache=TRUE}
+priors<- prior("normal(2, 2.5)", class = "Intercept") +
+    prior("normal(0, 3)", class = "b") +
+    prior("normal(0, 0.5)", class = "sd", group = "Tank") +
+    prior(student_t(3, 0, 2.5), class = 'sigma') +
+    prior(cauchy(0,2), class = 'sd')
+```
+
+run model
+```{r}
+T3.brm <- brm(colour.form,
+                  data = T3,
+                  prior = priors,
+                  sample_prior = 'only',
+                  iter = 5000,
+                  warmup = 2500,
+                  chains = 3, cores = 3,
+                  thin = 5,
+                  control = list(adapt_delta = 0.99, max_treedepth = 20),
+                  refresh = 0,
+                  backend = "cmdstanr"
+                  )
+```
+
+conditional effects
+```{r}
+T3.brm %>%
+    conditional_effects() %>%
+    plot(points = TRUE)
+```
+
+rerun model with posterior
+```{r}
+T3.brm2 <- update(T3.brm,
+                      sample_prior = 'yes',
+                      cores = 3,
+                      refresh = 0)
+```
+
+updated conditional effects
+```{r}
+ce_T3_hya<- T3.brm2 %>%
+    conditional_effects() %>%
+    plot(points = TRUE)
+ce_T3_hya
+ce_T3_hya<- ce_T3_hya$`Population:Temperature`$data |>
+  mutate(Species = "A. hyacinthus", Timepoint = "3")
+```
+
+plot conditional effects
+```{r}
+pd <- position_dodge(width=0.2)
+pal <- wes_palette("Zissou1", 5, type = "discrete")
+scalesize <- function(x) sprintf("%.1f", x)
+
+#plot col
+T3_hya_plot1<- ce_T3_hya |>
+  ggplot(aes(x=Population, y=estimate__, shape=Temperature, color = Temperature)) +
+  geom_pointrange(aes(ymin=lower__, ymax=upper__, color=Temperature), position=position_dodge(width=0.2))+
+  scale_y_continuous(limits=c(0,6), breaks=seq(0,6,1), labels = scalesize)+
+  scale_color_manual(values=pal[c(1,5)]) +
+  labs(x='Reef Cross', y="Colour score")+
+  theme_Publication() +
+  theme(legend.key.height = unit(0.3, "cm"),
+  #      legend.margin=margin(0,0,0,0),
+  #      legend.box.margin=margin(0,0,0,0),
+  #      plot.margin = margin(rep(0.5,4)),
+  #      legend.position="right",
+  #      legend.direction = "vertical",
+        axis.text.x = element_text(angle = 90)
+  #      axis.text.y = element_text(angle = 90)
+        )
+T3_hya_plot1
+```
+
+View prior and posterior
+```{r}
+T3.brm2 %>% SUYR_prior_and_posterior()
+```
+
+Trace plots
+```{r}
+T3.brm2$fit |> stan_trace()
+```
+
+Autocorrelation
+```{r}
+T3.brm2$fit |> stan_ac()
+```
+
+Rhat
+```{r}
+T3.brm2$fit |> stan_rhat()
+```
+
+Effective sample size
+```{r}
+T3.brm2$fit |> stan_ess()
+```
+
+Denisty overlay
+```{r}
+T1.brm2 |> pp_check(type = 'dens_overlay', nsamples = 250)
+```
+
+Dharma residuals
+```{r}
+col.resids<- make_brms_dharma_res(T3.brm2, integerResponse = FALSE)
+wrap_elements(~testUniformity(col.resids)) +
+wrap_elements(~plotResiduals(col.resids, form = factor(rep(1,nrow(col))))) +
+wrap_elements(~plotResiduals(col.resids, quantreg = FALSE))+
+wrap_elements(~testDispersion(col.resids))
+```
+
+Summarise model
+back transform from logit scale: by exponentiating on the odds scale. comparing to 1
+```{r}
+T3.brm2 |>
+  as_draws_df() |>
+  mutate(across(everything(), exp)) |>
+  summarise_draws(
+    median,
+    HDInterval::hdi,
+    Pl = ~mean(.x < 0),
+    Pg = ~mean(.x > 0),
+    rhat,
+    ess_bulk,
+    ess_tail
+    ) |>
+  knitr::kable()
+```
+
+Probability scale
+```{r}
+T3.brm2 |>
+  emmeans(~Population* Temperature, type = "response")
+```
+
+Planned contrast:
+Davies
+Palms
+Arlington
+Martin
+Wood
+
+```{r}
+cmat=cbind(
+  "Central vs North" = c(0, 0, 0, 0, 0, -1/3, -1/3, -1/3, 1/2, 1/2),
+  "Davies" = c(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0),
+  "Palms" = c(0, -1, 0, 0, 0, 0, 1, 0, 0, 0),
+  "Arlington" = c(0, 0, -1, 0, 0, 0, 0, 1, 0, 0),
+  "Martin" = c(0, 0, 0, -1, 0, 0, 0, 0, 1, 0),
+  "Wood" = c(0, 0, 0, 0, -1, 0, 0, 0, 0, 1)
+)
+
+T3.em<- T3.brm2 |>
+  emmeans(~Population* Temperature, type = 'response') |>
+  contrast(method=list(cmat)) |>
+  gather_emmeans_draws() |>
+  mutate(across(everything(), exp)) |>
+#on odds ratio scale
+  dplyr::summarise(median_hdci(.value),
+            Pl = mean(.value < 0),
+            Pg = mean(.value > 0)
+            )
+T3.em
+```
+
+#Plot
+```{r}
+T3.brm2 %>% get_variables()
+```
+
+```{r}
+T3.brm2 %>%
+  gather_draws(`b_Intercept.*|b_Population.*`, regex = TRUE) %>%
+  ggplot() +
+  geom_vline(xintercept = 0, linetype = "dashed") +
+  stat_slab(aes(
+    x = .value, y = .variable,
+    fill = stat(ggdist::cut_cdf_qi(cdf,
+      .width = c(0.5, 0.8, 0.95),
+      labels = scales::percent_format()
+    ))
+  ), color = "black") +
+  scale_fill_brewer("Interval", direction = -1, na.translate = FALSE)
+```
+
+####
+Hot only
+```{r}
+col_hot <- colour |>
+  filter(Temperature == "Hot")
+```
+
+# Fit the model
+form
+```{r}
+colour.form <- bf(Bleaching_D ~ Population + (1|Tank),
+                     family = gaussian()
+                   )
+```
+
+priors
+```{r fitModel2h1, results='markdown', eval=TRUE, mhidden=TRUE, cache=TRUE}
+priors<- prior("normal(2, 6)", class = "Intercept") +
+    prior("normal(0, 4)", class = "b") +
+    prior("normal(0, 0.5)", class = "sd", group = "Tank") +
+    prior(student_t(3, 0, 2.5), class = 'sigma') +
+    prior(cauchy(0,2), class = 'sd')
+```
+
+run model
+```{r}
+col.brm3 <- brm(colour.form,
+                  data = col_hot,
+                  prior = priors,
+                  sample_prior = 'yes',
+                  iter = 5000,
+                  warmup = 2500,
+                  chains = 3, cores = 3,
+                  thin = 5,
+                  control = list(adapt_delta = 0.99, max_treedepth = 20),
+                  refresh = 0,
+                  backend = "cmdstanr"
+                  )
+```
+
+updated conditional effects
+```{r}
+col.brm3 %>%
+    conditional_effects() %>%
+    plot(points = TRUE)
+```
+
+View prior and posterior
+```{r}
+col.brm3 %>% SUYR_prior_and_posterior()
+```
+
+Trace plots
+```{r}
+col.brm3$fit |> stan_trace()
+```
+
+Autocorrelation
+```{r}
+col.brm3$fit |> stan_ac()
+```
+
+Rhat
+```{r}
+col.brm3$fit |> stan_rhat()
+```
+
+Effective sample size
+```{r}
+col.brm3$fit |> stan_ess()
+```
+
+Density overlay
+```{r}
+col.brm3 |> pp_check(type = 'dens_overlay', nsamples = 250)
+```
+
+Dharma residuals
+```{r}
+col.resids<- make_brms_dharma_res(col.brm3, integerResponse = FALSE)
+wrap_elements(~testUniformity(col.resids)) +
+wrap_elements(~plotResiduals(col.resids, form = factor(rep(1,nrow(col))))) +
+wrap_elements(~plotResiduals(col.resids, quantreg = FALSE))+
+wrap_elements(~testDispersion(col.resids))
+```
+
+Summarise model
+back transform from logit scale: by exponentiating on the odds scale. comparing to 1
+```{r}
+col.brm3 |>
+  as_draws_df() |>
+  mutate(across(everything(), exp)) |>
+  summarise_draws(
+    median,
+    HDInterval::hdi,
+    Pl = ~mean(.x < 0),
+    Pg = ~mean(.x > 0),
+    rhat,
+    ess_bulk,
+    ess_tail
+    ) |>
+  knitr::kable()
+```
+
+Probability scale
+```{r}
+col.brm3 |>
+  emmeans(~Population, type = "response")
+```
+
+Planned contrast:
+
+Davies
+Jewell
+Palms
+Parke
+
+```{r}
+cmat=cbind(
+  "South vs North" = c(-1/2, -1/2, -1/2, 1/2, 1/2)
+)
+
+col.em<- col.brm3 |>
+  emmeans(~Population, type = 'response') |>
+  contrast(method=list(cmat)) |>
+  gather_emmeans_draws() |>
+  mutate(across(everything(), exp)) |>
+#on odds ratio scale
+  dplyr::summarise(median_hdci(.value),
+            Pl = mean(.value < 0),
+            Pg = mean(.value > 0)
+            )
+col.em
+```
+
+#Plot
+get variables
+```{r}
+col.brm3 %>% get_variables()
+```
+
+```{r}
+surv.plot<- col.brm3 %>%
+  emmeans(~Population) %>%
+  gather_emmeans_draws() %>%
+    ggplot() +
+  #geom_vline(xintercept = 0, linetype = "dashed") +
+  stat_slab(aes(
+    x = .value, y = Population,
+    fill = stat(ggdist::cut_cdf_qi(cdf,
+      .width = c(0.5, 0.8, 0.95),
+      labels = scales::percent_format()
+    ))
+  ), color = "black") +
+  scale_fill_brewer("Interval", direction = -1, na.translate = FALSE) +
+  theme_classic() +
+  labs(x = "col", y = "Treatment")
+surv.plot
+```

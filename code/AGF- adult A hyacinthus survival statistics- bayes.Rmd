@@ -1,5 +1,5 @@
 ---
-title: "09_AGF- Hya Adult survival statistics- bayes"
+title: "A. hyacinthus Adult survival statistics- bayes"
 author: "Alex Macadam"
 date: "2023-11-23"
 output: html_document
@@ -34,12 +34,42 @@ library(DHARMa)
 library(ggridges)
 library(easystats)     #framework for stats, modelling and visualisation
 library(patchwork)
-source('helperFunctions.R')
+source('/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/code/helperFunctions.R')
+
+theme_Publication <- function(base_size=14, base_family="helvetica") {
+      library(grid)
+      library(ggthemes)
+      (theme_foundation(base_size=base_size, base_family=base_family)
+       + theme(plot.title = element_text(face = "bold",
+                                         size = rel(1.2), hjust = 0.5),
+               text = element_text(),
+               panel.background = element_rect(colour = NA),
+               plot.background = element_rect(colour = NA),
+               panel.border = element_rect(colour = NA),
+               axis.title = element_text(face = "bold",size = rel(1)),
+               axis.title.y = element_text(angle=90,vjust =2),
+               axis.title.x = element_text(vjust = -0.2),
+               axis.text = element_text(), 
+               axis.line = element_line(colour="black"),
+               axis.ticks = element_line(),
+               panel.grid.major = element_line(colour="#f0f0f0"),
+               panel.grid.minor = element_blank(),
+               legend.key = element_rect(colour = NA),
+               legend.position = "bottom",
+               legend.direction = "horizontal",
+               legend.key.size= unit(0.2, "cm"),
+               legend.margin = unit(0, "cm"),
+               legend.title = element_text(face="italic"),
+               plot.margin=unit(c(10,5,5,5),"mm"),
+               strip.background=element_rect(colour="#f0f0f0",fill="#f0f0f0"),
+               strip.text = element_text(face="bold")
+          ))
+}
 ```
 
 Read in data
 ```{r}
-survival.hya <- read.csv('Adult-survival.csv', header=T) |>
+survival.hya <- read.csv('/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/Adult-survival.csv', header=T) |>
   filter(Species == "A. hyacinthus", Timepoint == "T5") |> #remove other species data
   mutate(Survival=as.numeric(Survival), Bleaching_D=as.numeric(Bleaching_D), TissueArea_cm2=as.numeric(TissueArea_cm2)) |> #format columns
   mutate(Tank = factor(Tank),
@@ -101,9 +131,38 @@ survival.brm2 <- update(survival.brm,
 
 updated conditional effects
 ```{r}
-survival.brm2 %>%
+ce_survival_hya<- survival.brm2 %>%
     conditional_effects() %>%
     plot(points = TRUE)
+ce_survival_hya
+ce_survival_hya<- ce_survival_hya$`Population:Temperature`$data |>
+  mutate(Species = "A. hyacinthus")
+```
+
+plot conditional effects
+```{r}
+pd <- position_dodge(width=0.2)
+pal <- wes_palette("Zissou1", 5, type = "discrete")
+scalesize <- function(x) sprintf("%.1f", x)
+
+#plot survival
+survival_hya_plot1<- ce_survival_hya |>
+  ggplot(aes(x=Population, y=estimate__, shape=Temperature, color = Temperature)) +
+  geom_pointrange(aes(ymin=lower__, ymax=upper__, color=Temperature), position=position_dodge(width=0.2))+
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.2), labels = scalesize)+
+  scale_color_manual(values=pal[c(1,5)]) +
+  labs(x='Reef Cross', y="Survival (%)")+
+  theme_Publication() +
+  theme(legend.key.height = unit(0.3, "cm"),
+  #      legend.margin=margin(0,0,0,0),
+  #      legend.box.margin=margin(0,0,0,0),
+  #      plot.margin = margin(rep(0.5,4)),
+  #      legend.position="right",
+  #      legend.direction = "vertical",
+        axis.text.x = element_text(angle = 90)
+  #      axis.text.y = element_text(angle = 90)
+        )
+survival_hya_plot1
 ```
 
 View prior and posterior
@@ -166,7 +225,7 @@ survival.brm2 |>
 Probability scale
 ```{r}
 survival.brm2 |>
-  emmeans(~Population, type = "response")
+  emmeans(~Population * Temperature, type = "response")
 ```
 
 Planned contrast:
@@ -178,16 +237,21 @@ Wood
 
 ```{r}
 cmat=cbind(
-  "Central vs North" = c(-1/3, -1/3, 1/2, -1/3, 1/2)
+  "Central vs North" = c(0, 0, 0, 0, 0, -1/3, -1/3, 1/2, -1/3, 1/2),
+  "Arlington" = c(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0),
+  "Davies" = c(0, -1, 0, 0, 0, 0, 1, 0, 0, 0),
+  "Martin" = c(0, 0, -1, 0, 0, 0, 0, 1, 0, 0),
+  "Palms" = c(0, 0, 0, -1, 0, 0, 0, 0, 1, 0),
+  "Wood" = c(0, 0, 0, 0, -1, 0, 0, 0, 0, 1)
 )
 
 survival.em<- survival.brm2 |>
-  emmeans(~Population, type = 'response') |>
+  emmeans(~Population * Temperature, type = 'response') |>
   contrast(method=list(cmat)) |>
   gather_emmeans_draws() |>
   mutate(across(everything(), exp)) |>
 #on odds ratio scale
-  summarise(median_hdci(.value),
+  dplyr::summarise(median_hdci(.value),
             Pl = mean(.value < 1),
             Pg = mean(.value > 1)
             )
@@ -255,44 +319,44 @@ survival.brm3 <- brm(survival.form,
 
 conditional effects
 ```{r}
-survival.brm4 %>%
+survival.brm3 %>%
     conditional_effects() %>%
     plot(points = TRUE)
 ```
 
 View priors and posteriors
 ```{r}
-survival.brm4 %>% SUYR_prior_and_posterior()
+survival.brm3 %>% SUYR_prior_and_posterior()
 ```
 
 Trace plots
 ```{r}
-survival.brm4$fit |> stan_trace()
+survival.brm3$fit |> stan_trace()
 ```
 
 Autocorrelation
 ```{r}
-survival.brm4$fit |> stan_ac()
+survival.brm3$fit |> stan_ac()
 ```
 
 Rhat
 ```{r}
-survival.brm4$fit |> stan_rhat()
+survival.brm3$fit |> stan_rhat()
 ```
 
 Effective sample size
 ```{r}
-survival.brm4$fit |> stan_ess()
+survival.brm3$fit |> stan_ess()
 ```
 
 Density overlay
 ```{r}
-survival.brm4 |> pp_check(type = 'dens_overlay', nsamples = 250)
+survival.brm3 |> pp_check(type = 'dens_overlay', nsamples = 250)
 ```
 
 Dharma residuals
 ```{r}
-survival.resids<- make_brms_dharma_res(survival.brm4, integerResponse = FALSE)
+survival.resids<- make_brms_dharma_res(survival.brm3, integerResponse = FALSE)
 wrap_elements(~testUniformity(survival.resids)) +
 wrap_elements(~plotResiduals(survival.resids, form = factor(rep(1,nrow(survival))))) +
 wrap_elements(~plotResiduals(survival.resids, quantreg = FALSE))+
