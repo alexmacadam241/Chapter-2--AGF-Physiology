@@ -5,7 +5,7 @@ R code to accompany the paper
 ### Statistical analysis
 
 - [01_AGF_adult_Akenti_survival_statistics_bayes.Rmd](01_AGF_adult_Akenti_survival_statistics_bayes.Rmd)
-- [02_AGF_adult_Ahyacinthus_survival_statistics_bayes.Rmd](02_AGF_adult_Ahyacinthus_survival_statistics_ bayes.Rmd)
+- [02_AGF_adult_Ahyacinthus_survival_statistics_bayes.Rmd](02_AGF_adult_Ahyacinthus_survival_statistics_bayes.Rmd)
 - [03_AGF_adult_Gretiformis_survival_statistics_bayes.Rmd](03_AGF_adult_Gretiformis_survival_statistics_bayes.Rmd)
 - [04_AGF_adult_Akenti_bleaching_statistics_bayes.Rmd](04_AGF_adult_Akenti_bleaching_statistics_bayes.Rmd)
 - [05_AGF_adult_Ahyacinthus_bleaching_statistics_bayes.Rmd](05_AGF_adult_Ahyacinthus_bleaching_statistics_bayes.Rmd)
