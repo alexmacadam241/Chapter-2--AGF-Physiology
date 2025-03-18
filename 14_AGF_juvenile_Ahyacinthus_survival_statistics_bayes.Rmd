@@ -1,0 +1,334 @@
+---
+title: "Physiology- A. hyacinthus juvenile survival"
+author: "Alex Macadam"
+date: "2023-10-24"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Load packages
+```{r}
+set.seed(123)
+library(tidyverse) #for data wrangling
+library(car)       #for regression diagnostics
+library(broom)     #for tidy output
+library(ggfortify) #for model diagnostics
+library(sjPlot)    #for outputs
+library(knitr)     #for kable
+library(effects)   #for partial effects plots
+library(emmeans)   #for estimating marginal means
+library(MASS)      #for glm.nb
+library(MuMIn)     #for AICc
+library(brms)
+library(broom.mixed)
+library(tidybayes)
+library(bayesplot)
+library(rstanarm)
+library(cmdstanr)
+library(ggeffects)
+library(rstan)
+library(DHARMa)
+library(ggridges)
+library(easystats)
+library(patchwork)
+source('helperFunctions.R')
+```
+
+```{r}
+#load data
+survival_hot <- read.csv("data/Juvenile-survival-2021.csv", header=T, fileEncoding="UTF-8-BOM") |>
+  mutate(Family = factor(Family),
+         Species = factor(Species),
+         Temp = factor(Temp),
+         Tank = factor(Tank),
+         Timepoint = factor(Timepoint),
+         Cassette = factor(Cassette),
+         Plate.Slide = factor(Plate.Slide),
+         Treatment = factor(Treatment),
+         Cone = factor(Cone),
+         CrossType = factor(CrossType),
+         popcross = factor(popcross)
+         ) |>
+  filter(Timepoint == "6", Temp == "HOT")
+```
+
+# Fit the model
+form
+```{r}
+survival.form <- bf(Survival | trials(1) ~ popcross + (1|Tank),
+                  family=binomial(link='logit'))
+```
+
+priors
+```{r fitModel2h1, results='markdown', eval=TRUE, mhidden=TRUE, cache=TRUE}
+priors <-
+    prior(normal(0, 1.7), class = 'Intercept') +
+    prior(normal(0, 1.7), class = 'b') +
+    prior(student_t(3, 0, 1.7), class = 'sd') 
+```
+
+run model
+```{r}
+survival.brm <- brm(survival.form, 
+                  data = survival_hot,
+                  prior = priors,
+                  sample_prior = 'yes',
+                  iter = 5000,
+                  warmup = 2500,
+                  chains = 3, cores = 3,
+                  thin = 5,
+                  control = list(adapt_delta = 0.99, max_treedepth = 20),
+                  refresh = 0,
+                  backend = "cmdstanr"
+                  )
+```
+
+View prior and posterior
+```{r}
+survival.brm %>% SUYR_prior_and_posterior()
+```
+
+Trace plots
+```{r}
+survival.brm$fit |> stan_trace()
+```
+
+Autocorrelation
+```{r}
+survival.brm$fit |> stan_ac()
+```
+
+Rhat
+```{r}
+survival.brm$fit |> stan_rhat()
+```
+
+Effective sample size
+```{r}
+survival.brm$fit |> stan_ess()
+```
+
+Denisty overlay
+```{r}
+survival.brm |> pp_check(type = 'dens_overlay', nsamples = 250)
+```
+
+Dharma residuals
+```{r}
+survival.resids<- make_brms_dharma_res(survival.brm, integerResponse = FALSE)
+wrap_elements(~testUniformity(survival.resids)) +
+wrap_elements(~plotResiduals(survival.resids, form = factor(rep(1,nrow(survival.hot))))) +
+wrap_elements(~plotResiduals(survival.resids, quantreg = FALSE))+
+wrap_elements(~testDispersion(survival.resids))
+
+survival.resids<- make_brms_dharma_res(survival.brm, integerResponse = FALSE)
+testUniformity(survival.resids)
+plotResiduals(survival.resids, form = factor(rep(1,nrow(survival.hot))))
+plotResiduals(survival.resids, quantreg = FALSE)
+testDispersion(survival.resids)
+```
+
+Summarise model
+conditional effects
+```{r}
+survival.brm %>%
+    conditional_effects() %>%
+    plot(points = TRUE)
+```
+
+back transform from logit scale: by exponentiating on the odds scale. comparing to 1
+```{r}
+survival.brm |>
+  as_draws_df() |>
+  mutate(across(everything(), exp)) |>
+  summarise_draws(
+    median,
+    HDInterval::hdi,
+    Pl = ~mean(.x < 1),
+    Pg = ~mean(.x > 1),
+    rhat,
+    ess_bulk,
+    ess_tail
+    ) |>
+  knitr::kable()
+```
+
+Probability scale
+```{r}
+survival.brm |>
+  emmeans(~popcross, type = "response")
+```
+
+Planned contrast:
+DAxDA
+DAxMA  
+MAxAR
+MAxDA
+MAxMA
+MAxWD
+PIxMA
+WDxMA
+
+```{r}
+cmat=cbind(
+  "Pure vs Hybrid" = c(-1/2, 1/6, 1/6, 1/6, -1/2, 1/6, 1/6, 1/6),
+  "PureSouth vs Hybrid" = c(-1, 1/4, 1/4, 1/4, 0, 0, 1/4, 0),
+  "PureSouth vs Hybrid 2" = c(-1, 1/5, 1/5, 1/5, 0, 1/5, 1/5, 0),
+  "PureNorth vs Hybrid" = c(0, 1/4, 1/4, 1/4, -1, 0, 1/4, 0),
+  "PureNorth vs Hybrid2" = c(-1, 1/5, 1/5, 1/5, -1/2, 1/5, 1/5, -1/2),
+  "North vs South" = c(1, 0, 0, 0, -1, 0, 0, 0),
+  "North vs South2" = c(1, 0, 0, 0, -1/3, -1/3, 0, -1/3)
+)
+```
+
+```{r}
+survival.em<- survival.brm4 |>
+  emmeans(~popcross, type = 'response') |>
+  contrast(method=list(cmat)) |>
+  gather_emmeans_draws() |>
+  mutate(across(everything(), exp)) |>
+#on odds ratio scale
+  summarise(median_hdci(.value),
+            Pl = mean(.value < 1),
+            Pg = mean(.value > 1)
+            )
+survival.em
+```
+
+#Plot
+```{r}
+surv.plot<- survival.brm %>%
+  emmeans(~popcross) %>%
+  gather_emmeans_draws() %>%
+    ggplot() +
+  #geom_vline(xintercept = 0, linetype = "dashed") +
+  stat_slab(aes(
+    x = .value, y = popcross,
+    fill = stat(ggdist::cut_cdf_qi(cdf,
+      .width = c(0.5, 0.8, 0.95),
+      labels = scales::percent_format()
+    ))
+  ), color = "black") +
+  scale_fill_brewer("Interval", direction = -1, na.translate = FALSE) +
+  theme_classic() +
+  labs(x = "Survival", y = "Treatment")
+surv.plot
+```
+
+####
+By Region cross
+```{r}
+survival_hot <- survival_hot %>%
+  mutate(Region_cross = case_when(
+    popcross %in% c("ARLxARL", "ARLxDAV", "DAVxARL", "DAVxDAV") ~ "central",
+    popcross %in% c("DAVxMAR", "MARxARL", "MARxDAV", "MARxPAL", 
+                    "PALxMAR", "WOOxARL") ~ "hybrid",
+    popcross %in% c("MARxMAR", "MARxWOO", "WOOxMAR") ~ "north",
+    TRUE ~ NA_character_  # Assign NA if no match
+  ))
+```
+
+form
+```{r}
+survival.form <- bf(Survival | trials(1) ~ Region_cross + (1|Tank),
+                  family=binomial(link='logit'))
+```
+
+priors
+```{r fitModel2h1, results='markdown', eval=TRUE, mhidden=TRUE, cache=TRUE}
+priors <-
+    prior(normal(0, 1.5), class = 'Intercept') +
+    prior(normal(0, 1.5), class = 'b') +
+    prior(student_t(3, 0, 1.5), class = 'sd') 
+```
+
+run model
+```{r}
+survival.brm4 <- brm(survival.form, 
+                  data = survival_hot,
+                  prior = priors,
+                  sample_prior = 'yes',
+                  iter = 5000,
+                  warmup = 2500,
+                  chains = 3, cores = 3,
+                  thin = 5,
+                  control = list(adapt_delta = 0.99, max_treedepth = 20),
+                  refresh = 0,
+                  backend = "cmdstanr"
+                  )
+```
+
+View prior and posterior
+```{r}
+survival.brm4 %>% SUYR_prior_and_posterior()
+```
+
+Trace plots
+```{r}
+survival.brm4$fit |> stan_trace()
+```
+
+Autocorrelation
+```{r}
+survival.brm4$fit |> stan_ac()
+```
+
+Rhat
+```{r}
+survival.brm4$fit |> stan_rhat()
+```
+
+Effective sample size
+```{r}
+survival.brm4$fit |> stan_ess()
+```
+
+Denisty overlay
+```{r}
+survival.brm4 |> pp_check(type = 'dens_overlay', nsamples = 250)
+```
+
+Dharma residuals
+```{r}
+survival.resids<- make_brms_dharma_res(survival.brm4, integerResponse = FALSE)
+wrap_elements(~testUniformity(survival.resids)) +
+wrap_elements(~plotResiduals(survival.resids, form = factor(rep(1,nrow(survival.hot))))) +
+wrap_elements(~plotResiduals(survival.resids, quantreg = FALSE))+
+wrap_elements(~testDispersion(survival.resids))
+
+survival.resids<- make_brms_dharma_res(survival.brm4, integerResponse = FALSE)
+testUniformity(survival.resids)
+plotResiduals(survival.resids, form = factor(rep(1,nrow(survival.hot))))
+plotResiduals(survival.resids, quantreg = FALSE)
+testDispersion(survival.resids)
+```
+
+Summarise model
+conditional effects
+```{r}
+survival.brm4 %>%
+    conditional_effects() %>%
+    plot(points = TRUE)
+```
+
+```{r}
+surv.plot<- survival.brm4 %>%
+  emmeans(~Region_cross) %>%
+  gather_emmeans_draws() %>%
+    ggplot() +
+  #geom_vline(xintercept = 0, linetype = "dashed") +
+  stat_slab(aes(
+    x = .value, y = Region_cross,
+    fill = stat(ggdist::cut_cdf_qi(cdf,
+      .width = c(0.5, 0.8, 0.95),
+      labels = scales::percent_format()
+    ))
+  ), color = "black") +
+  scale_fill_brewer("Interval", direction = -1, na.translate = FALSE) +
+  theme_classic() +
+  labs(x = "Survival", y = "Treatment")
+surv.plot
+```
