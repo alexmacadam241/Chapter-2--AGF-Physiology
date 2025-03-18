@@ -1,5 +1,5 @@
 ---
-title: "A. kenti Adult survival statistics- bayes"
+title: "02_AGF_adult_Ahyacinthus_survival_statistics_ bayes"
 author: "Alex Macadam"
 date: "2023-11-23"
 output: html_document
@@ -34,8 +34,7 @@ library(DHARMa)
 library(ggridges)
 library(easystats)     #framework for stats, modelling and visualisation
 library(patchwork)
-library(wesanderson)
-source('/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/code/helperFunctions.R')
+source('helperFunctions.R')
 
 theme_Publication <- function(base_size=14, base_family="helvetica") {
       library(grid)
@@ -70,23 +69,21 @@ theme_Publication <- function(base_size=14, base_family="helvetica") {
 
 Read in data
 ```{r}
-survival.ten <- read.csv('/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/Adult-survival.csv', header=T) |>
-  filter(Species == "Tenuis", Timepoint == "3") |> #remove other species data
+survival.hya <- read.csv('data/Adult-survival.csv', header=T) |>
+  filter(Species == "A. hyacinthus", Timepoint == "T5") |> #remove other species data
   mutate(Survival=as.numeric(Survival), Bleaching_D=as.numeric(Bleaching_D), TissueArea_cm2=as.numeric(TissueArea_cm2)) |> #format columns
   mutate(Tank = factor(Tank),
                          Position = factor(Position),
                          Stick = factor(Stick),
                          Genotype = factor(Genotype),
                          Temperature = factor(Temperature, levels=c('Ambient', 'Hot')),
-                         Population = factor(Population, levels=c('Davies','Jewell','Palms','Parke','Switzer')),
+                         Reef = factor(Reef, levels=c('Davies','Palms','Arlington','Martin','Wood')),
                          Timepoint = factor(Timepoint),
                          Species = factor(Species)
                         ) # change columns to factors
-
-survival.ten$pop_temp <- paste(survival.ten$Population, survival.ten$Temperature, sep = "_")
 ```
 
-Fit the model
+# Fit the model
 form
 ```{r}
 survival.form <- bf(Survival | trials(1) ~ Population * Temperature + (1|Tank),
@@ -96,17 +93,17 @@ survival.form <- bf(Survival | trials(1) ~ Population * Temperature + (1|Tank),
 priors
 ```{r fitModel2h1, results='markdown', eval=TRUE, mhidden=TRUE, cache=TRUE}
 priors <-
-    prior(normal(0, 2.5), class = 'Intercept') +
-    prior(normal(0, 2), class = 'b') +
-    prior(student_t(3, 0, 2.5), class = 'sd') 
+    prior(normal(1.5, 5), class = 'Intercept') +
+    prior(normal(1, 10), class = 'b') +
+    prior(student_t(5, 0, 2.5), class = 'sd') 
 ```
 
 run model
 ```{r}
 survival.brm <- brm(survival.form,
-                  data = survival.ten,
+                  data = survival.hya,
                   prior = priors,
-                  sample_prior = 'only',
+                  sample_prior = 'yes',
                   iter = 5000,
                   warmup = 2500,
                   chains = 3, cores = 3,
@@ -124,7 +121,7 @@ survival.brm %>%
     plot(points = TRUE)
 ```
 
-rerun model with posterior
+rerun model
 ```{r}
 survival.brm2 <- update(survival.brm,
                       sample_prior = 'yes',
@@ -134,12 +131,12 @@ survival.brm2 <- update(survival.brm,
 
 updated conditional effects
 ```{r}
-ce_survival_ten<- survival.brm2 %>%
+ce_survival_hya<- survival.brm2 %>%
     conditional_effects() %>%
     plot(points = TRUE)
-ce_survival_ten
-ce_survival_ten<- ce_survival_ten$`Population:Temperature`$data |>
-  mutate(Species = "A. kenti")
+ce_survival_hya
+ce_survival_hya<- ce_survival_hya$`Population:Temperature`$data |>
+  mutate(Species = "A. hyacinthus")
 ```
 
 plot conditional effects
@@ -149,7 +146,7 @@ pal <- wes_palette("Zissou1", 5, type = "discrete")
 scalesize <- function(x) sprintf("%.1f", x)
 
 #plot survival
-survival_ten_plot1<- ce_survival_ten |>
+survival_hya_plot1<- ce_survival_hya |>
   ggplot(aes(x=Population, y=estimate__, shape=Temperature, color = Temperature)) +
   geom_pointrange(aes(ymin=lower__, ymax=upper__, color=Temperature), position=position_dodge(width=0.2))+
   scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.2), labels = scalesize)+
@@ -165,7 +162,7 @@ survival_ten_plot1<- ce_survival_ten |>
         axis.text.x = element_text(angle = 90)
   #      axis.text.y = element_text(angle = 90)
         )
-survival_ten_plot1
+survival_hya_plot1
 ```
 
 View prior and posterior
@@ -193,7 +190,7 @@ Effective sample size
 survival.brm2$fit |> stan_ess()
 ```
 
-Denisty overlay
+Density overlay
 ```{r}
 survival.brm2 |> pp_check(type = 'dens_overlay', nsamples = 250)
 ```
@@ -228,26 +225,28 @@ survival.brm2 |>
 Probability scale
 ```{r}
 survival.brm2 |>
-  emmeans(~Population* Temperature, type = "response")
+  emmeans(~Population * Temperature, type = "response")
 ```
 
 Planned contrast:
+Arlington
 Davies
-Jewell
+Martin
 Palms
-Parke
+Wood
 
 ```{r}
 cmat=cbind(
-  "Central vs North" = c(0, 0, 0, 0, -1/2, 1/2, -1/2, 1/2),
-  "Davies" = c(-1, 0, 0, 0, 1, 0, 0, 0),
-  "Jewell" = c(0, -1, 0, 0, 0, 1, 0, 0),
-  "Palms" = c(0, 0, -1, 0, 0, 0, 1, 0),
-  "Parke" = c(0, 0, 0, -1, 0, 0, 0, 1)
+  "Central vs North" = c(0, 0, 0, 0, 0, -1/3, -1/3, 1/2, -1/3, 1/2),
+  "Arlington" = c(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0),
+  "Davies" = c(0, -1, 0, 0, 0, 0, 1, 0, 0, 0),
+  "Martin" = c(0, 0, -1, 0, 0, 0, 0, 1, 0, 0),
+  "Palms" = c(0, 0, 0, -1, 0, 0, 0, 0, 1, 0),
+  "Wood" = c(0, 0, 0, 0, -1, 0, 0, 0, 0, 1)
 )
 
 survival.em<- survival.brm2 |>
-  emmeans(~Population* Temperature, type = 'response') |>
+  emmeans(~Population * Temperature, type = 'response') |>
   contrast(method=list(cmat)) |>
   gather_emmeans_draws() |>
   mutate(across(everything(), exp)) |>
@@ -260,6 +259,7 @@ survival.em
 ```
 
 #Plot
+get variables
 ```{r}
 survival.brm2 %>% get_variables()
 ```
@@ -282,12 +282,11 @@ survival.brm2 %>%
 ####
 Hot only
 ```{r}
-survival_hot <- survival.ten |>
+survival_hot <- survival.hya |>
   filter(Temperature == "Hot")
 ```
 
 # Fit the model
-## Random intercept
 form
 ```{r}
 survival.form <- bf(Survival | trials(1) ~ Population + (1|Tank),
@@ -297,9 +296,9 @@ survival.form <- bf(Survival | trials(1) ~ Population + (1|Tank),
 priors
 ```{r fitModel2h1, results='markdown', eval=TRUE, mhidden=TRUE, cache=TRUE}
 priors <-
-    prior(normal(0, 2.5), class = 'Intercept') +
-    prior(normal(0, 2), class = 'b') +
-    prior(student_t(3, 0, 2.5), class = 'sd') 
+    prior(normal(0, 1.7), class = 'Intercept') +
+    prior(normal(0, 1.7), class = 'b') +
+    prior(student_t(3, 0, 1.7), class = 'sd') 
 ```
 
 run model- n
@@ -318,14 +317,14 @@ survival.brm3 <- brm(survival.form,
                   )
 ```
 
-updated conditional effects
+conditional effects
 ```{r}
 survival.brm3 %>%
     conditional_effects() %>%
     plot(points = TRUE)
 ```
 
-View prior and posterior
+View priors and posteriors
 ```{r}
 survival.brm3 %>% SUYR_prior_and_posterior()
 ```
@@ -389,15 +388,14 @@ survival.brm3 |>
 ```
 
 Planned contrast:
-
+Arlington
 Davies
-Jewell
+Martin
 Palms
-Parke
-
+Wood
 ```{r}
 cmat=cbind(
-  "South vs North" = c(-1/2, 1/2, -1/2, 1/2)
+  "Central vs North" = c(-1/3, -1/3, 1/2, -1/3, 1/2)
 )
 
 survival.em<- survival.brm3 |>
@@ -406,7 +404,7 @@ survival.em<- survival.brm3 |>
   gather_emmeans_draws() |>
   mutate(across(everything(), exp)) |>
 #on odds ratio scale
-  summarise(median_hdci(.value),
+  dplyr::summarise(median_hdci(.value),
             Pl = mean(.value < 1),
             Pg = mean(.value > 1)
             )

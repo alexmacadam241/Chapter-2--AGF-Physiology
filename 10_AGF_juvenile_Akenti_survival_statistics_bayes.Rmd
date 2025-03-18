@@ -1,5 +1,5 @@
 ---
-title: "Physiology- A. kenti juvenile survival"
+title: "10_AGF_juvenile_Akenti_survival_statistics_ bayes"
 author: "Alex Macadam"
 date: "2023-10-21"
 output: html_document
@@ -39,7 +39,7 @@ source('helperFunctions.R')
 
 ```{r}
 #load data
-survival.hot <- read.csv("Juvenile-survival-2020.csv", header=T, fileEncoding="UTF-8-BOM") |>
+survival <- read.csv("data/Juvenile-survival-2020.csv", header=T, fileEncoding="UTF-8-BOM") |>
   mutate(Family = factor(Family),
          Species = factor(Species),
          Temp = factor(Temp),
@@ -54,7 +54,9 @@ survival.hot <- read.csv("Juvenile-survival-2020.csv", header=T, fileEncoding="U
          RegionCross = factor(RegionCross),
          popcross = factor(popcross)
          ) |>
-  filter(Timepoint == "6", Crosstype == "Individual Cross", Temp == "HOT")
+  filter(Timepoint == "6", Crosstype == "Individual Cross")
+
+survival.hot <- survival |> filter(Temp == "HOT")
 ```
 
 # Fit the model
@@ -74,8 +76,8 @@ priors <-
 
 run model
 ```{r}
-survival.brm4 <- brm(survival.form, 
-                  data = survival_hot,
+survival.brm <- brm(survival.form, 
+                  data = survival.hot,
                   prior = priors,
                   sample_prior = 'yes',
                   iter = 5000,
@@ -177,20 +179,13 @@ Planned contrast:
  SwitzerxSwitzer
 ```{r}
 cmat=cbind(
-  "Pure vs Hybrid" = c(-1/5, 1/5, -1/5, 1/5, 1/5, -1/5, 1/5, -1/5, 1/5, -1/5),
   "PureSouth vs Hybrid" = c(-1/3, 1/4, 0, 1/4, -1/3, -1/3, 1/4, 0, 1/4, 0),
-  "PureSouth vs Hybrid 2" = c(-1/2, 1/4, 0, 1/4, 0, -1/2, 1/4, 0, 1/4, 0),
   "PureNorth vs Hybrid" = c(0, 1/4, -1/4, 1/4, -1/4, 0, 1/4, -1/4, 1/4, -1/4),
-  "South v North" = c(-1/3, 0, 1/3, 0, -1/3, -1/3, 0, 1/3, 0, 1/3),
-  "Dav vs DavHyb" = c(-1, 1/3, 0, 0, 0, 0, 1/3, 0, 1/3, 0),
-  "Pal vs PalHyb" = c(0, 0, 0, 1, 0, -1, 0, 0, 0, 0),
+  "Central v North" = c(-1/3, 0, 1/3, 0, -1/3, -1/3, 0, 1/3, 0, 1/3),
   "Dav vs JewDav" = c(-1, 1, 0, 0, 0, 0, 0, 0, 0, 0),
   "Pal vs JewPal" = c(0, 0, 0, 1, 0, -1, 0, 0, 0, 0),
   "Dav vs ParDav" = c(-1, 0, 0, 0, 0, 0, 1, 0, 0, 0),
-  "Dav vs SwiDav" = c(-1, 0, 0, 0, 0, 0, 0, 0, 1, 0),
-  "JewxJew vs JewxDav" = c(0, 1, -1, 0, 0, 0, 0, 0, 0, 0),
-  "JewxJew vs JewxPal" = c(0, 0, -1, 1, 0, 0, 0, 0, 0, 0),
-  "Pure vs JewHyb" = c(-1/2, 1/2, 0, 1/2, 0, -1/2, 0, 0, 0, 0)
+  "Dav vs SwiDav" = c(-1, 0, 0, 0, 0, 0, 0, 0, 1, 0)
 )
 ```
 
@@ -232,7 +227,7 @@ surv.plot
 By Symbionts 
 form
 ```{r}
-survival.form <- bf(Survival | trials(1) ~ Treatment + (1|Tank),
+survival.form <- bf(Survival | trials(1) ~ Treatment * Temp + (1|Tank),
                   family=binomial(link='logit'))
 ```
 
@@ -247,7 +242,7 @@ priors <-
 run model
 ```{r}
 survival.brm3 <- brm(survival.form, 
-                  data = survival.hot,
+                  data = survival,
                   prior = priors,
                   sample_prior = 'yes',
                   iter = 5000,
@@ -315,13 +310,43 @@ survival.brm3 %>%
 
 Probability scale
 ```{r}
-survival.brm4 |>
-  emmeans(~popcross, type = "response")
+survival.brm3 |>
+  emmeans(~Treatment * Temp, type = "response")
+```
+
+Planned contrast:
+D1 amb
+Sed amb
+SS amb
+D1 hot
+Sed hot
+SS hot
+
+```{r}
+cmat=cbind(
+  "D1" = c(-1, 0, 0, 1, 0, 0),
+  "SS" = c(0, -1, 0, 0, 1, 0),
+  "Sed" = c(0, 0, -1, 0, 0, 1)
+)
+```
+
+```{r}
+survival.em<- survival.brm3 |>
+  emmeans(~Treatment * Temp, type = 'response') |>
+  contrast(method=list(cmat)) |>
+  gather_emmeans_draws() |>
+  mutate(across(everything(), exp)) |>
+#on odds ratio scale
+  dplyr::summarise(median_hdci(.value),
+            Pl = mean(.value < 1),
+            Pg = mean(.value > 1)
+            )
+survival.em
 ```
 
 ```{r}
 surv.plot<- survival.brm3 %>%
-  emmeans(~Treatment) %>%
+  emmeans(~Treatment * Temp) %>%
   gather_emmeans_draws() %>%
     ggplot() +
   #geom_vline(xintercept = 0, linetype = "dashed") +

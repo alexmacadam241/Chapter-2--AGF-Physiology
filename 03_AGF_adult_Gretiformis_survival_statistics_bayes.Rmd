@@ -1,5 +1,5 @@
 ---
-title: "G. retiformis Adult survival statistics- bayes"
+title: "03_AGF_adult_Gretiformis_survival_statistics_ bayes"
 author: "Alex Macadam"
 date: "2023-11-23"
 output: html_document
@@ -34,7 +34,7 @@ library(DHARMa)
 library(ggridges)
 library(easystats)     #framework for stats, modelling and visualisation
 library(patchwork)
-source('/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/code/helperFunctions.R')
+source('helperFunctions.R')
 
 theme_Publication <- function(base_size=14, base_family="helvetica") {
       library(grid)
@@ -69,7 +69,7 @@ theme_Publication <- function(base_size=14, base_family="helvetica") {
 
 ```{r}
 # Read in data
-survival.gon <- read.csv('/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/Adult-survival.csv', header=T) |>
+survival.gon <- read.csv('data/Adult-survival.csv', header=T) |>
   filter(Species == "Goniastrea", Timepoint == "4") |> #remove other species data
   mutate(Survival=as.numeric(Survival), Bleaching_D=as.numeric(Bleaching_D), TissueArea_cm2=as.numeric(TissueArea_cm2)) |> #format columns
   mutate(Tank = factor(Tank),

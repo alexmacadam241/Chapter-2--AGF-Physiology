@@ -1,7 +1,7 @@
 ---
-title: "Physiology- A. kenti survival statistics- bayes"
+title: "08_AGF_larvae_Ahyacinthus_survival_statistics_ bayes"
 author: "Alex Macadam"
-date: "2023-10-19"
+date: "2023-10-23"
 output: html_document
 ---
 
@@ -39,7 +39,7 @@ source('helperFunctions.R')
 
 ```{r}
 #load data
-survival.hot <- read.csv("Larvae-survival-2020.csv", header=T, fileEncoding="UTF-8-BOM") |>
+survival_hot <- read.csv("data/Larvae-survival-2021.csv", header=T, fileEncoding="UTF-8-BOM") |>
   mutate(Family = factor(Family),
          Temp = factor(Temp),
          Treatment = factor(Treatment),
@@ -49,32 +49,33 @@ survival.hot <- read.csv("Larvae-survival-2020.csv", header=T, fileEncoding="UTF
          Cone = factor(Cone),
          Culture = factor(Culture),
          popcross = factor(popcross),
-         Region_cross = factor(Region_cross),
          BoatID = factor(BoatID)
          ) |>
-  filter(Timepoint == "2", Year==2020, CrossType != 'BulkCross', Species == "A.ten", Treatment == "Hot") |> #keep only Kenti and individual crosses
+  filter(Timepoint == "2", Treatment == "Hot") |> 
   drop_na(No.LarvaeIn)  # drop nas from the start
 ```
 
 # Fit the model
 form
 ```{r}
-survival.form <- bf(Survival | trials(1) ~ popcross + (1|BoatID),
+survival.form <- bf(Survival | trials(1) ~ popcross + (popcross|BoatID),
                   family=binomial(link='logit'))
 ```
 
 priors
-```{r fitModel2h1, results='markdown', eval=TRUE, mhidden=TRUE, cache=TRUE}
+```{r}
 priors <-
-    prior(normal(0, 1.5), class = 'Intercept') +
-    prior(normal(0, 1.5), class = 'b') +
-    prior(student_t(3, 0, 1.5), class = 'sd') 
+    prior(normal(0, 1.7), class = 'Intercept') +
+    prior(normal(0, 3), class = 'b') +
+    prior(student_t(3,0,1.7), class = 'sd', coef = "Intercept", group = "BoatID") +
+    prior(student_t(3, 0, 1.7), class = 'sd') +
+    prior(lkj_corr_cholesky(1), class = 'cor')
 ```
 
 run model
 ```{r}
 survival.brm <- brm(survival.form, 
-                  data = survival.hot,
+                  data = survival_hot,
                   prior = priors,
                   sample_prior = 'yes',
                   iter = 5000,
@@ -121,13 +122,13 @@ Dharma residuals
 ```{r}
 survival.resids<- make_brms_dharma_res(survival.brm, integerResponse = FALSE)
 wrap_elements(~testUniformity(survival.resids)) +
-wrap_elements(~plotResiduals(survival.resids, form = factor(rep(1,nrow(survival.hot))))) +
+wrap_elements(~plotResiduals(survival.resids, form = factor(rep(1,nrow(survival_hot))))) +
 wrap_elements(~plotResiduals(survival.resids, quantreg = FALSE))+
 wrap_elements(~testDispersion(survival.resids))
 
 survival.resids<- make_brms_dharma_res(survival.brm, integerResponse = FALSE)
 testUniformity(survival.resids)
-plotResiduals(survival.resids, form = factor(rep(1,nrow(survival.hot))))
+plotResiduals(survival.resids, form = factor(rep(1,nrow(survival_hot))))
 plotResiduals(survival.resids, quantreg = FALSE)
 testDispersion(survival.resids)
 ```
@@ -164,26 +165,29 @@ survival.brm |>
 ```
 
 Planned contrast:
-                    Pure vs Hybrid |   PureSouth vs Hybrid  | PureSouth vs Hybrid 2 | PureNorth vs Hybrid | South v North
-DaviesxDavies             -1/5            -1/3                     -1/2                     0                  -1/3 
-JewellxDavies              1/5             1/4                      1/4                     1/4                 0
-JewellxJewell             -1/5             0                        0                      -1/4                 1/3 
-JewellxPalms               1/5             1/4                      1/4                     1/4                 0
-PalmsxDavies               1/5            -1/3                      0                      -1/4                -1/3
-PalmsxPalms               -1/5            -1/3                     -1/2                     0                  -1/3
-ParkexDavies               1/5             1/4                      1/4                     1/4                 0
-ParkexParke               -1/5             0                        0                      -1/4                 1/3
-SwitzerxDavies             1/5             1/4                      1/4                     1/4                 0
-SwitzerxSwitzer           -1/5             0                        0                      -1/4                 1/3
+                      Pure vs Hybrid | PureSouth vs Hybrid | PureNorth vs Hybrid | Pure Dav vs hybrid Dav | Mart mom vs Mart dad | Hot vs cool reef
+ArlingtonxArlington          -1/3             -1/2                      0              0                         0                   1/2
+ArlingtonxDavies              1/10             1/7                      1/8            0                         0                   0
+DaviesxArlington              1/10             1/7                      1/8            0                         0                   0
+DaviesxDavies                -1/3             -1/2                      0             -1                         0                   1/2
+DaviesxMartin                 1/10             1/7                      1/8            1/2                       1/2                 0
+MartinxArlington              1/10             1/7                      1/8            0                        -1/2                 0
+MartinxDavies                 1/10             1/7                      1/8            1/2                      -1/2                 0
+MartinxMartin                -1/3              0                       -1/3            0                         0                  -1/3
+MartinxPalms                  1/10             1/7                      1/8            0                        -1/2                 0
+MartinxWood                   1/10             0                       -1/3            0                        -1/2                -1/3
+PalmsxMartin                  1/10             1/7                      1/8            0                         1/2                 0
+WoodxArlington                1/10             0                        1/8            0                         0                   0
+WoodxMartin                   1/10             0                       -1/3            0                         0                  -1/3
 
 ```{r}
 cmat=cbind(
-  "Central v North" = c(-1/3, 0, 1/3, 0, -1/3, -1/3, 0, 1/3, 0, 1/3),
-  "PureCentral vs Hybrid" = c(-1/3, 1/4, 0, 1/4, -1/3, -1/3, 1/4, 0, 1/4, 0),
-  "PureCentral vs Hybrid 2" = c(-1/2, 1/4, 0, 1/4, 0, -1/2, 1/4, 0, 1/4, 0),
-  "PureNorth vs Hybrid" = c(0, 1/4, -1/4, 1/4, -1/4, 0, 1/4, -1/4, 1/4, -1/4),
-  "Dav vs DavHyb" = c(-1, 1/3, 0, 0, 0, 0, 1/3, 0, 1/3, 0),
-  "Pal vs PalHyb" = c(0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
+  "Pure vs Hybrid" = c(-1/3, 1/10, 1/10, -1/3, 1/10, 1/10, 1/10, -1/3, 1/10, 1/10, 1/10, 1/10, 1/10),
+  "PureCentral vs Hybrid" = c(-1/2, 1/7, 1/7, -1/2, 1/7, 1/7, 1/7, 0, 1/7, 0, 1/7, 0, 0),
+  "PureNorth vs Hybrid" = c(0, 1/8, 1/8, 0, 1/8, 1/8, 1/8, -1/3, 1/8, -1/3, 1/8, 1/8, -1/3),
+  "Pure Dav vs hybrid Dav" = c(0, 0, 0, -1, 1/2, 0, 1/2, 0, 0, 0, 0, 0, 0),
+  "Mart mom vs Mart dad" = c(0, 0, 0, 0, 1/2, -1/2, -1/2, 0, -1/2, -1/2, 1/2, 0, 0),
+  "North vs Central reef" = c(1/2, 0, 0, 1/2, 0, 0, 0, -1/3, 0, -1/3, 0, 0, -1/3)
 )
 ```
 
@@ -221,8 +225,39 @@ surv.plot<- survival.brm %>%
 surv.plot
 ```
 
+#Plot
+```{r}
+surv.plot<- survival.brm %>%
+  emmeans(~popcross) %>%
+  gather_emmeans_draws() %>%
+    ggplot() +
+  #geom_vline(xintercept = 0, linetype = "dashed") +
+  stat_slab(aes(
+    x = .value, y = popcross,
+    fill = stat(ggdist::cut_cdf_qi(cdf,
+      .width = c(0.5, 0.8, 0.95),
+      labels = scales::percent_format()
+    ))
+  ), color = "black") +
+  scale_fill_brewer("Interval", direction = -1, na.translate = FALSE) +
+  theme_classic() +
+  labs(x = "Survival", y = "Treatment")
+surv.plot
+```
+
 ######
 By region cross
+```{r}
+survival_hot <- survival_hot %>%
+  mutate(Region_cross = case_when(
+    popcross %in% c("ArlingtonxArlington", "ArlingtonxDavies", "DaviesxArlington", "DaviesxDavies") ~ "central",
+    popcross %in% c("DaviesxMartin", "MartinxArlington", "MartinxDavies", "MartinxPalms", 
+                    "PalmsxMartin", "WoodxArlington") ~ "hybrid",
+    popcross %in% c("MartinxMartin", "MartinxWood", "WoodxMartin") ~ "north",
+    TRUE ~ NA_character_  # Assign NA if no match
+  ))
+```
+
 form
 ```{r}
 survival.form <- bf(Survival | trials(1) ~ Region_cross + (1|BoatID),
@@ -240,7 +275,7 @@ priors <-
 run model- n
 ```{r}
 survival.brm4 <- brm(survival.form, 
-                  data = survival.hot,
+                  data = survival_hot,
                   prior = priors,
                   sample_prior = 'yes',
                   iter = 5000,
@@ -287,7 +322,7 @@ Dharma residuals
 ```{r}
 survival.resids<- make_brms_dharma_res(survival.brm4, integerResponse = FALSE)
 wrap_elements(~testUniformity(survival.resids)) +
-wrap_elements(~plotResiduals(survival.resids, form = factor(rep(1,nrow(survival.hot))))) +
+wrap_elements(~plotResiduals(survival.resids, form = factor(rep(1,nrow(survival))))) +
 wrap_elements(~plotResiduals(survival.resids, quantreg = FALSE))+
 wrap_elements(~testDispersion(survival.resids))
 

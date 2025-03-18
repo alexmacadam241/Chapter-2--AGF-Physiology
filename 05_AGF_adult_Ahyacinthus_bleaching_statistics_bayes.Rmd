@@ -1,5 +1,5 @@
 ---
-title: "A. kenti Adult bleaching statistics- bayes"
+title: "05_AGF_adult_Ahyacinthus_bleaching_statistics_ bayes"
 author: "Alex Macadam"
 date: "2023-11-23"
 output: html_document
@@ -35,7 +35,7 @@ library(ggridges)
 library(easystats)     #framework for stats, modelling and visualisation
 library(patchwork)
 library(wesanderson)
-source('/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/code/helperFunctions.R')
+source('helperFunctions.R')
 
 theme_Publication <- function(base_size=14, base_family="helvetica") {
       library(grid)
@@ -70,15 +70,14 @@ theme_Publication <- function(base_size=14, base_family="helvetica") {
 
 Read in data
 ```{r}
-colour <- read.csv('/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/Adult-bleaching.csv', header=T) |>
+colour <- read.csv('data/Adult-bleaching-yr2.csv', header=T) |>
   mutate(Bleaching_D=as.numeric(Bleaching_D)) |>
-  filter(Species == "Acropora tenuis") |>
   mutate(Tank = factor(Tank),
                          Position = factor(Position),
                          Stick = factor(Stick),
                          Genotype = factor(Genotype),
                          Temperature = factor(Temperature, levels=c('Ambient', 'Hot')),
-                         Population = factor(Population, levels=c('Davies','Jewell','Palms','Parke','Switzer')),
+                         Population = factor(Population, levels=c('Davies','Palms','Arlington','Martin','Wood')),
                          Timepoint = factor(Timepoint),
                          Species = factor(Species)
                         ) # change columns to factors
@@ -98,8 +97,8 @@ colour.form <- bf(Bleaching_D ~ Population * Temperature + (1|Tank),
 
 priors
 ```{r fitModel2h1, results='markdown', eval=TRUE, mhidden=TRUE, cache=TRUE}
-priors<- prior("normal(2, 6)", class = "Intercept") +
-    prior("normal(0, 4)", class = "b") +
+priors<- prior("normal(2, 2.5)", class = "Intercept") +
+    prior("normal(0, 3)", class = "b") +
     prior("normal(0, 0.5)", class = "sd", group = "Tank") +
     prior(student_t(3, 0, 2.5), class = 'sigma') +
     prior(cauchy(0,2), class = 'sd')
@@ -138,12 +137,12 @@ T1.brm2 <- update(T1.brm,
 
 updated conditional effects
 ```{r}
-ce_T1_ten<- T1.brm2 %>%
+ce_T1_hya<- T1.brm2 %>%
     conditional_effects() %>%
     plot(points = TRUE)
-ce_T1_ten
-ce_T1_ten<- ce_T1_ten$`Population:Temperature`$data |>
-  mutate(Species = "A. kenti", Timepoint = "1")
+ce_T1_hya
+ce_T1_hya<- ce_T1_hya$`Population:Temperature`$data |>
+  mutate(Species = "A. hyacinthus", Timepoint = "1")
 ```
 
 plot conditional effects
@@ -153,7 +152,7 @@ pal <- wes_palette("Zissou1", 5, type = "discrete")
 scalesize <- function(x) sprintf("%.1f", x)
 
 #plot col
-T1_ten_plot1<- ce_T1_ten |>
+T1_hya_plot1<- ce_T1_hya |>
   ggplot(aes(x=Population, y=estimate__, shape=Temperature, color = Temperature)) +
   geom_pointrange(aes(ymin=lower__, ymax=upper__, color=Temperature), position=position_dodge(width=0.2))+
   scale_y_continuous(limits=c(0,6), breaks=seq(0,6,1), labels = scalesize)+
@@ -169,7 +168,7 @@ T1_ten_plot1<- ce_T1_ten |>
         axis.text.x = element_text(angle = 90)
   #      axis.text.y = element_text(angle = 90)
         )
-T1_ten_plot1
+T1_hya_plot1
 ```
 
 View prior and posterior
@@ -237,17 +236,19 @@ T1.brm2 |>
 
 Planned contrast:
 Davies
-Jewell
 Palms
-Parke
+Arlington
+Martin
+Wood
 
 ```{r}
 cmat=cbind(
-  "Central vs North" = c(0, 0, 0, 0, -1/2, 1/2, -1/2, 1/2),
-  "Davies" = c(-1, 0, 0, 0, 1, 0, 0, 0),
-  "Jewell" = c(0, -1, 0, 0, 0, 1, 0, 0),
-  "Palms" = c(0, 0, -1, 0, 0, 0, 1, 0),
-  "Parke" = c(0, 0, 0, -1, 0, 0, 0, 1)
+  "Central vs North" = c(0, 0, 0, 0, 0, -1/3, -1/3, -1/3, 1/2, 1/2),
+  "Davies" = c(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0),
+  "Palms" = c(0, -1, 0, 0, 0, 0, 1, 0, 0, 0),
+  "Arlington" = c(0, 0, -1, 0, 0, 0, 0, 1, 0, 0),
+  "Martin" = c(0, 0, 0, -1, 0, 0, 0, 0, 1, 0),
+  "Wood" = c(0, 0, 0, 0, -1, 0, 0, 0, 0, 1)
 )
 
 T1.em<- T1.brm2 |>
@@ -295,8 +296,8 @@ colour.form <- bf(Bleaching_D ~ Population * Temperature + (1|Tank),
 
 priors
 ```{r fitModel2h1, results='markdown', eval=TRUE, mhidden=TRUE, cache=TRUE}
-priors<- prior("normal(2, 6)", class = "Intercept") +
-    prior("normal(0, 4)", class = "b") +
+priors<- prior("normal(2, 2.5)", class = "Intercept") +
+    prior("normal(0, 3)", class = "b") +
     prior("normal(0, 0.5)", class = "sd", group = "Tank") +
     prior(student_t(3, 0, 2.5), class = 'sigma') +
     prior(cauchy(0,2), class = 'sd')
@@ -335,12 +336,12 @@ T3.brm2 <- update(T3.brm,
 
 updated conditional effects
 ```{r}
-ce_T3_ten<- T3.brm2 %>%
+ce_T3_hya<- T3.brm2 %>%
     conditional_effects() %>%
     plot(points = TRUE)
-ce_T3_ten
-ce_T3_ten<- ce_T3_ten$`Population:Temperature`$data |>
-  mutate(Species = "A. kenti", Timepoint = "3")
+ce_T3_hya
+ce_T3_hya<- ce_T3_hya$`Population:Temperature`$data |>
+  mutate(Species = "A. hyacinthus", Timepoint = "3")
 ```
 
 plot conditional effects
@@ -350,7 +351,7 @@ pal <- wes_palette("Zissou1", 5, type = "discrete")
 scalesize <- function(x) sprintf("%.1f", x)
 
 #plot col
-T3_ten_plot1<- ce_T3_ten |>
+T3_hya_plot1<- ce_T3_hya |>
   ggplot(aes(x=Population, y=estimate__, shape=Temperature, color = Temperature)) +
   geom_pointrange(aes(ymin=lower__, ymax=upper__, color=Temperature), position=position_dodge(width=0.2))+
   scale_y_continuous(limits=c(0,6), breaks=seq(0,6,1), labels = scalesize)+
@@ -366,7 +367,7 @@ T3_ten_plot1<- ce_T3_ten |>
         axis.text.x = element_text(angle = 90)
   #      axis.text.y = element_text(angle = 90)
         )
-T3_ten_plot1
+T3_hya_plot1
 ```
 
 View prior and posterior
@@ -396,7 +397,7 @@ T3.brm2$fit |> stan_ess()
 
 Denisty overlay
 ```{r}
-T3.brm2 |> pp_check(type = 'dens_overlay', nsamples = 250)
+T1.brm2 |> pp_check(type = 'dens_overlay', nsamples = 250)
 ```
 
 Dharma residuals
@@ -434,17 +435,19 @@ T3.brm2 |>
 
 Planned contrast:
 Davies
-Jewell
 Palms
-Parke
+Arlington
+Martin
+Wood
 
 ```{r}
 cmat=cbind(
-  "Central vs North" = c(0, 0, 0, 0, -1/2, 1/2, -1/2, 1/2),
-  "Davies" = c(-1, 0, 0, 0, 1, 0, 0, 0),
-  "Jewell" = c(0, -1, 0, 0, 0, 1, 0, 0),
-  "Palms" = c(0, 0, -1, 0, 0, 0, 1, 0),
-  "Parke" = c(0, 0, 0, -1, 0, 0, 0, 1)
+  "Central vs North" = c(0, 0, 0, 0, 0, -1/3, -1/3, -1/3, 1/2, 1/2),
+  "Davies" = c(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0),
+  "Palms" = c(0, -1, 0, 0, 0, 0, 1, 0, 0, 0),
+  "Arlington" = c(0, 0, -1, 0, 0, 0, 0, 1, 0, 0),
+  "Martin" = c(0, 0, 0, -1, 0, 0, 0, 0, 1, 0),
+  "Wood" = c(0, 0, 0, 0, -1, 0, 0, 0, 0, 1)
 )
 
 T3.em<- T3.brm2 |>
@@ -480,7 +483,7 @@ T3.brm2 %>%
   scale_fill_brewer("Interval", direction = -1, na.translate = FALSE)
 ```
 
-##############
+####
 Hot only
 ```{r}
 col_hot <- colour |>
@@ -599,7 +602,7 @@ Parke
 
 ```{r}
 cmat=cbind(
-  "South vs North" = c(-1/2, 1/2, -1/2, 1/2)
+  "South vs North" = c(-1/2, -1/2, -1/2, 1/2, 1/2)
 )
 
 col.em<- col.brm3 |>
@@ -609,8 +612,8 @@ col.em<- col.brm3 |>
   mutate(across(everything(), exp)) |>
 #on odds ratio scale
   dplyr::summarise(median_hdci(.value),
-            Pl = mean(.value < 1),
-            Pg = mean(.value > 1)
+            Pl = mean(.value < 0),
+            Pg = mean(.value > 0)
             )
 col.em
 ```

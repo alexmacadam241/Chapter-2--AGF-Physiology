@@ -1,7 +1,7 @@
 ---
-title: "Physiology- A. hyacinthus juvenile survival"
+title: "09_AGF_larvae_Gretiformis_survival_statistics_ bayes"
 author: "Alex Macadam"
-date: "2023-10-24"
+date: "2023-10-23"
 output: html_document
 ---
 
@@ -39,41 +39,41 @@ source('helperFunctions.R')
 
 ```{r}
 #load data
-survival_hot <- read.csv("Juvenile-survival-2021.csv", header=T, fileEncoding="UTF-8-BOM") |>
+survival.hot <- read.csv("data/Larvae-survival-2020.csv", header=T, fileEncoding="UTF-8-BOM") |>
   mutate(Family = factor(Family),
-         Species = factor(Species),
          Temp = factor(Temp),
-         Tank = factor(Tank),
-         Timepoint = factor(Timepoint),
-         Cassette = factor(Cassette),
-         Plate.Slide = factor(Plate.Slide),
          Treatment = factor(Treatment),
          Cone = factor(Cone),
          CrossType = factor(CrossType),
-         popcross = factor(popcross)
+         BoatID = factor(BoatID),
+         Cone = factor(Cone),
+         Culture = factor(Culture),
+         popcross = factor(popcross),
+         BoatID = factor(BoatID)
          ) |>
-  filter(Timepoint == "6", Temp == "HOT")
+  filter(Timepoint == "2", Year==2020, Species == "G.ret", Treatment == "Hot") |> 
+  drop_na(No.LarvaeIn)  # drop nas from the start
 ```
 
 # Fit the model
 form
 ```{r}
-survival.form <- bf(Survival | trials(1) ~ popcross + (1|Tank),
+survival.form <- bf(Survival | trials(1) ~ popcross + (1|BoatID),
                   family=binomial(link='logit'))
 ```
 
 priors
 ```{r fitModel2h1, results='markdown', eval=TRUE, mhidden=TRUE, cache=TRUE}
 priors <-
-    prior(normal(0, 1.7), class = 'Intercept') +
-    prior(normal(0, 1.7), class = 'b') +
-    prior(student_t(3, 0, 1.7), class = 'sd') 
+    prior(normal(0, 1.5), class = 'Intercept') +
+    prior(normal(0, 1.5), class = 'b') +
+    prior(student_t(3, 0, 1.5), class = 'sd') 
 ```
 
 run model
 ```{r}
 survival.brm <- brm(survival.form, 
-                  data = survival_hot,
+                  data = survival.hot,
                   prior = priors,
                   sample_prior = 'yes',
                   iter = 5000,
@@ -85,7 +85,6 @@ survival.brm <- brm(survival.form,
                   backend = "cmdstanr"
                   )
 ```
-
 View prior and posterior
 ```{r}
 survival.brm %>% SUYR_prior_and_posterior()
@@ -163,35 +162,30 @@ survival.brm |>
 ```
 
 Planned contrast:
-DAxDA
-DAxMA  
-MAxAR
-MAxDA
-MAxMA
-MAxWD
-PIxMA
-WDxMA
+                            Jewmum_vs_Swimum |   JewPar_vs_Swimum  | Jewmum_vs_Jewdad
+JewellBulkxParkeBulk               -1/2            -1/4                     -1/2                   
+JewellBulkxSwitzerBulk             -1/2            -1/4                     -1/2                 
+ParkeBulkxJewellBulk                0              -1/4                      1/2                   
+ParkeBulkxSwitzerBulk               0              -1/4                      0                  
+SwitzerBulkxJewellBulk              1/2             1/2                      1/2                     
+SwitzerBulkxParkeBulk               1/2             1/2                      0                     
 
 ```{r}
 cmat=cbind(
-  "Pure vs Hybrid" = c(-1/2, 1/6, 1/6, 1/6, -1/2, 1/6, 1/6, 1/6),
-  "PureSouth vs Hybrid" = c(-1, 1/4, 1/4, 1/4, 0, 0, 1/4, 0),
-  "PureSouth vs Hybrid 2" = c(-1, 1/5, 1/5, 1/5, 0, 1/5, 1/5, 0),
-  "PureNorth vs Hybrid" = c(0, 1/4, 1/4, 1/4, -1, 0, 1/4, 0),
-  "PureNorth vs Hybrid2" = c(-1, 1/5, 1/5, 1/5, -1/2, 1/5, 1/5, -1/2),
-  "North vs South" = c(1, 0, 0, 0, -1, 0, 0, 0),
-  "North vs South2" = c(1, 0, 0, 0, -1/3, -1/3, 0, -1/3)
+  "Jewmum_vs_Swimum" = c(-0.5, -0.5, 0, 0, 0.5, 0.5),
+  "JewPar_vs_Swimum" = c(-0.25,-0.25,-0.25,-0.25,0.5,0.5),
+  "Jewmum_vs_Jewdad" = c(-0.5,-0.5,0.5,0,0.5,0)
 )
 ```
 
 ```{r}
-survival.em<- survival.brm4 |>
+survival.em<- survival.brm |>
   emmeans(~popcross, type = 'response') |>
   contrast(method=list(cmat)) |>
   gather_emmeans_draws() |>
   mutate(across(everything(), exp)) |>
 #on odds ratio scale
-  summarise(median_hdci(.value),
+  dplyr::summarise(median_hdci(.value),
             Pl = mean(.value < 1),
             Pg = mean(.value > 1)
             )
@@ -218,22 +212,22 @@ surv.plot<- survival.brm %>%
 surv.plot
 ```
 
-####
-By Region cross
+######
+By region cross
 ```{r}
-survival_hot <- survival_hot %>%
-  mutate(Region_cross = case_when(
-    popcross %in% c("ARLxARL", "ARLxDAV", "DAVxARL", "DAVxDAV") ~ "central",
-    popcross %in% c("DAVxMAR", "MARxARL", "MARxDAV", "MARxPAL", 
-                    "PALxMAR", "WOOxARL") ~ "hybrid",
-    popcross %in% c("MARxMAR", "MARxWOO", "WOOxMAR") ~ "north",
+survival.hot <- survival.hot %>%
+  mutate(Mom_cross = case_when(
+    popcross %in% c("ArlingtonxArlington", "ArlingtonxDavies", "DaviesxArlington", "DaviesxDavies") ~ "central",
+    popcross %in% c("DaviesxMartin", "MartinxArlington", "MartinxDavies", "MartinxPalms", 
+                    "PalmsxMartin", "WoodxArlington") ~ "hybrid",
+    popcross %in% c("MartinxMartin", "MartinxWood", "WoodxMartin") ~ "north",
     TRUE ~ NA_character_  # Assign NA if no match
   ))
 ```
 
 form
 ```{r}
-survival.form <- bf(Survival | trials(1) ~ Region_cross + (1|Tank),
+survival.form <- bf(Survival | trials(1) ~ Mom + (1|BoatID),
                   family=binomial(link='logit'))
 ```
 
@@ -248,7 +242,7 @@ priors <-
 run model
 ```{r}
 survival.brm4 <- brm(survival.form, 
-                  data = survival_hot,
+                  data = survival.hot,
                   prior = priors,
                   sample_prior = 'yes',
                   iter = 5000,
@@ -316,12 +310,12 @@ survival.brm4 %>%
 
 ```{r}
 surv.plot<- survival.brm4 %>%
-  emmeans(~Region_cross) %>%
+  emmeans(~Mom) %>%
   gather_emmeans_draws() %>%
     ggplot() +
   #geom_vline(xintercept = 0, linetype = "dashed") +
   stat_slab(aes(
-    x = .value, y = Region_cross,
+    x = .value, y = Mom,
     fill = stat(ggdist::cut_cdf_qi(cdf,
       .width = c(0.5, 0.8, 0.95),
       labels = scales::percent_format()

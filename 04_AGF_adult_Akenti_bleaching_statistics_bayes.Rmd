@@ -1,5 +1,5 @@
 ---
-title: "G. retiformis Adult bleaching statistics- bayes"
+title: "04_AGF_adult_Akenti_bleaching_statistics_ bayes"
 author: "Alex Macadam"
 date: "2023-11-23"
 output: html_document
@@ -35,7 +35,7 @@ library(ggridges)
 library(easystats)     #framework for stats, modelling and visualisation
 library(patchwork)
 library(wesanderson)
-source('/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/code/helperFunctions.R')
+source('helperFunctions.R')
 
 theme_Publication <- function(base_size=14, base_family="helvetica") {
       library(grid)
@@ -70,15 +70,15 @@ theme_Publication <- function(base_size=14, base_family="helvetica") {
 
 Read in data
 ```{r}
-colour <- read.csv('/Users/alexmacadam/Documents/GitHub/Chapter-2--AGF-Physiology/data/Adult-bleaching.csv', header=T) |>
+colour <- read.csv('data/Adult-bleaching.csv', header=T) |>
   mutate(Bleaching_D=as.numeric(Bleaching_D)) |>
-  filter(Species == "Goniastrea retiformis") |>
+  filter(Species == "Acropora tenuis") |>
   mutate(Tank = factor(Tank),
                          Position = factor(Position),
                          Stick = factor(Stick),
                          Genotype = factor(Genotype),
                          Temperature = factor(Temperature, levels=c('Ambient', 'Hot')),
-                         Population = factor(Population, levels=c('Jewell','Parke','Switzer')),
+                         Population = factor(Population, levels=c('Davies','Jewell','Palms','Parke','Switzer')),
                          Timepoint = factor(Timepoint),
                          Species = factor(Species)
                         ) # change columns to factors
@@ -138,12 +138,12 @@ T1.brm2 <- update(T1.brm,
 
 updated conditional effects
 ```{r}
-ce_T1_ret<- T1.brm2 %>%
+ce_T1_ten<- T1.brm2 %>%
     conditional_effects() %>%
     plot(points = TRUE)
-ce_T1_ret
-ce_T1_ret<- ce_T1_ret$`Population:Temperature`$data |>
-  mutate(Species = "G. retiformis", Timepoint = "1")
+ce_T1_ten
+ce_T1_ten<- ce_T1_ten$`Population:Temperature`$data |>
+  mutate(Species = "A. kenti", Timepoint = "1")
 ```
 
 plot conditional effects
@@ -153,7 +153,7 @@ pal <- wes_palette("Zissou1", 5, type = "discrete")
 scalesize <- function(x) sprintf("%.1f", x)
 
 #plot col
-T1_ret_plot1<- ce_T1_ret |>
+T1_ten_plot1<- ce_T1_ten |>
   ggplot(aes(x=Population, y=estimate__, shape=Temperature, color = Temperature)) +
   geom_pointrange(aes(ymin=lower__, ymax=upper__, color=Temperature), position=position_dodge(width=0.2))+
   scale_y_continuous(limits=c(0,6), breaks=seq(0,6,1), labels = scalesize)+
@@ -169,7 +169,7 @@ T1_ret_plot1<- ce_T1_ret |>
         axis.text.x = element_text(angle = 90)
   #      axis.text.y = element_text(angle = 90)
         )
-T1_ret_plot1
+T1_ten_plot1
 ```
 
 View prior and posterior
@@ -236,15 +236,18 @@ T1.brm2 |>
 ```
 
 Planned contrast:
+Davies
 Jewell
+Palms
 Parke
-Switzer
 
 ```{r}
 cmat=cbind(
-  "Jewell" = c(-1, 0, 0, 1, 0, 0),
-  "Parke" = c(0, -1, 0, 0, 1, 0),
-  "Switzer" = c(0, 0, -1, 0, 0, 1)
+  "Central vs North" = c(0, 0, 0, 0, -1/2, 1/2, -1/2, 1/2),
+  "Davies" = c(-1, 0, 0, 0, 1, 0, 0, 0),
+  "Jewell" = c(0, -1, 0, 0, 0, 1, 0, 0),
+  "Palms" = c(0, 0, -1, 0, 0, 0, 1, 0),
+  "Parke" = c(0, 0, 0, -1, 0, 0, 0, 1)
 )
 
 T1.em<- T1.brm2 |>
@@ -332,12 +335,12 @@ T3.brm2 <- update(T3.brm,
 
 updated conditional effects
 ```{r}
-ce_T3_ret<- T3.brm2 %>%
+ce_T3_ten<- T3.brm2 %>%
     conditional_effects() %>%
     plot(points = TRUE)
-ce_T3_ret
-ce_T3_ret<- ce_T3_ret$`Population:Temperature`$data |>
-  mutate(Species = "G. retiformis", Timepoint = "3")
+ce_T3_ten
+ce_T3_ten<- ce_T3_ten$`Population:Temperature`$data |>
+  mutate(Species = "A. kenti", Timepoint = "3")
 ```
 
 plot conditional effects
@@ -347,7 +350,7 @@ pal <- wes_palette("Zissou1", 5, type = "discrete")
 scalesize <- function(x) sprintf("%.1f", x)
 
 #plot col
-T3_ret_plot1<- ce_T3_ret |>
+T3_ten_plot1<- ce_T3_ten |>
   ggplot(aes(x=Population, y=estimate__, shape=Temperature, color = Temperature)) +
   geom_pointrange(aes(ymin=lower__, ymax=upper__, color=Temperature), position=position_dodge(width=0.2))+
   scale_y_continuous(limits=c(0,6), breaks=seq(0,6,1), labels = scalesize)+
@@ -363,7 +366,7 @@ T3_ret_plot1<- ce_T3_ret |>
         axis.text.x = element_text(angle = 90)
   #      axis.text.y = element_text(angle = 90)
         )
-T3_ret_plot1
+T3_ten_plot1
 ```
 
 View prior and posterior
@@ -430,15 +433,18 @@ T3.brm2 |>
 ```
 
 Planned contrast:
+Davies
 Jewell
+Palms
 Parke
-Switzer
 
 ```{r}
 cmat=cbind(
-  "Jewell" = c(-1, 0, 0, 1, 0, 0),
-  "Parke" = c(0, -1, 0, 0, 1, 0),
-  "Switzer" = c(0, 0, -1, 0, 0, 1)
+  "Central vs North" = c(0, 0, 0, 0, -1/2, 1/2, -1/2, 1/2),
+  "Davies" = c(-1, 0, 0, 0, 1, 0, 0, 0),
+  "Jewell" = c(0, -1, 0, 0, 0, 1, 0, 0),
+  "Palms" = c(0, 0, -1, 0, 0, 0, 1, 0),
+  "Parke" = c(0, 0, 0, -1, 0, 0, 0, 1)
 )
 
 T3.em<- T3.brm2 |>
@@ -474,7 +480,7 @@ T3.brm2 %>%
   scale_fill_brewer("Interval", direction = -1, na.translate = FALSE)
 ```
 
-####
+##############
 Hot only
 ```{r}
 col_hot <- colour |>
@@ -602,9 +608,9 @@ col.em<- col.brm3 |>
   gather_emmeans_draws() |>
   mutate(across(everything(), exp)) |>
 #on odds ratio scale
-  summarise(median_hdci(.value),
-            Pl = mean(.value < 0),
-            Pg = mean(.value > 0)
+  dplyr::summarise(median_hdci(.value),
+            Pl = mean(.value < 1),
+            Pg = mean(.value > 1)
             )
 col.em
 ```
@@ -632,50 +638,4 @@ surv.plot<- col.brm3 %>%
   theme_classic() +
   labs(x = "col", y = "Treatment")
 surv.plot
-```
-
-#####
-final plot
-```{r}
-ce_colour<- rbind(ce_T1_hya, ce_T1_ret, ce_T1_ten, ce_T3_hya, ce_T3_ret, ce_T3_ten) |>
-  mutate(Species = factor(Species, levels = c("A. kenti", "A. hyacinthus", "G. retiformis")))
-
-ten_col<- ce_colour |> filter(Species == "A. kenti") |>
-  ggplot() +
-  geom_errorbar(aes(x=Timepoint, ymin=lower__, ymax=upper__, color=Temperature), width=0.3, size=0.8, position=position_dodge(width=0.2)) +
-  geom_point(aes(x=Timepoint, y=estimate__, color=Temperature), size=2, position=position_dodge(width=0.2)) +
-  geom_line(aes(x=Timepoint, y=estimate__, colour=Temperature, group=Temperature), size=0.8, na.rm=TRUE, position=position_dodge(width=0.2)) +
-  scale_y_continuous(limits=c(1,7), breaks=seq(1,7,1), labels = scalesize) +
-  scale_color_manual(values=pal[c(1,5)]) +
-  ylab('Bleaching index score') + xlab('Day') +
-  facet_grid(cols=vars(Population), rows=vars(Species), space="free") +
-  theme_Publication()
-ten_col
-
-hya_col<- ce_colour |> filter(Species == "A. hyacinthus") |>
-  ggplot() +
-  geom_errorbar(aes(x=Timepoint, ymin=lower__, ymax=upper__, color=Temperature), width=0.3, size=0.8, position=position_dodge(width=0.2)) +
-  geom_point(aes(x=Timepoint, y=estimate__, color=Temperature), size=2, position=position_dodge(width=0.2)) +
-  geom_line(aes(x=Timepoint, y=estimate__, colour=Temperature, group=Temperature), size=0.8, na.rm=TRUE, position=position_dodge(width=0.2)) +
-  scale_y_continuous(limits=c(1,7), breaks=seq(1,7,1), labels = scalesize) +
-  scale_color_manual(values=pal[c(1,5)]) +
-  ylab('Bleaching index score') + xlab('Day') +
-  facet_grid(cols=vars(Population), rows=vars(Species), space="free") +
-  theme_Publication()
-hya_col
-
-ret_col<- ce_colour |> filter(Species == "G. retiformis") |>
-  ggplot() +
-  geom_errorbar(aes(x=Timepoint, ymin=lower__, ymax=upper__, color=Temperature), width=0.3, size=0.8, position=position_dodge(width=0.2)) +
-  geom_point(aes(x=Timepoint, y=estimate__, color=Temperature), size=2, position=position_dodge(width=0.2)) +
-  geom_line(aes(x=Timepoint, y=estimate__, colour=Temperature, group=Temperature), size=0.8, na.rm=TRUE, position=position_dodge(width=0.2)) +
-  scale_y_continuous(limits=c(1,7), breaks=seq(1,7,1), labels = scalesize) +
-  scale_color_manual(values=pal[c(1,5)]) +
-  ylab('Bleaching index score') + xlab('Day') +
-  facet_grid(cols=vars(Population), rows=vars(Species), space="free") +
-  theme_Publication()
-ret_col
-
-library(patchwork)
-col<- ten_col + hya_col + ret_col + plot_layout(nrow = 3, guides = "collect")
 ```
